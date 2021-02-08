@@ -11,6 +11,12 @@ const theme = {
     lg: '1.250em',
     sm: '.75em',
   },
+  media: {
+    sm: '320px',
+    md: '768px',
+    lg: '1024px',
+    xl: '1224px',
+  },
 };
 
 export default theme;
