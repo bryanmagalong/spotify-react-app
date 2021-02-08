@@ -1,7 +1,9 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
-import { HashRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { ThemeProvider } from 'styled-components';
+import theme from './theme';
 import App from './App';
 import store from './store';
 import * as serviceWorker from './serviceWorker';
@@ -10,7 +12,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
-        <App />
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
       </Router>
     </Provider>
   </React.StrictMode>,
