@@ -2,8 +2,8 @@ import React from 'react';
 import {Switch, Route} from 'react-router-dom';
 import styled from 'styled-components';
 
-import GlobalStyles from './theme/globalStyles';
-import Login from './components/Login';
+import GlobalStyles from '../theme/globalStyles';
+import Login from './Login';
 
 const AppStyled = styled.div`
   background: linear-gradient(to bottom, ${props => props.theme.colors.subLight}, ${props => props.theme.colors.main});
@@ -20,7 +20,7 @@ const App = () => {
           <Route exact path='/' component={Login} />
           <Route exact path='/login' component={Login} />
         </Switch>
-      </AppStyled>
+      </AppStyled> 
     </>
   );
 }
