@@ -7,13 +7,15 @@ import Home from '../containers/Home';
 import Login from './Login';
 import Redirect from '../containers/Redirect';
 import ProtectedRoute from '../containers/ProtectedRoute';
+import ErrorPopup from '../containers/ErrorPopup';
 
 const AppStyled = styled.div`
   background: linear-gradient(to bottom, ${props => props.theme.colors.subLight}, ${props => props.theme.colors.main});
   min-height: 100vh;
+  position: relative;
 `;
 
-const App = () => {
+const App = ({error, isOpen}) => {
   return (
     <>
       <GlobalStyles />
@@ -23,6 +25,7 @@ const App = () => {
             <Route exact path='/login' component={Login} />
             <Route exact path='/redirect' component={Redirect} />
           </Switch>
+          {isOpen && <ErrorPopup>{error}</ErrorPopup>}
       </AppStyled> 
     </>
   );
