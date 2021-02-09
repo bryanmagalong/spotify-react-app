@@ -8,6 +8,7 @@ const ButtonStyled = styled.button`
   text-align: center;
   text-transform: uppercase;
   font-weight: bold;
+  cursor: pointer;
 `;
 
 export default ButtonStyled;
