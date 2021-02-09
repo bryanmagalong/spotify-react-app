@@ -3,7 +3,10 @@ import {Switch, Route} from 'react-router-dom';
 import styled from 'styled-components';
 
 import GlobalStyles from '../theme/globalStyles';
+import Home from './Home';
 import Login from './Login';
+import Redirect from '../containers/Redirect';
+import ProtectedRoute from '../containers/ProtectedRoute';
 
 const AppStyled = styled.div`
   background: linear-gradient(to bottom, ${props => props.theme.colors.subLight}, ${props => props.theme.colors.main});
@@ -15,11 +18,11 @@ const App = () => {
     <>
       <GlobalStyles />
       <AppStyled>
-        <Switch>
-          {/* TODO: redirect to /login if not logged in */}
-          <Route exact path='/' component={Login} />
-          <Route exact path='/login' component={Login} />
-        </Switch>
+          <Switch>
+            <ProtectedRoute exact path='/' component={Home} />
+            <Route exact path='/login' component={Login} />
+            <Route exact path='/redirect' component={Redirect} />
+          </Switch>
       </AppStyled> 
     </>
   );
