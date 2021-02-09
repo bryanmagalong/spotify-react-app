@@ -13,7 +13,6 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
           loginSuccess();
           return <Component {...props} />;
         }
-        console.log(rest);
         return <Redirect to="/login" />;
       }}
     />

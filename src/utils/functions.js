@@ -29,4 +29,9 @@ export const setAuthHeader = () => {
   }
 };
 
-export const tokenExists = () => localStorage.getItem('params');
+export const tokenExists = () => {
+  const token = localStorage.getItem('params');
+  // console.log(token);
+  if (token === '{}') return false;
+  return token;
+};
