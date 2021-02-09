@@ -7,7 +7,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loginSuccess: () => dispatch(loginSuccess),
+  loginSuccess: () => dispatch(loginSuccess()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProtectedRoute);

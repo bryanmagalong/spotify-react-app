@@ -1,5 +1,10 @@
 /* eslint-disable import/no-anonymous-default-export */
-import { LOGIN, loginSuccess } from '../actions/authActions';
+import {
+  LOGIN,
+  loginSuccess,
+  LOGOUT,
+  logoutSuccess,
+} from '../actions/authActions';
 import { getParamValues } from '../utils/functions';
 
 export default (store) => (next) => (action) => {
@@ -15,7 +20,12 @@ export default (store) => (next) => (action) => {
 
       store.dispatch(loginSuccess());
       break;
+    case LOGOUT:
+      localStorage.removeItem('params');
+
+      store.dispatch(logoutSuccess());
+      break;
     default:
-      next(action);
+      return next(action);
   }
 };

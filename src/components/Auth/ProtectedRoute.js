@@ -1,15 +1,14 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { loginSuccess } from '../../actions/authActions';
 import { tokenExists } from '../../utils/functions';
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
-  // let auth = AuthContext;
+  const { loginSuccess, isLogged } = { ...rest };
   return (
     <Route
       {...rest}
       render={(props) => {
-        if (rest.isLogged) return <Component {...props} />;
+        if (isLogged) return <Component {...props} />;
         if (tokenExists()) {
           loginSuccess();
           return <Component {...props} />;

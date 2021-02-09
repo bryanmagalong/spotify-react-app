@@ -3,7 +3,7 @@ import {Switch, Route} from 'react-router-dom';
 import styled from 'styled-components';
 
 import GlobalStyles from '../theme/globalStyles';
-import Home from './Home';
+import Home from '../containers/Home';
 import Login from './Login';
 import Redirect from '../containers/Redirect';
 import ProtectedRoute from '../containers/ProtectedRoute';
