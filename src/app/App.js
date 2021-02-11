@@ -7,7 +7,7 @@ import GlobalStyles from '../theme/globalStyles';
 import Home from '../components/Home';
 import Login from '../components/Login';
 import Redirect from '../components/Auth/Redirect';
-import ProtectedRoute from '../containers/ProtectedRoute';
+import ProtectedRoute from '../components/Auth/ProtectedRoute';
 import ErrorPopup from '../components/shared/ErrorPopup';
 import Navbar from '../components/Navbar';
 
