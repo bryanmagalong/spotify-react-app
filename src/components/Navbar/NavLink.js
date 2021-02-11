@@ -21,7 +21,7 @@ const LinkName = styled.span`
 const MyNavLink = ({ to, name, children }) => {
   return (
     <li>
-      <StyledNavLink to={to} activeClassName="selected">
+      <StyledNavLink to={to} activeClassName="selected" exact>
         {children}
         <LinkName>{name}</LinkName>
       </StyledNavLink>
