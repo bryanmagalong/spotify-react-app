@@ -1,4 +1,5 @@
 import React from 'react';
+import {useSelector} from 'react-redux';
 import {Switch, Route} from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -8,6 +9,7 @@ import Login from '../components/Login';
 import Redirect from '../components/Auth/Redirect';
 import ProtectedRoute from '../containers/ProtectedRoute';
 import ErrorPopup from '../components/shared/ErrorPopup';
+import Navbar from '../components/Navbar';
 
 const AppStyled = styled.div`
   background: linear-gradient(to bottom, ${props => props.theme.colors.subLight}, ${props => props.theme.colors.main});
@@ -16,6 +18,8 @@ const AppStyled = styled.div`
 `;
 
 const App = ({error, isOpen}) => {
+  const isLogged = useSelector(state => state.authReducer.isLogged);
+  // console.log(isLogged);
   return (
     <>
       <GlobalStyles />
@@ -25,6 +29,7 @@ const App = ({error, isOpen}) => {
             <Route exact path='/login' component={Login} />
             <Route exact path='/redirect' component={Redirect} />
           </Switch>
+          {isLogged && <Navbar />}
           {isOpen && <ErrorPopup>{error}</ErrorPopup>}
       </AppStyled> 
     </>

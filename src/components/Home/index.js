@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { logout } from '../../features/auth/authActions';
 import Button from '../shared/Button';
 import { Title } from '../shared/Title';
+// import Navbar from '../Navbar';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const Home = () => {
       <Button type="button" onClick={() => dispatch(logout())}>
         Déconnexion
       </Button>
+      {/* <Navbar /> */}
     </div>
   );
 };
