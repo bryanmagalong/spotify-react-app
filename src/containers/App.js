@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import App from '../components/App';
+import App from '../app/App';
 
 const mapStateToProps = (state) => ({
   error: state.errorReducer.error,

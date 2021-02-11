@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { hideError } from '../actions/errorActions';
+import { hideError } from '../features/errors/errorActions';
 import ErrorPopup from '../components/shared/ErrorPopup';
 
 const mapStateToProps = () => ({});

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Redirect from '../components/Auth/Redirect';
-import { login } from '../actions/authActions';
-import { setError } from '../actions/errorActions';
+import { login } from '../features/auth/authActions';
+import { setError } from '../features/errors/errorActions';
 
 const mapStateToProps = (state) => ({
   isLogged: state.authReducer.isLogged,

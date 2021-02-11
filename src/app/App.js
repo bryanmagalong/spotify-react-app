@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import GlobalStyles from '../theme/globalStyles';
 import Home from '../containers/Home';
-import Login from './Login';
+import Login from '../components/Login';
 import Redirect from '../containers/Redirect';
 import ProtectedRoute from '../containers/ProtectedRoute';
 import ErrorPopup from '../containers/ErrorPopup';

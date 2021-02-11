@@ -1,4 +1,4 @@
-import { HIDE_ERROR } from '../actions/errorActions';
+import { HIDE_ERROR } from './errorActions';
 
 const initialState = {
   error: null,

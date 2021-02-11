@@ -1,11 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
-import {
-  LOGIN,
-  loginSuccess,
-  LOGOUT,
-  logoutSuccess,
-} from '../actions/authActions';
-import { getParamValues } from '../utils/functions';
+import { LOGIN, loginSuccess, LOGOUT, logoutSuccess } from './authActions';
+import { getParamValues } from '../../utils/functions';
 
 export default (store) => (next) => (action) => {
   switch (action.type) {

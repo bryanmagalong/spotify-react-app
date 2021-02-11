@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { loginSuccess } from '../actions/authActions';
+import { loginSuccess } from '../features/auth/authActions';
 import ProtectedRoute from '../components/Auth/ProtectedRoute';
 
 const mapStateToProps = (state) => ({
