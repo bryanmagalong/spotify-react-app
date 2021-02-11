@@ -16,6 +16,24 @@ const StyledNavbar = styled.nav`
   @media (min-width: ${(props) => props.theme.media.lg}) {
     order: 0;
     height: 75%;
+    align-items: flex-start;
+    padding-top: 2rem;
+  }
+`;
+
+const NavLinkList = styled.ul`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: inherit;
+  width: 100%;
+
+  @media (min-width: ${(props) => props.theme.media.lg}) {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1rem;
+    padding: 0 .5rem;
   }
 `;
 
@@ -33,14 +51,6 @@ const NavWrapper = styled(Wrapper)`
     height: 100vh;
     background-color: ${(props) => props.theme.colors.subDark};
   };
-`;
-
-const NavLinkList = styled.ul`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  height: inherit;
-  width: 100%;
 `;
 
 const Navbar = () => {

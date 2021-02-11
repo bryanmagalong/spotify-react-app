@@ -11,6 +11,18 @@ const StyledNavLink = styled(NavLink)`
   &.selected, &:hover{
     color: #FFF;
   }
+  
+  @media (min-width: ${(props) => props.theme.media.lg}) {
+    flex-direction: row;
+    gap: 1rem;
+    width: 100%;
+    padding: .4rem 1rem;
+
+    &.selected{
+      background-color: ${(props) => props.theme.colors.subLight};
+      border-radius: .2rem;
+    }
+  }
 `;
 
 const LinkName = styled.span`
@@ -18,14 +30,16 @@ const LinkName = styled.span`
   letter-spacing: .1rem;
 `;
 
+const LinkItem = styled.li`width: 100%;`;
+
 const MyNavLink = ({ to, name, children }) => {
   return (
-    <li>
+    <LinkItem>
       <StyledNavLink to={to} activeClassName="selected" exact>
         {children}
         <LinkName>{name}</LinkName>
       </StyledNavLink>
-    </li>
+    </LinkItem>
   );
 };
 
