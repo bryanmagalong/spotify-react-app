@@ -14,23 +14,22 @@ import Navbar from '../components/Navbar';
 const AppStyled = styled.div`
   background: linear-gradient(to bottom, ${props => props.theme.colors.subLight}, ${props => props.theme.colors.main});
   min-height: 100vh;
-  position: relative;
+  display: flex;
 `;
 
 const App = () => {
   const isLogged = useSelector(state => state.authReducer.isLogged);
   const{ error, isOpen } = useSelector(state => state.errorReducer);
-  
   return (
     <>
       <GlobalStyles />
       <AppStyled>
+          {isLogged && <Navbar />}
           <Switch>
             <ProtectedRoute exact path='/' component={Home} />
             <Route exact path='/login' component={Login} />
             <Route exact path='/redirect' component={Redirect} />
           </Switch>
-          {isLogged && <Navbar />}
           {isOpen && <ErrorPopup>{error}</ErrorPopup>}
       </AppStyled> 
     </>
