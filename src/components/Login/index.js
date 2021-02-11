@@ -34,7 +34,7 @@ const Login = () => {
   };
 
   return (
-    <LoginWrapper column>
+    <LoginWrapper flex column>
       <LoginTitle>Spotify React App</LoginTitle>
       <Button type="button" onClick={handleLogin}>
         Se connecter à Spotify
