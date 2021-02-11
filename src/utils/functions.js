@@ -14,7 +14,7 @@ export const getParamValues = (url) => {
 };
 
 /**
- * Function that will add the access_token to every axios API request
+ * Add the access_token to every axios API request
  */
 export const setAuthHeader = () => {
   try {
@@ -23,12 +23,24 @@ export const setAuthHeader = () => {
       axios.defaults.headers.common[
         'Authorization'
       ] = `Bearer ${params.access_token}`;
+      console.log(axios.defaults.headers.common['Authorization']);
     }
   } catch (error) {
     console.log('Error setting auth', error);
   }
 };
 
+/**
+ * Delete Authorization request header
+ */
+export const deleteAuthHeader = () => {
+  try {
+    delete axios.defaults.headers.common['Authorization'];
+    console.log(axios.defaults.headers.common['Authorization']);
+  } catch (error) {
+    console.log('Error deleting auth', error);
+  }
+};
 export const tokenExists = () => {
   const token = localStorage.getItem('params');
   // console.log(token);
