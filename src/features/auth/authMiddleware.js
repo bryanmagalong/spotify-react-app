@@ -1,11 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 import { LOGIN, loginSuccess, LOGOUT, logoutSuccess } from './authActions';
-import {
-  getParamValues,
-  tokenExists,
-  setAuthHeader,
-  deleteAuthHeader,
-} from '../../utils/functions';
+import { getParamValues, tokenExists } from '../../utils/functions';
 
 export default (store) => (next) => (action) => {
   switch (action.type) {
@@ -26,13 +21,11 @@ export default (store) => (next) => (action) => {
       // Store access token and expiration in localStorage
       localStorage.setItem('params', JSON.stringify(access_token));
       localStorage.setItem('expiry_time', expiryTime);
-      setAuthHeader(access_token);
 
       return store.dispatch(loginSuccess());
     case LOGOUT:
       localStorage.removeItem('params');
       localStorage.removeItem('expiry_time');
-      deleteAuthHeader();
 
       store.dispatch(logoutSuccess());
       break;
