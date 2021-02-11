@@ -1,6 +1,8 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { XCircle } from 'react-bootstrap-icons';
+import { hideError } from '../../features/errors/errorActions';
 
 const StyledErrorPopup = styled.div`
   position: absolute;
@@ -31,13 +33,16 @@ const CloseButton = styled.button`
   align-self: flex-start;
 `;
 
-const ErrorPopup = ({ hideError, children }) => (
-  <StyledErrorPopup>
-    <CloseButton type="button" onClick={hideError}>
-      <XCircle size="20" />
-    </CloseButton>
-    <ErrorMessage>{children}</ErrorMessage>
-  </StyledErrorPopup>
-);
+const ErrorPopup = ({ children }) => {
+  const dispatch = useDispatch();
+  return (
+    <StyledErrorPopup>
+      <CloseButton type="button" onClick={() => dispatch(hideError())}>
+        <XCircle size="20" />
+      </CloseButton>
+      <ErrorMessage>{children}</ErrorMessage>
+    </StyledErrorPopup>
+  );
+};
 
 export default ErrorPopup;
