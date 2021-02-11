@@ -3,11 +3,11 @@ import {Switch, Route} from 'react-router-dom';
 import styled from 'styled-components';
 
 import GlobalStyles from '../theme/globalStyles';
-import Home from '../containers/Home';
+import Home from '../components/Home';
 import Login from '../components/Login';
-import Redirect from '../containers/Redirect';
+import Redirect from '../components/Auth/Redirect';
 import ProtectedRoute from '../containers/ProtectedRoute';
-import ErrorPopup from '../containers/ErrorPopup';
+import ErrorPopup from '../components/shared/ErrorPopup';
 
 const AppStyled = styled.div`
   background: linear-gradient(to bottom, ${props => props.theme.colors.subLight}, ${props => props.theme.colors.main});
