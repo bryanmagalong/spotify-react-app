@@ -17,9 +17,10 @@ const AppStyled = styled.div`
   position: relative;
 `;
 
-const App = ({error, isOpen}) => {
+const App = () => {
   const isLogged = useSelector(state => state.authReducer.isLogged);
-  // console.log(isLogged);
+  const{ error, isOpen } = useSelector(state => state.errorReducer);
+  
   return (
     <>
       <GlobalStyles />
