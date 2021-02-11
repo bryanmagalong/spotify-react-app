@@ -1,22 +1,21 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { logout } from '../../features/auth/authActions';
-import Button from '../shared/Button';
 import { Title } from '../shared/Title';
-// import Navbar from '../Navbar';
+import Button from '../shared/Button';
+import Wrapper from '../shared/Wrapper';
+import { logout } from '../../features/auth/authActions';
 
 const Home = () => {
   const dispatch = useDispatch();
 
   return (
-    <div>
+    <Wrapper pb>
       <Title level="2">Accueil</Title>
       <Button type="button" onClick={() => dispatch(logout())}>
         Déconnexion
       </Button>
-      {/* <Navbar /> */}
-    </div>
+    </Wrapper>
   );
 };
 
