@@ -1,4 +1,4 @@
-import { HIDE_ERROR } from './errorActions';
+import { HIDE_ERROR, SET_ERROR } from './errorActions';
 
 const initialState = {
   error: null,
@@ -6,9 +6,7 @@ const initialState = {
 };
 
 const errorReducer = (state = initialState, action = {}) => {
-  const { payload } = action;
-
-  if (payload) return { error: payload, isOpen: true };
+  if (action.type === SET_ERROR) return { error: action.payload, isOpen: true };
   if (action.type === HIDE_ERROR) return { error: null, isOpen: false };
   else return initialState;
 };
