@@ -27,7 +27,7 @@ const App = () => {
       <GlobalStyles />
       <AppStyled>
           {isLogged && <Navbar />}
-          <Wrapper fullWidth>
+          <Wrapper as='main' fullWidth>
           {isLogged && <Search />}
             <Switch>
               <ProtectedRoute exact path='/' component={Home} />
