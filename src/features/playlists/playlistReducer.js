@@ -9,7 +9,7 @@ const playlistsReducer = (state = initialState, action = {}) => {
     case FETCH_PLAYLISTS_SUCCESS:
       return {
         ...state,
-        playlists: [ ...action.payload ],
+        list: [ ...action.payload ],
       };
     default:
       return state;
