@@ -10,6 +10,8 @@ import Redirect from '../components/Auth/Redirect';
 import ProtectedRoute from '../components/Auth/ProtectedRoute';
 import ErrorPopup from '../components/shared/ErrorPopup';
 import Navbar from '../components/Navbar';
+import Search from '../components/Search';
+import Wrapper from '../components/shared/Wrapper';
 
 const AppStyled = styled.div`
   background: linear-gradient(to bottom, ${props => props.theme.colors.subLight}, ${props => props.theme.colors.main});
@@ -25,11 +27,14 @@ const App = () => {
       <GlobalStyles />
       <AppStyled>
           {isLogged && <Navbar />}
-          <Switch>
-            <ProtectedRoute exact path='/' component={Home} />
-            <Route exact path='/login' component={Login} />
-            <Route exact path='/redirect' component={Redirect} />
-          </Switch>
+          <Wrapper fullWidth>
+          {isLogged && <Search />}
+            <Switch>
+              <ProtectedRoute exact path='/' component={Home} />
+              <Route exact path='/login' component={Login} />
+              <Route exact path='/redirect' component={Redirect} />
+            </Switch>
+          </Wrapper>
           {isOpen && <ErrorPopup>{error}</ErrorPopup>}
       </AppStyled> 
     </>

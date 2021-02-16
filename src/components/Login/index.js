@@ -15,7 +15,7 @@ const LoginTitle = styled(TitleStyled)`
 `;
 
 const LoginWrapper = styled(Wrapper)`
-  min-height: inherit;
+  height: 100vh;
   justify-content: center;
   align-items: center;
   row-gap: 2.5rem;
