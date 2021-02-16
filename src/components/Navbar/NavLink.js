@@ -28,6 +28,7 @@ const StyledNavLink = styled(NavLink)`
 const LinkName = styled.span`
   font-weight: bold;
   letter-spacing: .1rem;
+  font-size: ${(props) => props.theme.fontSize.md};
 `;
 
 const LinkItem = styled.li`width: 100%;`;

@@ -59,13 +59,13 @@ const Navbar = () => {
       <StyledNavbar>
         <NavLinkList>
           <NavLink name="Accueil" to="/">
-            <HouseDoor size="30" />
+            <HouseDoor size="26" />
           </NavLink>
           <NavLink name="Parcourir" to="/browse">
-            <Folder2Open size="30" />
+            <Folder2Open size="26" />
           </NavLink>
           <NavLink name="Profil" to="/profile">
-            <Person size="30" />
+            <Person size="26" />
           </NavLink>
         </NavLinkList>
       </StyledNavbar>
