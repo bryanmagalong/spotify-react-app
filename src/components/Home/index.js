@@ -9,13 +9,13 @@ import Card from '../shared/Card';
 import Section from './Section';
 import List from './List';
 import { logout } from '../../features/auth/authActions';
-
+import { fetchPlaylist } from '../../features/playlists/playlistActions';
 const Home = () => {
   const dispatch = useDispatch();
   const playlists = useSelector((state) => state.playlists.list);
 
   useEffect(() => {
-    if (!playlists.lenght) dispatch({ type: 'FETCH_PLAYLISTS' });
+    if (!playlists.length) dispatch(fetchPlaylist({ limit: 4 }));
   }, []);
 
   return (
@@ -23,7 +23,9 @@ const Home = () => {
       <Title>Accueil</Title>
       <Section title="Mes playlists">
         <List>
-          {playlists.map((playlist) => <Card name={playlist.name} />)}
+          {playlists.map((playlist) => (
+            <Card key={playlist.id} {...playlist} />
+          ))}
         </List>
       </Section>
       <Button type="button" onClick={() => dispatch(logout())}>
