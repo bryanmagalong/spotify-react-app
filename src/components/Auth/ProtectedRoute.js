@@ -5,7 +5,7 @@ import { tokenExists } from '../../utils/functions';
 import { loginSuccess } from '../../features/auth/authActions';
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
-  const isLogged = useSelector((state) => state.authReducer.isLogged);
+  const isLogged = useSelector((state) => state.auth.isLogged);
   const dispatch = useDispatch();
   return (
     <Route

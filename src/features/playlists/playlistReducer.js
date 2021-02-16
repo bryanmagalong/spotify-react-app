@@ -1,7 +1,7 @@
 import { FETCH_PLAYLISTS_SUCCESS } from './playlistActions';
 
 const initialState = {
-  playlists: [],
+  list: [],
 };
 
 const playlistsReducer = (state = initialState, action = {}) => {

@@ -20,8 +20,8 @@ const AppStyled = styled.div`
 `;
 
 const App = () => {
-  const isLogged = useSelector(state => state.authReducer.isLogged);
-  const{ error, isOpen } = useSelector(state => state.errorReducer);
+  const isLogged = useSelector(state => state.auth.isLogged);
+  const{ error, isOpen } = useSelector(state => state.errors);
   return (
     <>
       <GlobalStyles />
