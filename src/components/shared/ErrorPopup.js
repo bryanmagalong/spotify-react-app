@@ -5,9 +5,9 @@ import { XCircle } from 'react-bootstrap-icons';
 import { hideError } from '../../features/errors/errorActions';
 
 const StyledErrorPopup = styled.div`
-  position: absolute;
-  bottom: 0px;
-  width: 100vw;
+  position: sticky;
+  top: 0px;
+  width: 100%;
   height: 3rem;
   padding: 0.5rem 0;
   background-color: red;
