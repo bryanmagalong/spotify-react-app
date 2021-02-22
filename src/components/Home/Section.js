@@ -1,9 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { Title } from '../shared/Title';
 
-const StyledSection = styled.section`padding: 1rem 0;`;
+const StyledSection = styled.section.attrs((props) => ({
+  display: props.display, // true if list length > 0 else false
+}))`
+  padding: 1rem 0;
+  ${(props) => !props.display && css`display: none;`};
+`;
 
 const StyledLine = styled.div`
   width: 100%;
@@ -12,9 +17,9 @@ const StyledLine = styled.div`
   margin-top: .8rem;
 `;
 
-const Section = ({ title, children }) => {
+const Section = ({ title, display, children }) => {
   return (
-    <StyledSection>
+    <StyledSection display={display}>
       <Title level="2">{title}</Title>
       <StyledLine />
       {children}

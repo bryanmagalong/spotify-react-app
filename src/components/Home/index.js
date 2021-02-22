@@ -32,19 +32,19 @@ const Home = () => {
   return (
     <Wrapper pb pt px>
       <Title>Accueil</Title>
-      <Section title="Mes playlists">
+      <Section title="Mes playlists" display={playlists.length}>
         <List>
           {playlists.map((playlist) => (
             <Card key={playlist.id} {...playlist} />
           ))}
         </List>
       </Section>
-      <Section title="titres les plus écoutés">
+      <Section title="titres les plus écoutés" display={topTracks.length}>
         <List>
           {topTracks.map((track) => <Card key={track.id} {...track} />)}
         </List>
       </Section>
-      <Section title="artistes les plus écoutés">
+      <Section title="artistes les plus écoutés" display={topArtists.length}>
         <List>
           {topArtists.map((artist) => <Card key={artist.id} {...artist} />)}
         </List>
