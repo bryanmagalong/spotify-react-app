@@ -1,8 +1,7 @@
-/* eslint-disable import/no-anonymous-default-export */
 import { FETCH_PLAYLISTS, fetchPlaylistSuccess } from './playlistActions';
 import { get } from '../../utils/api';
 
-export default (store) => (next) => async (action) => {
+const playlistMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
     case FETCH_PLAYLISTS:
       try {
@@ -33,3 +32,5 @@ export default (store) => (next) => async (action) => {
       return next(action);
   }
 };
+
+export default playlistMiddleware;

@@ -4,7 +4,7 @@ const initialState = {
   list: [],
 };
 
-const playlistsReducer = (state = initialState, action = {}) => {
+const playlistReducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case FETCH_PLAYLISTS_SUCCESS:
       return {
@@ -16,4 +16,4 @@ const playlistsReducer = (state = initialState, action = {}) => {
   }
 };
 
-export default playlistsReducer;
+export default playlistReducer;
