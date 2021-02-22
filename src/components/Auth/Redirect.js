@@ -15,7 +15,12 @@ const Redirect = () => {
       dispatch(login(history.location.hash));
       history.push('/');
     } catch (error) {
-      dispatch(setError(error.message));
+      dispatch(
+        setError({
+          message: error.message,
+          status: 401,
+        }),
+      );
       // console.log(error.message);
       history.push('/login');
     }

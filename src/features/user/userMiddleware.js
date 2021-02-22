@@ -31,10 +31,13 @@ const userMiddleware = (store) => (next) => async (action) => {
 
         store.dispatch(fetchMyTopTracksSuccess(myTopTracks));
       } catch (error) {
-        if (error.response.status === 403)
-          store.dispatch(
-            setError("Vous n'avez pas les droits d'accès à cette ressource."),
-          );
+        console.log(error);
+        store.dispatch(
+          setError({
+            message: error.message,
+            status: error.response.status,
+          }),
+        );
       }
       break;
     case FETCH_MY_TOP_ARTISTS:
@@ -57,10 +60,12 @@ const userMiddleware = (store) => (next) => async (action) => {
 
         store.dispatch(fetchMyTopArtistsSuccess(myTopArtists));
       } catch (error) {
-        if (error.response.status === 403)
-          store.dispatch(
-            setError("Vous n'avez pas les droits d'accès à cette ressource."),
-          );
+        store.dispatch(
+          setError({
+            message: error.message,
+            status: error.response.status,
+          }),
+        );
       }
       break;
     default:
