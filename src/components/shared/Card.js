@@ -1,7 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const StyledCard = styled.article`border-radius: .5rem;`;
+import styled, { css } from 'styled-components';
 
 const ImageCard = styled.div`
   max-width: 100%;
@@ -12,11 +10,21 @@ const ImageCard = styled.div`
     object-fit: cover;
     width: 100%;
   }
+
+  ${(props) =>
+    props.type === 'artist' &&
+    css`
+      & img {
+        border-radius: 100%;
+      }
+    `};
 `;
 
 const DescriptionCard = styled.div`
   color: white;
   letter-spacing: .1rem;
+
+  ${(props) => props.type === 'artist' && css`text-align: center;`};
 
   & h3 {
     font-weight: bold;
@@ -30,20 +38,21 @@ const DescriptionCard = styled.div`
   & span {
     font-size: ${(props) => props.theme.fontSize.md};
     color: ${(props) => props.theme.colors.gray};
+    text-transform: capitalize;
   }
 `;
 
-const Card = ({ name, images, type }) => {
+const Card = ({ name, images, type, album }) => {
   return (
-    <StyledCard>
-      <ImageCard>
+    <article>
+      <ImageCard type={type}>
         <img src={images} alt={name} />
       </ImageCard>
-      <DescriptionCard>
+      <DescriptionCard type={type}>
         <h3>{name}</h3>
-        <span>{type}</span>
+        <span>{type === 'track' ? album : type}</span>
       </DescriptionCard>
-    </StyledCard>
+    </article>
   );
 };
 
