@@ -1,6 +1,6 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
-import {Switch, Route} from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Switch, Route } from 'react-router-dom';
 import styled from 'styled-components';
 
 import GlobalStyles from '../theme/globalStyles';
@@ -21,7 +21,8 @@ const AppStyled = styled.div`
 
 const App = () => {
   const isLogged = useSelector(state => state.auth.isLogged);
-  const{ error, isOpen } = useSelector(state => state.errors);
+  const { error, isOpen } = useSelector(state => state.errors);
+
   return (
     <>
       <GlobalStyles />
@@ -29,13 +30,13 @@ const App = () => {
           {isLogged && <Navbar />}
           <Wrapper as='main' fullWidth>
           {isLogged && <Search />}
+          {isOpen && <ErrorPopup>{error.message}</ErrorPopup>}
             <Switch>
               <ProtectedRoute exact path='/' component={Home} />
               <Route exact path='/login' component={Login} />
               <Route exact path='/redirect' component={Redirect} />
             </Switch>
           </Wrapper>
-          {isOpen && <ErrorPopup>{error}</ErrorPopup>}
       </AppStyled> 
     </>
   );
