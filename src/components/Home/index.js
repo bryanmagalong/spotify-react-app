@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import styled from 'styled-components';
 
-import { Title } from '../shared/Title';
+import { TitleStyled } from '../shared/Title';
 import Button from '../shared/Button';
 import Wrapper from '../shared/Wrapper';
 import Card from '../shared/Card';
@@ -14,6 +15,10 @@ import {
   fetchMyTopArtists,
   fetchMyTopTracks,
 } from '../../features/user/userActions';
+
+const StyledHomeTitle = styled(TitleStyled)`
+  padding-bottom: 1rem;
+`;
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -31,7 +36,7 @@ const Home = () => {
 
   return (
     <Wrapper pb pt px>
-      <Title>Accueil</Title>
+      <StyledHomeTitle>Accueil</StyledHomeTitle>
       <Section title="Mes playlists" display={playlists.length}>
         <List>
           {playlists.map((playlist) => (
