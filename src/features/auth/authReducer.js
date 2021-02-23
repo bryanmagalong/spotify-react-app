@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from '../actions/authActions';
+import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from './authActions';
 
 const initialState = {
   isLogged: false,

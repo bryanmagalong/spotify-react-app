@@ -1,21 +1,26 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-// import { getParamValues } from '../utils/functions';
 
-const Redirect = ({ setError, login, isLogged }) => {
-  let history = useHistory();
+import { login } from '../../features/auth/authActions';
+import { setError } from '../../features/errors/errorActions';
+
+const Redirect = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     try {
-      if (isLogged) return history.push('/');
-      if (!history.location.hash)
-        throw new Error('Access denied! Please try again!');
-
-      login(history.location.hash);
+      dispatch(login(history.location.hash));
       history.push('/');
     } catch (error) {
-      setError(error.message);
+      dispatch(
+        setError({
+          message: error.message,
+          status: 401,
+        }),
+      );
       // console.log(error.message);
       history.push('/login');
     }

@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
   *, *::before, *::after {
-      box-sizing: inherit;
+      box-sizing: border-box;
   }
 
   html, body, div, span, applet, object, iframe,

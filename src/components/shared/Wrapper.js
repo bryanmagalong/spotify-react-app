@@ -1,8 +1,27 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Wrapper = styled.div`
-  display: flex;
+  width: ${(props) => props.fullWidth && '100%'};
+  display: ${(props) => props.flex && 'flex'};
   flex-direction: ${(props) => props.column && 'column'};
+  padding-bottom: ${(props) => props.pb && '10rem'};
+  padding-top: ${(props) => props.pt && '1.5rem'};
+
+  @media (min-width: ${(props) => props.theme.media.lg}) {
+    padding-bottom: 0;
+  }
+
+  ${(props) =>
+    props.px &&
+    css`
+      padding-left: 1rem;
+      padding-right: 1rem;
+
+      @media (min-width: ${(props) => props.theme.media.lg}) {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+    `};
 `;
 
 export default Wrapper;

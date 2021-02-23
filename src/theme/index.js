@@ -7,9 +7,10 @@ const theme = {
     green: '#15DB5F',
   },
   fontSize: {
-    xl: '1.875em',
-    lg: '1.250em',
-    sm: '.75em',
+    xl: '1.875em', // 30px
+    lg: '1.250em', // 20px
+    md: '0.875em', // 14px
+    sm: '.75em', // 12px
   },
   media: {
     sm: '320px',
