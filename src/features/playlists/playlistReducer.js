@@ -1,7 +1,11 @@
-import { FETCH_PLAYLISTS_SUCCESS } from './playlistActions';
+import {
+  FETCH_PLAYLISTS_SUCCESS,
+  FETCH_PLAYLIST_BY_ID_SUCCESS,
+} from './playlistActions';
 
 const initialState = {
   list: [],
+  playlist: {},
 };
 
 const playlistReducer = (state = initialState, action = {}) => {
@@ -10,6 +14,11 @@ const playlistReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         list: [ ...action.payload ],
+      };
+    case FETCH_PLAYLIST_BY_ID_SUCCESS:
+      return {
+        ...state,
+        playlist: { ...action.payload },
       };
     default:
       return state;

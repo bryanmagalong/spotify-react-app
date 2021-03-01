@@ -1,5 +1,11 @@
-import { FETCH_PLAYLISTS, fetchPlaylistSuccess } from './playlistActions';
+import {
+  FETCH_PLAYLISTS,
+  fetchPlaylistsSuccess,
+  FETCH_PLAYLIST_BY_ID,
+  fetchPlaylistByIdSuccess,
+} from './playlistActions';
 import { get } from '../../utils/api';
+import { setError } from '../errors/errorActions';
 
 const playlistMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
@@ -23,11 +29,28 @@ const playlistMiddleware = (store) => (next) => async (action) => {
         });
 
         // console.log(data.items);
-        store.dispatch(fetchPlaylistSuccess(playlists));
+        store.dispatch(fetchPlaylistsSuccess(playlists));
       } catch (error) {
         console.log(error);
       }
-      break;
+      return next(action);
+    case FETCH_PLAYLIST_BY_ID:
+      try {
+        const playlistId = action.payload;
+        const data = await get(
+          `https://api.spotify.com/v1/playlists/${playlistId}`,
+        );
+
+        const playlist = { ...data, images: data.images[0].url };
+        store.dispatch(fetchPlaylistByIdSuccess(playlist));
+        console.log(playlist);
+      } catch (error) {
+        if (error.response.status === 404);
+        store.dispatch(
+          setError({ message: 'Playlist introuvable!', statusCode: 404 }),
+        );
+      }
+      return next(action);
     default:
       return next(action);
   }

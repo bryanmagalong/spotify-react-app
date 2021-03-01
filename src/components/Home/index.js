@@ -10,7 +10,7 @@ import Card from '../shared/Card';
 import Section from './Section';
 import List from './List';
 import { logout } from '../../features/auth/authActions';
-import { fetchPlaylist } from '../../features/playlists/playlistActions';
+import { fetchPlaylists } from '../../features/playlists/playlistActions';
 import {
   fetchMyTopArtists,
   fetchMyTopTracks,
@@ -26,13 +26,16 @@ const Home = () => {
   const topTracks = useSelector((state) => state.user.topTracksList);
   const topArtists = useSelector((state) => state.user.topArtistsList);
 
-  useEffect(() => {
-    if (!playlists.length) dispatch(fetchPlaylist({ limit: 6 }));
-    if (!topTracks.length)
-      dispatch(fetchMyTopTracks({ limit: 6, time_range: 'long_term' }));
-    if (!topArtists.length)
-      dispatch(fetchMyTopArtists({ limit: 6, time_range: 'long_term' }));
-  }, []);
+  useEffect(
+    () => {
+      if (!playlists.length) dispatch(fetchPlaylists({ limit: 6 }));
+      if (!topTracks.length)
+        dispatch(fetchMyTopTracks({ limit: 6, time_range: 'long_term' }));
+      if (!topArtists.length)
+        dispatch(fetchMyTopArtists({ limit: 6, time_range: 'long_term' }));
+    },
+    [ dispatch ],
+  );
 
   return (
     <Wrapper pb pt px>
