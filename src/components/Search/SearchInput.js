@@ -32,6 +32,7 @@ const StyledSearchButton = styled.button`
 `;
 
 const SearchInput = () => {
+  // TODO: form/input verification
   const inputValue = useSelector((state) => state.search.value);
   const dispatch = useDispatch();
 
