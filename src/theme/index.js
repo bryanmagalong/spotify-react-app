@@ -18,6 +18,9 @@ const theme = {
     lg: '1024px',
     xl: '1224px',
   },
+  template: {
+    trackGridColumns: '1rem 2fr 1fr 1fr',
+  },
 };
 
 export default theme;
