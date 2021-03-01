@@ -1,6 +1,6 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
+import React, {useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Switch, Route, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import GlobalStyles from '../theme/globalStyles';
@@ -14,6 +14,7 @@ import Search from '../components/Search';
 import Wrapper from '../components/shared/Wrapper';
 import Error404 from '../components/Error404';
 import Playlist from '../components/Playlist';
+import { hideError } from '../features/errors/errorActions';
 
 const AppStyled = styled.div`
   background: linear-gradient(
@@ -28,7 +29,16 @@ const AppStyled = styled.div`
 const App = () => {
   const isLogged = useSelector((state) => state.auth.isLogged);
   const { error, isOpen } = useSelector((state) => state.errors);
-  
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  useEffect(() => {
+    if(error.statusCode && error.statusCode === 404) {
+      dispatch(hideError());
+      history.push('/404');
+    };
+  }, [error, dispatch, history]);
+
   return (
     <>
       <GlobalStyles />
