@@ -12,6 +12,7 @@ import ErrorPopup from '../components/shared/ErrorPopup';
 import Navbar from '../components/Navbar';
 import Search from '../components/Search';
 import Wrapper from '../components/shared/Wrapper';
+import Error404 from '../components/Error404';
 
 const AppStyled = styled.div`
   background: linear-gradient(
@@ -39,6 +40,7 @@ const App = () => {
             <ProtectedRoute exact path="/" component={Home} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/redirect" component={Redirect} />
+            <Route path="*" component={Error404} />
           </Switch>
         </Wrapper>
       </AppStyled>
