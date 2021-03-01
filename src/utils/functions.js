@@ -40,6 +40,12 @@ export const setAuthHeader = () => {
 //   }
 // };
 
+// export const checkExpiration = () => {
+//   const expiryTime = JSON.parse(localStorage.getItem('expiry_time'));
+//   const currentDate = new Date().getTime() * 1000;
+//   return currentDate > expiryTime;
+// };
+
 export const tokenExists = () => {
   const token = localStorage.getItem('params');
   // console.log(token);
