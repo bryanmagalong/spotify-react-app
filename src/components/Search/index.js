@@ -8,6 +8,11 @@ const StyledSearch = styled.div`
   width: 100%;
   position: sticky;
   top: 0;
+  padding: .5rem;
+
+  @media (min-width: ${(props) => props.theme.media.lg}) {
+    padding-left: 2rem;
+  }
 `;
 
 const Search = () => {
