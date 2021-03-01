@@ -14,32 +14,36 @@ import Search from '../components/Search';
 import Wrapper from '../components/shared/Wrapper';
 
 const AppStyled = styled.div`
-  background: linear-gradient(to bottom, ${props => props.theme.colors.subLight}, ${props => props.theme.colors.main});
+  background: linear-gradient(
+    to bottom,
+    ${(props) => props.theme.colors.subLight},
+    ${(props) => props.theme.colors.main}
+  );
   min-height: 100vh;
   display: flex;
 `;
 
 const App = () => {
-  const isLogged = useSelector(state => state.auth.isLogged);
-  const { error, isOpen } = useSelector(state => state.errors);
-
+  const isLogged = useSelector((state) => state.auth.isLogged);
+  const { error, isOpen } = useSelector((state) => state.errors);
+  
   return (
     <>
       <GlobalStyles />
       <AppStyled>
-          {isLogged && <Navbar />}
-          <Wrapper as='main' fullWidth>
+        {isLogged && <Navbar />}
+        <Wrapper as="main" fullWidth>
           {isLogged && <Search />}
           {isOpen && <ErrorPopup>{error.message}</ErrorPopup>}
-            <Switch>
-              <ProtectedRoute exact path='/' component={Home} />
-              <Route exact path='/login' component={Login} />
-              <Route exact path='/redirect' component={Redirect} />
-            </Switch>
-          </Wrapper>
-      </AppStyled> 
+          <Switch>
+            <ProtectedRoute exact path="/" component={Home} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/redirect" component={Redirect} />
+          </Switch>
+        </Wrapper>
+      </AppStyled>
     </>
   );
-}
+};
 
 export default App;
