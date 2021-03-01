@@ -41,10 +41,16 @@ const playlistMiddleware = (store) => (next) => async (action) => {
           `https://api.spotify.com/v1/playlists/${playlistId}`,
         );
 
-        const playlist = { ...data, images: data.images[0].url };
+        const playlist = {
+          ...data,
+          images: data.images[0].url,
+          owner: data.owner.display_name,
+          followers: data.followers.total.toLocaleString(),
+        };
         store.dispatch(fetchPlaylistByIdSuccess(playlist));
         console.log(playlist);
       } catch (error) {
+        console.log(error);
         if (error.response.status === 404);
         store.dispatch(
           setError({ message: 'Playlist introuvable!', statusCode: 404 }),
