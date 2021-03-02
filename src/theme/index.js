@@ -13,13 +13,14 @@ const theme = {
     sm: '.75em', // 12px
   },
   media: {
-    sm: '320px',
+    xs: '320px',
+    sm: '375px',
     md: '768px',
     lg: '1024px',
     xl: '1224px',
   },
   template: {
-    trackGridColumns: '1rem 2fr 1fr 1fr',
+    trackGridColumns: '1rem 2fr 1fr 3rem',
   },
 };
 
