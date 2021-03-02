@@ -4,19 +4,24 @@ import styled from 'styled-components';
 const StyledTrackList = styled.div`padding: 2rem 0;`;
 
 const StyledTrackListHeader = styled.div`
-  display: grid;
-  grid-template-columns: ${(props) => props.theme.template.trackGridColumns};
-  grid-gap: 1rem;
-  height: 2rem;
-  border-bottom: 1px solid ${(props) => props.theme.colors.gray};
+  display: none;
 
-  & div {
-    display: flex;
-    align-items: center;
-    color: ${(props) => props.theme.colors.gray};
+  @media (min-width: ${(props) => props.theme.media.md}) {
+    display: grid;
+    padding: 0 .8rem;
+    grid-template-columns: ${(props) => props.theme.template.trackGridColumns};
+    grid-gap: 1rem;
+    height: 2rem;
+    border-bottom: 1px solid ${(props) => props.theme.colors.gray};
 
-    &:last-child {
-      justify-self: flex-end;
+    & div {
+      display: flex;
+      align-items: center;
+      color: ${(props) => props.theme.colors.gray};
+
+      &:last-child {
+        justify-self: flex-end;
+      }
     }
   }
 `;
