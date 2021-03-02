@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPlaylistById } from '../../features/playlists/playlistActions';
+
 import Wrapper from '../shared/Wrapper';
 import Header from './Header';
 import TrackList from './TrackList';
+import TrackItem from './TrackItem';
+import { fetchPlaylistById } from '../../features/playlists/playlistActions';
 
 const Playlist = () => {
   const { playlistId } = useParams();
@@ -29,7 +31,9 @@ const Playlist = () => {
         followers={playlist.followers}
       />
       <TrackList>
-        {tracks.map((item) => <div key={item.id}>{item.name}</div>)}
+        {tracks.map((item, index) => (
+          <TrackItem key={item.id} number={index + 1} {...item} />
+        ))}
       </TrackList>
     </Wrapper>
   );
