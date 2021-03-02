@@ -2,17 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { TitleStyled } from '../shared/Title';
-
-const StyledImageWrapper = styled.div`
-  max-width: 50%;
-  height: auto;
-  margin-bottom: 1rem;
-
-  & img {
-    object-fit: cover;
-    width: 100%;
-  }
-`;
+import ImageWrapper from '../shared/ImageWrapper';
 
 const StyledHeaderWrapper = styled.div`
   display: flex;
@@ -39,9 +29,7 @@ const StyledHeaderTitle = styled(TitleStyled)`
 const Header = ({ name, image, description, owner, followers }) => {
   return (
     <StyledHeaderWrapper>
-      <StyledImageWrapper>
-        <img src={image} alt={name} />
-      </StyledImageWrapper>
+      <ImageWrapper src={image} alt={name} />
       <StyledTextWrapper>
         <StyledHeaderTitle>{name}</StyledHeaderTitle>
         <p>{description}</p>
