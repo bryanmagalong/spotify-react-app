@@ -4,6 +4,7 @@ const Wrapper = styled.div`
   width: ${(props) => props.fullWidth && '100%'};
   display: ${(props) => props.flex && 'flex'};
   flex-direction: ${(props) => props.column && 'column'};
+  align-items: ${(props) => props.itemsCenter && 'center'};
   padding-bottom: ${(props) => props.pb && '10rem'};
   padding-top: ${(props) => props.pt && '1.5rem'};
 
