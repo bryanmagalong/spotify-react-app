@@ -29,6 +29,7 @@ const Playlist = () => {
         description={playlist.description}
         owner={playlist.owner}
         followers={playlist.followers}
+        type={playlist.type}
       />
       <TrackList>
         {tracks.map((item, index) => (
