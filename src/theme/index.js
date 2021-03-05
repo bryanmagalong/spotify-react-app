@@ -7,6 +7,7 @@ const theme = {
     green: '#15DB5F',
   },
   fontSize: {
+    xxl: '4em', // 64px
     xl: '1.875em', // 30px
     lg: '1.250em', // 20px
     md: '0.875em', // 14px
