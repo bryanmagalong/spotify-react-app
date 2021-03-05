@@ -21,7 +21,7 @@ const theme = {
     xl: '1224px',
   },
   template: {
-    trackGridColumns: '1rem 2fr 1fr 3rem',
+    trackGridColumns: '1.2rem 2fr 1fr 3rem',
   },
 };
 
