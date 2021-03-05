@@ -20,20 +20,20 @@ const StyledTrackItem = styled.div`
   }
 `;
 
-const StyledTrackItemDiv = styled.div`
+const StyledDiv = styled.div`
   display: flex;
   align-items: center;
   column-gap: ${(props) => props.columnGap && '1rem'};
 `;
 
-const StyledTrackTitleWrapper = styled(StyledTrackItemDiv)`
+const StyledTitleDiv = styled(StyledDiv)`
   width: 100%;
   flex-direction: column;
   align-items: flex-start;
   row-gap: .3rem;
 `;
 
-const StyledTrackText = styled.div`
+const StyledText = styled.div`
   letter-spacing: .1rem;
   color: ${(props) => props.white && '#FFF'};
   display: ${(props) => props.flex && 'flex'};
@@ -50,7 +50,7 @@ const StyledExplicitTag = styled.span`
   border-radius: 3px;
 `;
 
-const StyledTrackAlbum = styled(StyledTrackItemDiv)`
+const StyledTrackAlbum = styled(StyledDiv)`
   display: none;
   
   @media (min-width: ${(props) => props.theme.media.md}) {
@@ -76,8 +76,8 @@ const TrackItem = ({
 }) => {
   return (
     <StyledTrackItem>
-      <StyledTrackItemDiv>{number}</StyledTrackItemDiv>
-      <StyledTrackItemDiv columnGap>
+      <StyledDiv>{number}</StyledDiv>
+      <StyledDiv columnGap>
         <ImageWrapper
           src={images.url}
           alt={name}
@@ -85,14 +85,14 @@ const TrackItem = ({
           marginBottom="0"
           size={images.width}
         />
-        <StyledTrackTitleWrapper>
-          <StyledTrackText white>{name}</StyledTrackText>
-          <StyledTrackText flex columnGap fontSize=".9rem">
+        <StyledTitleDiv>
+          <StyledText white>{name}</StyledText>
+          <StyledText flex columnGap fontSize=".9rem">
             <StyledExplicitTag show={explicit}>E</StyledExplicitTag>
             {artist.name}
-          </StyledTrackText>
-        </StyledTrackTitleWrapper>
-      </StyledTrackItemDiv>
+          </StyledText>
+        </StyledTitleDiv>
+      </StyledDiv>
       <StyledTrackAlbum>{album.name}</StyledTrackAlbum>
       <StyledTrackDuration>{duration}</StyledTrackDuration>
     </StyledTrackItem>
