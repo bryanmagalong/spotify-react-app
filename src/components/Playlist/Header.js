@@ -7,7 +7,7 @@ import Wrapper from '../shared/Wrapper';
 
 const StyledHeaderWrapper = styled(Wrapper)`
   row-gap: 1rem;
-
+  
   @media (min-width: ${(props) => props.theme.media.md}) {
     height: 15rem;
     flex-direction: row;
@@ -24,15 +24,6 @@ const StyledTextWrapper = styled(Wrapper)`
   @media (min-width: ${(props) => props.theme.media.md}) {
     align-items: flex-start;
     justify-content: flex-end;
-  }
-`;
-
-const StyledDescription = styled.p`
-  color: ${(props) => props.theme.colors.gray};
-  display: none;
-
-  @media (min-width: ${(props) => props.theme.media.md}) {
-    display: block;
   }
 `;
 
@@ -58,6 +49,26 @@ const StyledHeaderTitle = styled(TitleStyled)`
   }
 `;
 
+const StyledDescription = styled.p`
+  color: ${(props) => props.theme.colors.gray};
+  display: none;
+
+  @media (min-width: ${(props) => props.theme.media.md}) {
+    display: block;
+  }
+`;
+
+const StyledMeta = styled.p`
+  color: ${(props) => props.theme.colors.gray};
+  letter-spacing: 3px;
+  text-align: center;
+
+  & span {
+    color: #fff;
+    font-weight: bold;
+  }
+`;
+
 const Header = ({ name, image, description, owner, followers, type }) => {
   return (
     <StyledHeaderWrapper flex column itemsCenter>
@@ -65,6 +76,8 @@ const Header = ({ name, image, description, owner, followers, type }) => {
         marginBottom="0"
         maxWidth="192px"
         maxHeight="192px"
+        size="192"
+        boxShadow
         src={image}
         alt={name}
       />
@@ -72,9 +85,9 @@ const Header = ({ name, image, description, owner, followers, type }) => {
         <StyledType>{type}</StyledType>
         <StyledHeaderTitle>{name}</StyledHeaderTitle>
         <StyledDescription>{description}</StyledDescription>
-        <span>
-          par {owner} • {followers} Abonnés
-        </span>
+        <StyledMeta>
+          par <span>{owner}</span> • {followers} Abonnés
+        </StyledMeta>
       </StyledTextWrapper>
     </StyledHeaderWrapper>
   );
