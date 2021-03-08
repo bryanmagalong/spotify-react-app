@@ -45,8 +45,10 @@ const playlistMiddleware = (store) => (next) => async (action) => {
           ...data,
           images: data.images[0].url,
           owner: data.owner.display_name,
+          ownerUrl: data.owner.external_urls.spotify,
           followers: data.followers.total.toLocaleString(),
         };
+
         store.dispatch(fetchPlaylistByIdSuccess(playlist));
         console.log(playlist);
       } catch (error) {

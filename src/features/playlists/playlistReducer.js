@@ -30,6 +30,7 @@ const playlistReducer = (state = initialState, action = {}) => {
           artist: {
             name: item.track.artists[0].name,
             id: item.track.artists[0].id,
+            url: item.track.artists[0].external_urls.spotify,
           },
           album: {
             name: item.track.album.name,
