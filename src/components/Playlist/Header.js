@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { TitleStyled } from '../shared/Title';
 import ImageWrapper from '../shared/ImageWrapper';
 import Wrapper from '../shared/Wrapper';
+import CustomLink from '../shared/CustomLink';
 
 const StyledHeaderWrapper = styled(Wrapper)`
   row-gap: 1rem;
@@ -63,13 +64,21 @@ const StyledMeta = styled.p`
   letter-spacing: 3px;
   text-align: center;
 
-  & span {
+  ${CustomLink} {
     color: #fff;
     font-weight: bold;
   }
 `;
 
-const Header = ({ name, image, description, owner, followers, type }) => {
+const Header = ({
+  name,
+  image,
+  description,
+  owner,
+  ownerUrl,
+  followers,
+  type,
+}) => {
   return (
     <StyledHeaderWrapper flex column itemsCenter>
       <ImageWrapper
@@ -86,7 +95,8 @@ const Header = ({ name, image, description, owner, followers, type }) => {
         <StyledHeaderTitle>{name}</StyledHeaderTitle>
         <StyledDescription>{description}</StyledDescription>
         <StyledMeta>
-          par <span>{owner}</span> • {followers} Abonnés
+          par <CustomLink href={ownerUrl}>{owner}</CustomLink> • {followers}{' '}
+          Abonnés
         </StyledMeta>
       </StyledTextWrapper>
     </StyledHeaderWrapper>
