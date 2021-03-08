@@ -28,6 +28,7 @@ const Playlist = () => {
         name={playlist.name}
         description={playlist.description}
         owner={playlist.owner}
+        ownerUrl={playlist.ownerUrl}
         followers={playlist.followers}
         type={playlist.type}
       />
