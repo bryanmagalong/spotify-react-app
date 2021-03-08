@@ -6,6 +6,27 @@ import NavLink from './NavLink';
 import Wrapper from '../shared/Wrapper';
 import Player from './Player';
 
+const Navbar = () => {
+  return (
+    <NavWrapper flex column>
+      <StyledNavbar>
+        <NavLinkList>
+          <NavLink name="Accueil" to="/">
+            <HouseDoor size="26" />
+          </NavLink>
+          <NavLink name="Parcourir" to="/browse">
+            <Folder2Open size="26" />
+          </NavLink>
+          <NavLink name="Profil" to="/profile">
+            <Person size="26" />
+          </NavLink>
+        </NavLinkList>
+      </StyledNavbar>
+      <Player />
+    </NavWrapper>
+  );
+};
+
 const StyledNavbar = styled.nav`
   width: 100%;
   height: 50%;
@@ -52,26 +73,5 @@ const NavWrapper = styled(Wrapper)`
     background-color: ${(props) => props.theme.colors.subDark};
   };
 `;
-
-const Navbar = () => {
-  return (
-    <NavWrapper flex column>
-      <StyledNavbar>
-        <NavLinkList>
-          <NavLink name="Accueil" to="/">
-            <HouseDoor size="26" />
-          </NavLink>
-          <NavLink name="Parcourir" to="/browse">
-            <Folder2Open size="26" />
-          </NavLink>
-          <NavLink name="Profil" to="/profile">
-            <Person size="26" />
-          </NavLink>
-        </NavLinkList>
-      </StyledNavbar>
-      <Player />
-    </NavWrapper>
-  );
-};
 
 export default Navbar;

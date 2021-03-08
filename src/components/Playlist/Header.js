@@ -6,6 +6,39 @@ import ImageWrapper from '../shared/ImageWrapper';
 import Wrapper from '../shared/Wrapper';
 import CustomLink from '../shared/CustomLink';
 
+const Header = ({
+  name,
+  image,
+  description,
+  owner,
+  ownerUrl,
+  followers,
+  type,
+}) => {
+  return (
+    <StyledHeaderWrapper flex column itemsCenter>
+      <ImageWrapper
+        marginBottom="0"
+        maxWidth="192px"
+        maxHeight="192px"
+        size="192"
+        boxShadow
+        src={image}
+        alt={name}
+      />
+      <StyledTextWrapper as="section" flex column itemsCenter>
+        <StyledType>{type}</StyledType>
+        <StyledHeaderTitle>{name}</StyledHeaderTitle>
+        <StyledDescription>{description}</StyledDescription>
+        <StyledMeta>
+          par <CustomLink href={ownerUrl}>{owner}</CustomLink> • {followers}{' '}
+          Abonnés
+        </StyledMeta>
+      </StyledTextWrapper>
+    </StyledHeaderWrapper>
+  );
+};
+
 const StyledHeaderWrapper = styled(Wrapper)`
   row-gap: 1rem;
   
@@ -69,38 +102,5 @@ const StyledMeta = styled.p`
     font-weight: bold;
   }
 `;
-
-const Header = ({
-  name,
-  image,
-  description,
-  owner,
-  ownerUrl,
-  followers,
-  type,
-}) => {
-  return (
-    <StyledHeaderWrapper flex column itemsCenter>
-      <ImageWrapper
-        marginBottom="0"
-        maxWidth="192px"
-        maxHeight="192px"
-        size="192"
-        boxShadow
-        src={image}
-        alt={name}
-      />
-      <StyledTextWrapper as="section" flex column itemsCenter>
-        <StyledType>{type}</StyledType>
-        <StyledHeaderTitle>{name}</StyledHeaderTitle>
-        <StyledDescription>{description}</StyledDescription>
-        <StyledMeta>
-          par <CustomLink href={ownerUrl}>{owner}</CustomLink> • {followers}{' '}
-          Abonnés
-        </StyledMeta>
-      </StyledTextWrapper>
-    </StyledHeaderWrapper>
-  );
-};
 
 export default Header;

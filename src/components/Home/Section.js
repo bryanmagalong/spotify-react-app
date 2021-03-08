@@ -3,6 +3,16 @@ import styled, { css } from 'styled-components';
 
 import { Title } from '../shared/Title';
 
+const Section = ({ title, display, children }) => {
+  return (
+    <StyledSection display={display}>
+      <Title level="2">{title}</Title>
+      <StyledLine />
+      {children}
+    </StyledSection>
+  );
+};
+
 const StyledSection = styled.section.attrs((props) => ({
   display: props.display, // true if list length > 0 else false
 }))`
@@ -16,15 +26,5 @@ const StyledLine = styled.div`
   background-color: ${(props) => props.theme.colors.gray};
   margin-top: .8rem;
 `;
-
-const Section = ({ title, display, children }) => {
-  return (
-    <StyledSection display={display}>
-      <Title level="2">{title}</Title>
-      <StyledLine />
-      {children}
-    </StyledSection>
-  );
-};
 
 export default Section;

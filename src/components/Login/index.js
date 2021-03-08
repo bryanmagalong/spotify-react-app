@@ -5,23 +5,6 @@ import { TitleStyled } from '../shared/Title';
 import Wrapper from '../shared/Wrapper';
 import Button from '../shared/Button';
 
-const LoginTitle = styled(TitleStyled)`
-  text-align: center;
-  font-size: 2.5em;
-
-  @media(min-width: ${(props) => props.theme.media.md}){
-    font-size: 5.625em;
-  }
-`;
-
-const LoginWrapper = styled(Wrapper)`
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
-  row-gap: 2.5rem;
-  padding: 0 10px;
-`;
-
 const Login = () => {
   const {
     REACT_APP_AUTHORIZE_URL,
@@ -45,5 +28,22 @@ const Login = () => {
     </LoginWrapper>
   );
 };
+
+const LoginTitle = styled(TitleStyled)`
+  text-align: center;
+  font-size: 2.5em;
+
+  @media(min-width: ${(props) => props.theme.media.md}){
+    font-size: 5.625em;
+  }
+`;
+
+const LoginWrapper = styled(Wrapper)`
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  row-gap: 2.5rem;
+  padding: 0 10px;
+`;
 
 export default Login;

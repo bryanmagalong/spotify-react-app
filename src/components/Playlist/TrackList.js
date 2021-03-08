@@ -1,6 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const TrackList = ({ children }) => {
+  return (
+    <StyledTrackList>
+      <StyledTrackListHeader>
+        <div>#</div>
+        <div>Titre</div>
+        <div>Album</div>
+        <div>Durée</div>
+      </StyledTrackListHeader>
+      <StyledTrackListBody>{children}</StyledTrackListBody>
+    </StyledTrackList>
+  );
+};
+
 const StyledTrackList = styled.div`padding: 2rem 0;`;
 
 const StyledTrackListHeader = styled.div`
@@ -25,20 +39,7 @@ const StyledTrackListHeader = styled.div`
     }
   }
 `;
-const StyledTrackListBody = styled.div`padding: 1rem 0;`;
 
-const TrackList = ({ children }) => {
-  return (
-    <StyledTrackList>
-      <StyledTrackListHeader>
-        <div>#</div>
-        <div>Titre</div>
-        <div>Album</div>
-        <div>Durée</div>
-      </StyledTrackListHeader>
-      <StyledTrackListBody>{children}</StyledTrackListBody>
-    </StyledTrackList>
-  );
-};
+const StyledTrackListBody = styled.div`padding: 1rem 0;`;
 
 export default TrackList;

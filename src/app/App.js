@@ -16,16 +16,6 @@ import Error404 from '../components/Error404';
 import Playlist from '../components/Playlist';
 import { hideError } from '../features/errors/errorActions';
 
-const AppStyled = styled.div`
-  background: linear-gradient(
-    to bottom,
-    ${(props) => props.theme.colors.subLight},
-    ${(props) => props.theme.colors.main}
-  );
-  min-height: 100vh;
-  display: flex;
-`;
-
 const App = () => {
   const isLogged = useSelector((state) => state.auth.isLogged);
   const { error, isOpen } = useSelector((state) => state.errors);
@@ -59,5 +49,15 @@ const App = () => {
     </>
   );
 };
+
+const AppStyled = styled.div`
+  background: linear-gradient(
+    to bottom,
+    ${(props) => props.theme.colors.subLight},
+    ${(props) => props.theme.colors.main} 50%
+  );
+  min-height: 100vh;
+  display: flex;
+`;
 
 export default App;

@@ -5,6 +5,18 @@ import styled from 'styled-components';
 import Wrapper from '../shared/Wrapper';
 import { TitleStyled } from '../shared/Title';
 
+const Error404 = () => {
+  return (
+    <Wrapper pb pt px>
+      <Styled404Title>404</Styled404Title>
+      <StyledSubtitle>
+        Ooops ! La page que vous recherchez semble introuvable.
+      </StyledSubtitle>
+      <StyledLink to="/">Revenir à la page d'accueil</StyledLink>
+    </Wrapper>
+  );
+};
+
 const Styled404Title = styled(TitleStyled)`
   color: ${(props) => props.theme.colors.gray};
   letter-spacing: .2rem;
@@ -25,17 +37,5 @@ const StyledLink = styled(Link)`
     border-bottom: 1px solid #fff;
   }
 `;
-
-const Error404 = () => {
-  return (
-    <Wrapper pb pt px>
-      <Styled404Title>404</Styled404Title>
-      <StyledSubtitle>
-        Ooops ! La page que vous recherchez semble introuvable.
-      </StyledSubtitle>
-      <StyledLink to="/">Revenir à la page d'accueil</StyledLink>
-    </Wrapper>
-  );
-};
 
 export default Error404;

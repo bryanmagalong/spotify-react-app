@@ -2,6 +2,17 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
+const MyNavLink = ({ to, name, children }) => {
+  return (
+    <LinkItem>
+      <StyledNavLink to={to} activeClassName="selected" exact>
+        {children}
+        <LinkName>{name}</LinkName>
+      </StyledNavLink>
+    </LinkItem>
+  );
+};
+
 const StyledNavLink = styled(NavLink)`
   display: flex;
   flex-direction: column;
@@ -32,16 +43,5 @@ const LinkName = styled.span`
 `;
 
 const LinkItem = styled.li`width: 100%;`;
-
-const MyNavLink = ({ to, name, children }) => {
-  return (
-    <LinkItem>
-      <StyledNavLink to={to} activeClassName="selected" exact>
-        {children}
-        <LinkName>{name}</LinkName>
-      </StyledNavLink>
-    </LinkItem>
-  );
-};
 
 export default MyNavLink;

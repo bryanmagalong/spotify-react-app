@@ -16,10 +16,6 @@ import {
   fetchMyTopTracks,
 } from '../../features/user/userActions';
 
-const StyledHomeTitle = styled(TitleStyled)`
-  padding-bottom: 1rem;
-`;
-
 const Home = () => {
   const dispatch = useDispatch();
   const playlists = useSelector((state) => state.playlists.list);
@@ -63,5 +59,9 @@ const Home = () => {
     </Wrapper>
   );
 };
+
+const StyledHomeTitle = styled(TitleStyled)`
+  padding-bottom: 1rem;
+`;
 
 export default Home;

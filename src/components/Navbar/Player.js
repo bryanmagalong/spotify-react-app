@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const Player = () => {
+  return <StyledPlayer>PLAYER</StyledPlayer>;
+};
+
 const StyledPlayer = styled.div`
   background-color: ${(props) => props.theme.colors.subLight};
   height: 50%;
@@ -9,9 +13,5 @@ const StyledPlayer = styled.div`
     height: 25%;
   }
 `;
-
-const Player = () => {
-  return <StyledPlayer>PLAYER</StyledPlayer>;
-};
 
 export default Player;
