@@ -4,33 +4,6 @@ import styled from 'styled-components';
 import { Search } from 'react-bootstrap-icons';
 import { searchOnChange } from '../../features/search/searchActions';
 
-const StyledSearchInput = styled.input`
-  background-color: white;
-  width: 100%;
-  height: 100%;
-  border: none;
-  font-size: 1em;
-  font-weight: bold;
-  border-radius: 0 .4rem .4rem 0;
-
-  @media (min-width: ${(props) => props.theme.media.lg}) {
-    width: 60%;
-  }
-`;
-
-const StyledForm = styled.form`
-  height: 100%;
-  display: flex;
-`;
-
-const StyledSearchButton = styled.button`
-  background-color: white;
-  padding: 0 .6rem;
-  font-size: 1em;
-  border-radius: .4rem 0 0 .4rem;
-  border: none;
-`;
-
 const SearchInput = () => {
   // TODO: form/input verification
   const inputValue = useSelector((state) => state.search.value);
@@ -59,5 +32,32 @@ const SearchInput = () => {
     </StyledForm>
   );
 };
+
+const StyledSearchInput = styled.input`
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  border: none;
+  font-size: 1em;
+  font-weight: bold;
+  border-radius: 0 .4rem .4rem 0;
+
+  @media (min-width: ${(props) => props.theme.media.lg}) {
+    width: 60%;
+  }
+`;
+
+const StyledForm = styled.form`
+  height: 100%;
+  display: flex;
+`;
+
+const StyledSearchButton = styled.button`
+  background-color: white;
+  padding: 0 .6rem;
+  font-size: 1em;
+  border-radius: .4rem 0 0 .4rem;
+  border: none;
+`;
 
 export default SearchInput;

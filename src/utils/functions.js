@@ -52,3 +52,18 @@ export const tokenExists = () => {
   if (token === '{}') return false;
   return token;
 };
+
+/**
+ * Convert milliseconds to minutes and seconds (minutes:seconds)
+ * https://stackoverflow.com/questions/21294302/converting-milliseconds-to-minutes-and-seconds-with-javascript
+ * @param {milliseconds} ms 
+ */
+export const msToMinutesAndSeconds = (ms) => {
+  const minutes = Math.floor(ms / 60000);
+  const seconds = ((ms % 60000) / 1000).toFixed(0);
+
+  // eslint-disable-next-line eqeqeq
+  return seconds == 60
+    ? minutes + 1 + ':00'
+    : minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+};

@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+export const Title = ({ level, children }) => {
+  const tag = level ? `h${level}` : 'h1';
+
+  return <TitleStyled as={tag}>{children}</TitleStyled>;
+};
+
 export const TitleStyled = styled.h1`
   text-transform: uppercase;
   font-weight: bold;
@@ -10,9 +16,3 @@ export const TitleStyled = styled.h1`
     return props.theme.fontSize.xl;
   }};
 `;
-
-export const Title = ({ level, children }) => {
-  const tag = level ? `h${level}` : 'h1';
-
-  return <TitleStyled as={tag}>{children}</TitleStyled>;
-};

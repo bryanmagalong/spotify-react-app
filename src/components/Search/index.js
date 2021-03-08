@@ -2,6 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import SearchInput from './SearchInput';
 
+const Search = () => {
+  return (
+    <StyledSearch>
+      <SearchInput />
+    </StyledSearch>
+  );
+};
+
 const StyledSearch = styled.div`
   background-color: ${(props) => props.theme.colors.subDark};
   height: 3.75rem;
@@ -14,13 +22,5 @@ const StyledSearch = styled.div`
     padding-left: 2rem;
   }
 `;
-
-const Search = () => {
-  return (
-    <StyledSearch>
-      <SearchInput />
-    </StyledSearch>
-  );
-};
 
 export default Search;

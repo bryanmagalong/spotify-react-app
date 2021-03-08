@@ -7,16 +7,21 @@ const theme = {
     green: '#15DB5F',
   },
   fontSize: {
+    xxl: '4em', // 64px
     xl: '1.875em', // 30px
     lg: '1.250em', // 20px
     md: '0.875em', // 14px
     sm: '.75em', // 12px
   },
   media: {
-    sm: '320px',
+    xs: '320px',
+    sm: '375px',
     md: '768px',
     lg: '1024px',
     xl: '1224px',
+  },
+  template: {
+    trackGridColumns: '1.2rem 2fr 1fr 3rem',
   },
 };
 

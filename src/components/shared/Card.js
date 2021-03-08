@@ -1,16 +1,26 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
-const ImageCard = styled.div`
-  max-width: 100%;
-  height: auto;
-  margin-bottom: 1rem;
+import ImageWrapper from './ImageWrapper';
 
-  & img {
-    object-fit: cover;
-    width: 100%;
-  }
+const Card = ({ name, images, type, album, id, owner }) => {
+  const path = `/${type}s/${id}`;
 
+  return (
+    <article>
+      <StyledCard to={path}>
+        <ImageCard type={type} src={images} alt={name} maxWidth="100%" />
+        <DescriptionCard type={type}>
+          <h3>{name}</h3>
+          <span>{type === 'track' ? album : `par ${owner.display_name}`}</span>
+        </DescriptionCard>
+      </StyledCard>
+    </article>
+  );
+};
+
+const ImageCard = styled(ImageWrapper)`
   ${(props) =>
     props.type === 'artist' &&
     css`
@@ -27,33 +37,32 @@ const DescriptionCard = styled.div`
   ${(props) => props.type === 'artist' && css`text-align: center;`};
 
   & h3 {
-    font-weight: bold;
     margin-bottom: .5rem;
     min-width: 166px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    font-weight: bold;
   }
 
   & span {
     font-size: ${(props) => props.theme.fontSize.md};
     color: ${(props) => props.theme.colors.gray};
-    text-transform: capitalize;
   }
 `;
 
-const Card = ({ name, images, type, album }) => {
-  return (
-    <article>
-      <ImageCard type={type}>
-        <img src={images} alt={name} />
-      </ImageCard>
-      <DescriptionCard type={type}>
-        <h3>{name}</h3>
-        <span>{type === 'track' ? album : type}</span>
-      </DescriptionCard>
-    </article>
-  );
-};
+const StyledCard = styled(Link)`
+  color: #FFF;
+  &:hover {
+    & h3 {
+      text-decoration: underline; 
+    }
+
+    & img {
+      transition: all ease-in-out .3s;
+      box-shadow: 0px 0px 30px 0px rgba(178, 178, 178, 0.2);
+    }
+  }
+`;
 
 export default Card;

@@ -1,6 +1,6 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
+import React, {useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Switch, Route, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import GlobalStyles from '../theme/globalStyles';
@@ -12,21 +12,23 @@ import ErrorPopup from '../components/shared/ErrorPopup';
 import Navbar from '../components/Navbar';
 import Search from '../components/Search';
 import Wrapper from '../components/shared/Wrapper';
-
-const AppStyled = styled.div`
-  background: linear-gradient(
-    to bottom,
-    ${(props) => props.theme.colors.subLight},
-    ${(props) => props.theme.colors.main}
-  );
-  min-height: 100vh;
-  display: flex;
-`;
+import Error404 from '../components/Error404';
+import Playlist from '../components/Playlist';
+import { hideError } from '../features/errors/errorActions';
 
 const App = () => {
   const isLogged = useSelector((state) => state.auth.isLogged);
   const { error, isOpen } = useSelector((state) => state.errors);
-  
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  useEffect(() => {
+    if(error.statusCode && error.statusCode === 404) {
+      dispatch(hideError());
+      history.push('/404');
+    };
+  }, [error, dispatch, history]);
+
   return (
     <>
       <GlobalStyles />
@@ -39,11 +41,23 @@ const App = () => {
             <ProtectedRoute exact path="/" component={Home} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/redirect" component={Redirect} />
+            <ProtectedRoute path='/playlists/:playlistId' component={Playlist} />
+            <Route path="*" component={Error404} />
           </Switch>
         </Wrapper>
       </AppStyled>
     </>
   );
 };
+
+const AppStyled = styled.div`
+  background: linear-gradient(
+    to bottom,
+    ${(props) => props.theme.colors.subLight},
+    ${(props) => props.theme.colors.main} 50%
+  );
+  min-height: 100vh;
+  display: flex;
+`;
 
 export default App;
