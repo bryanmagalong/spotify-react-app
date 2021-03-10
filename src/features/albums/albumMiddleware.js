@@ -5,10 +5,8 @@ import { get } from '../../utils/api';
 const albumMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
     case FETCH_ALBUM_BY_ID:
-      console.log('//========== Album Middleware');
-      const albumId = action.payload;
-
       try {
+        const albumId = action.payload;
         const data = await get(`https://api.spotify.com/v1/albums/${albumId}`);
         // console.log(data);
 
@@ -20,15 +18,14 @@ const albumMiddleware = (store) => (next) => async (action) => {
           album_type: data.album_type,
           type: data.type,
           total_tracks: data.total_tracks,
-          copyrights: [ ...data.copyrights ],
         };
 
         const trackList = [ ...data.tracks.items ];
-
+        const copyrights = data.copyrights.map((item) => item.text);
         // console.log(album);
         // console.log(trackList);
 
-        store.dispatch(fetchAlbumByIdSuccess({ album, trackList }));
+        store.dispatch(fetchAlbumByIdSuccess({ album, trackList, copyrights }));
       } catch (error) {
         console.log(error);
         if (error.response.status === 404);

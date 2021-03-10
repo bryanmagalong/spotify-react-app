@@ -4,12 +4,12 @@ import { msToMinutesAndSeconds } from '../../utils/functions';
 const initialState = {
   album: {},
   trackList: [],
+  copyrights: [],
 };
 
 const albumReducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case FETCH_ALBUM_BY_ID_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         album: { ...action.payload.album },
@@ -25,6 +25,7 @@ const albumReducer = (state = initialState, action = {}) => {
             url: item.artists[0].external_urls.spotify,
           },
         })),
+        copyrights: [ ...action.payload.copyrights ],
       };
     default:
       return state;
