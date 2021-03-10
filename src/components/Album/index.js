@@ -7,12 +7,15 @@ import { fetchAlbumById } from '../../features/albums/albumActions';
 import Header from '../shared/Header';
 import TrackList from '../shared/TrackList';
 import TrackItem from '../shared/TrackItem';
+import Copyrights from './Copyrights';
 
 const Album = () => {
   const { albumId } = useParams();
+  console.log(albumId);
   const dispatch = useDispatch();
   const album = useSelector((state) => state.albums.album);
   const tracks = useSelector((state) => state.albums.trackList);
+  const copyrights = useSelector((state) => state.albums.copyrights);
 
   useEffect(
     () => {
@@ -20,6 +23,7 @@ const Album = () => {
     },
     [ albumId, dispatch ],
   );
+
   return (
     <Wrapper px pb pt>
       <Header {...album} image={album.images} />
@@ -28,6 +32,7 @@ const Album = () => {
           <TrackItem key={item.id} number={index + 1} {...item} />
         ))}
       </TrackList>
+      <Copyrights copyrights={copyrights} />
     </Wrapper>
   );
 };
