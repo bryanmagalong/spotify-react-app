@@ -24,7 +24,7 @@ const Header = ({
       : `${followers} Abonnés`;
 
   return (
-    <StyledHeaderWrapper flex column itemsCenter>
+    <StyledHeaderWrapper as="section" flex column itemsCenter>
       <ImageWrapper
         marginBottom="0"
         maxWidth="192px"
@@ -80,9 +80,11 @@ const StyledType = styled.span`
 
 const StyledHeaderTitle = styled(TitleStyled)`
   text-transform: capitalize;
+  text-align: center;
 
   @media (min-width: ${(props) => props.theme.media.md}) {
-    font-size: 3em;
+    font-size: 2.3em;
+    text-align: left;
   }
 
   @media (min-width: ${(props) => props.theme.media.xl}) {
