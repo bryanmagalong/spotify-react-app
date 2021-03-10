@@ -14,6 +14,8 @@ import Search from '../components/Search';
 import Wrapper from '../components/shared/Wrapper';
 import Error404 from '../components/Error404';
 import Playlist from '../components/Playlist';
+import Album from '../components/Album';
+
 import { hideError } from '../features/errors/errorActions';
 
 const App = () => {
@@ -42,6 +44,7 @@ const App = () => {
             <Route exact path="/login" component={Login} />
             <Route exact path="/redirect" component={Redirect} />
             <ProtectedRoute path='/playlists/:playlistId' component={Playlist} />
+            <ProtectedRoute path='/albums/:albumId' component={Album} />
             <Route path="*" component={Error404} />
           </Switch>
         </Wrapper>
