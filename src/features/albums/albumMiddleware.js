@@ -12,7 +12,7 @@ const albumMiddleware = (store) => (next) => async (action) => {
 
         const album = {
           name: data.name,
-          images: data.images[0].url,
+          image: data.images[0].url,
           owner: data.artists[0].name,
           ownerUrl: data.artists[0].external_urls.spotify,
           album_type: data.album_type,
