@@ -1,14 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Clock } from 'react-bootstrap-icons';
 
-const TrackList = ({ children }) => {
+const TrackList = ({ children, type }) => {
   return (
     <StyledTrackList>
-      <StyledTrackListHeader>
+      <StyledTrackListHeader type={type}>
         <div>#</div>
         <div>Titre</div>
-        <div>Album</div>
-        <div>Durée</div>
+        {type === 'playlist' && <div>Album</div>}
+        <div>
+          <Clock />
+        </div>
       </StyledTrackListHeader>
       <StyledTrackListBody>{children}</StyledTrackListBody>
     </StyledTrackList>
@@ -23,7 +26,10 @@ const StyledTrackListHeader = styled.div`
   @media (min-width: ${(props) => props.theme.media.md}) {
     display: grid;
     padding: 0 .8rem;
-    grid-template-columns: ${(props) => props.theme.template.trackGridColumns};
+    grid-template-columns: ${(props) =>
+      props.type === 'playlist'
+        ? props.theme.template.trackGridColumns
+        : props.theme.template.albumTrackGridColumns};
     grid-gap: 1rem;
     height: 2rem;
     border-bottom: 1px solid ${(props) => props.theme.colors.gray};

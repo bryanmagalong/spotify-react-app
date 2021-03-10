@@ -14,11 +14,12 @@ const TrackItem = ({
   album,
   explicit,
   duration,
+  type,
 }) => {
   const albumPath = album ? `/albums/${album.id}` : '';
 
   return (
-    <StyledTrackItem>
+    <StyledTrackItem type={type}>
       <StyledDiv flex itemsCenter>
         {number}
       </StyledDiv>
@@ -42,13 +43,33 @@ const TrackItem = ({
       </StyledDiv>
       {album && (
         <StyledTrackAlbum>
-          <Link to={albumPath}>{album.name}</Link>
+          <StyledInternLink to={albumPath}>{album.name}</StyledInternLink>
         </StyledTrackAlbum>
       )}
       <StyledTrackDuration>{duration}</StyledTrackDuration>
     </StyledTrackItem>
   );
 };
+
+const StyledTrackItem = styled.div`
+  padding: .5rem .8rem;
+  border-radius: 3px;
+  display: grid;
+  grid-template-columns: 1rem 1fr;
+  grid-gap: 1rem;
+  color: ${(props) => props.theme.colors.gray};
+
+  &:hover {
+    background-color: rgba(178, 178, 178, 0.1);
+  }
+
+  @media (min-width: ${(props) => props.theme.media.md}) {
+    grid-template-columns: ${(props) =>
+      props.type === 'playlist'
+        ? props.theme.template.trackGridColumns
+        : props.theme.template.albumTrackGridColumns};
+  }
+`;
 
 const StyledDiv = styled(Wrapper)`
   column-gap: ${(props) => props.columnGap && '1rem'};
@@ -99,20 +120,12 @@ const StyledTrackDuration = styled(StyledTrackAlbum)`
   }
 `;
 
-const StyledTrackItem = styled.div`
-  padding: .5rem .8rem;
-  border-radius: 3px;
-  display: grid;
-  grid-template-columns: 1rem 1fr;
-  grid-gap: 1rem;
+const StyledInternLink = styled(Link)`
   color: ${(props) => props.theme.colors.gray};
 
   &:hover {
-    background-color: rgba(178, 178, 178, 0.1);
-  }
-
-  @media (min-width: ${(props) => props.theme.media.md}) {
-    grid-template-columns: ${(props) => props.theme.template.trackGridColumns};
+    color: #fff;
+    text-decoration: underline;
   }
 `;
 

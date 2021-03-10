@@ -27,7 +27,7 @@ const Album = () => {
   return (
     <Wrapper px pb pt>
       <Header {...album} />
-      <TrackList>
+      <TrackList type={album.type}>
         {tracks.map((item, index) => (
           <TrackItem key={item.id} number={index + 1} {...item} />
         ))}

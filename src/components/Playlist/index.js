@@ -24,9 +24,14 @@ const Playlist = () => {
   return (
     <Wrapper px pb pt>
       <Header {...playlist} />
-      <TrackList>
+      <TrackList type={playlist.type}>
         {tracks.map((item, index) => (
-          <TrackItem key={item.id} number={index + 1} {...item} />
+          <TrackItem
+            key={item.id}
+            type={playlist.type}
+            number={index + 1}
+            {...item}
+          />
         ))}
       </TrackList>
     </Wrapper>
