@@ -23,15 +23,7 @@ const Playlist = () => {
 
   return (
     <Wrapper px pb pt>
-      <Header
-        image={playlist.images}
-        name={playlist.name}
-        description={playlist.description}
-        owner={playlist.owner}
-        ownerUrl={playlist.ownerUrl}
-        followers={playlist.followers}
-        type={playlist.type}
-      />
+      <Header {...playlist} />
       <TrackList>
         {tracks.map((item, index) => (
           <TrackItem key={item.id} number={index + 1} {...item} />

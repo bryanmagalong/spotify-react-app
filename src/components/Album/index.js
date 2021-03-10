@@ -26,7 +26,7 @@ const Album = () => {
 
   return (
     <Wrapper px pb pt>
-      <Header {...album} image={album.images} />
+      <Header {...album} />
       <TrackList>
         {tracks.map((item, index) => (
           <TrackItem key={item.id} number={index + 1} {...item} />
