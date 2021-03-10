@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { TitleStyled } from '../shared/Title';
-import ImageWrapper from '../shared/ImageWrapper';
-import Wrapper from '../shared/Wrapper';
-import CustomLink from '../shared/CustomLink';
+import { TitleStyled } from './Title';
+import ImageWrapper from './ImageWrapper';
+import Wrapper from './Wrapper';
+import CustomLink from './CustomLink';
 
 const Header = ({
   name,

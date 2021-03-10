@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-import ImageWrapper from '../shared/ImageWrapper';
-import Wrapper from '../shared/Wrapper';
-import StyledCustomLink from '../shared/CustomLink';
+import ImageWrapper from './ImageWrapper';
+import Wrapper from './Wrapper';
+import StyledCustomLink from './CustomLink';
 
 const TrackItem = ({
   number,
@@ -14,6 +15,8 @@ const TrackItem = ({
   explicit,
   duration,
 }) => {
+  const albumPath = `/albums/${album.id}`;
+
   return (
     <StyledTrackItem>
       <StyledDiv flex itemsCenter>
@@ -35,7 +38,9 @@ const TrackItem = ({
           </StyledText>
         </StyledTitleDiv>
       </StyledDiv>
-      <StyledTrackAlbum>{album.name}</StyledTrackAlbum>
+      <StyledTrackAlbum>
+        <Link to={albumPath}>{album.name}</Link>
+      </StyledTrackAlbum>
       <StyledTrackDuration>{duration}</StyledTrackDuration>
     </StyledTrackItem>
   );

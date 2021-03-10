@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Wrapper from '../shared/Wrapper';
-import Header from './Header';
-import TrackList from './TrackList';
-import TrackItem from './TrackItem';
+import Header from '../shared/Header';
+import TrackList from '../shared/TrackList';
+import TrackItem from '../shared/TrackItem';
 import { fetchPlaylistById } from '../../features/playlists/playlistActions';
 
 const Playlist = () => {
