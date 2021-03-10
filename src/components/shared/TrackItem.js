@@ -15,7 +15,7 @@ const TrackItem = ({
   explicit,
   duration,
 }) => {
-  const albumPath = `/albums/${album.id}`;
+  const albumPath = album ? `/albums/${album.id}` : '';
 
   return (
     <StyledTrackItem>
@@ -23,13 +23,15 @@ const TrackItem = ({
         {number}
       </StyledDiv>
       <StyledDiv flex itemsCenter columnGap>
-        <ImageWrapper
-          src={images.url}
-          alt={name}
-          maxWidth="30%"
-          marginBottom="0"
-          size={images.width}
-        />
+        {images && (
+          <ImageWrapper
+            src={images.url}
+            alt={name}
+            maxWidth="30%"
+            marginBottom="0"
+            size={images.width}
+          />
+        )}
         <StyledTitleDiv flex column fullWidth>
           <StyledText white>{name}</StyledText>
           <StyledText flex columnGap fontSize=".9rem">
@@ -38,9 +40,11 @@ const TrackItem = ({
           </StyledText>
         </StyledTitleDiv>
       </StyledDiv>
-      <StyledTrackAlbum>
-        <Link to={albumPath}>{album.name}</Link>
-      </StyledTrackAlbum>
+      {album && (
+        <StyledTrackAlbum>
+          <Link to={albumPath}>{album.name}</Link>
+        </StyledTrackAlbum>
+      )}
       <StyledTrackDuration>{duration}</StyledTrackDuration>
     </StyledTrackItem>
   );

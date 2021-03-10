@@ -14,7 +14,15 @@ const Header = ({
   ownerUrl,
   followers,
   type,
+  album_type,
+  total_tracks,
 }) => {
+  const headerType = type === 'album' ? album_type : type;
+  const meta =
+    type === 'album'
+      ? `${total_tracks} titre${total_tracks > 1 ? 's' : ''}`
+      : `${followers} Abonnés`;
+
   return (
     <StyledHeaderWrapper flex column itemsCenter>
       <ImageWrapper
@@ -27,12 +35,11 @@ const Header = ({
         alt={name}
       />
       <StyledTextWrapper as="section" flex column itemsCenter>
-        <StyledType>{type}</StyledType>
+        <StyledType>{headerType}</StyledType>
         <StyledHeaderTitle>{name}</StyledHeaderTitle>
         <StyledDescription>{description}</StyledDescription>
         <StyledMeta>
-          par <CustomLink href={ownerUrl}>{owner}</CustomLink> • {followers}{' '}
-          Abonnés
+          par <CustomLink href={ownerUrl}>{owner}</CustomLink> • {meta}
         </StyledMeta>
       </StyledTextWrapper>
     </StyledHeaderWrapper>
