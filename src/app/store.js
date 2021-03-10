@@ -1,6 +1,7 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import authMiddleware from '../features/auth/authMiddleware';
 import playlistMiddleware from '../features/playlists/playlistMiddleware';
+import albumMiddleware from '../features/albums/albumMiddleware';
 import userMiddleware from '../features/user/userMiddleware';
 import rootReducer from './rootReducer';
 
@@ -8,7 +9,12 @@ import rootReducer from './rootReducer';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const enhancers = composeEnhancers(
-  applyMiddleware(authMiddleware, playlistMiddleware, userMiddleware),
+  applyMiddleware(
+    authMiddleware,
+    playlistMiddleware,
+    albumMiddleware,
+    userMiddleware,
+  ),
 );
 
 // == Store
