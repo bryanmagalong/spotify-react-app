@@ -18,6 +18,7 @@ const albumMiddleware = (store) => (next) => async (action) => {
           album_type: data.album_type,
           type: data.type,
           total_tracks: data.total_tracks,
+          release_year: data.release_date.split('-')[0],
         };
 
         const trackList = [ ...data.tracks.items ];

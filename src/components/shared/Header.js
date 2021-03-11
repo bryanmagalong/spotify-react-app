@@ -16,11 +16,12 @@ const Header = ({
   type,
   album_type,
   total_tracks,
+  release_year,
 }) => {
   const headerType = type === 'album' ? album_type : type;
   const meta =
     type === 'album'
-      ? `${total_tracks} titre${total_tracks > 1 ? 's' : ''}`
+      ? `${release_year} • ${total_tracks} titre${total_tracks > 1 ? 's' : ''}`
       : `${followers} Abonnés`;
 
   return (
