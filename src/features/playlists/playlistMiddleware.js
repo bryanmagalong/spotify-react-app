@@ -77,7 +77,7 @@ const playlistMiddleware = (store) => (next) => async (action) => {
         console.log(error);
         if (error.response.status === 404);
         store.dispatch(
-          setError({ message: 'Playlist introuvable!', statusCode: 404 }),
+          setError({ message: 'Playlist introuvable!', status: 404 }),
         );
       }
       return next(action);
