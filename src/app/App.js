@@ -17,6 +17,7 @@ import Playlist from '../components/Playlist';
 import Album from '../components/Album';
 
 import { hideError } from '../features/errors/errorActions';
+import { deleteAuthHeader } from '../utils/functions';
 
 const App = () => {
   const isLogged = useSelector((state) => state.auth.isLogged);
@@ -25,9 +26,17 @@ const App = () => {
   const history = useHistory();
 
   useEffect(() => {
-    if(error.statusCode && error.statusCode === 404) {
+    if(!error.status) return;
+    
+    if(error.status === 404) {
       dispatch(hideError());
-      history.push('/404');
+      return history.push('/404');
+    } 
+    
+    if(error.status === 401) {
+      dispatch(hideError());
+      deleteAuthHeader();
+      return history.push('/login');
     };
   }, [error, dispatch, history]);
 
