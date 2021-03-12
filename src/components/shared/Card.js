@@ -38,7 +38,7 @@ const DescriptionCard = styled.div`
 
   & h3 {
     margin-bottom: .5rem;
-    min-width: 166px;
+    min-width: 128px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
