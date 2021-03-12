@@ -72,7 +72,7 @@ const playlistMiddleware = (store) => (next) => async (action) => {
         }));
 
         store.dispatch(fetchPlaylistByIdSuccess({ playlist, trackList }));
-        console.log(playlist);
+        // console.log(playlist);
       } catch (error) {
         console.log(error);
         if (error.response.status === 404);

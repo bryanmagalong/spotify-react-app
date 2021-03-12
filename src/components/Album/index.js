@@ -11,7 +11,7 @@ import Copyrights from './Copyrights';
 
 const Album = () => {
   const { albumId } = useParams();
-  console.log(albumId);
+  // console.log(albumId);
   const dispatch = useDispatch();
   const album = useSelector((state) => state.albums.album);
   const tracks = useSelector((state) => state.albums.trackList);

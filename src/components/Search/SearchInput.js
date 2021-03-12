@@ -10,7 +10,7 @@ const SearchInput = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
-    console.log('Submit event');
+    // console.log('Submit event');
     e.preventDefault();
   };
 
@@ -26,7 +26,7 @@ const SearchInput = () => {
         placeholder="Artistes, titres ou albums"
         onChange={(e) => {
           dispatch(searchOnChange(e.target.value));
-          console.log(e.target.value);
+          // console.log(e.target.value);
         }}
       />
     </StyledForm>
