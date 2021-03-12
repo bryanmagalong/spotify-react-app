@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-import ImageWrapper from '../shared/ImageWrapper';
-import Wrapper from '../shared/Wrapper';
-import StyledCustomLink from '../shared/CustomLink';
+import ImageWrapper from './ImageWrapper';
+import Wrapper from './Wrapper';
+import StyledCustomLink from './CustomLink';
 
 const TrackItem = ({
   number,
@@ -13,20 +14,25 @@ const TrackItem = ({
   album,
   explicit,
   duration,
+  type,
 }) => {
+  const albumPath = album ? `/albums/${album.id}` : '';
+
   return (
-    <StyledTrackItem>
+    <StyledTrackItem type={type}>
       <StyledDiv flex itemsCenter>
         {number}
       </StyledDiv>
       <StyledDiv flex itemsCenter columnGap>
-        <ImageWrapper
-          src={images.url}
-          alt={name}
-          maxWidth="30%"
-          marginBottom="0"
-          size={images.width}
-        />
+        {images && (
+          <ImageWrapper
+            src={images.url}
+            alt={name}
+            maxWidth="30%"
+            marginBottom="0"
+            size={images.width}
+          />
+        )}
         <StyledTitleDiv flex column fullWidth>
           <StyledText white>{name}</StyledText>
           <StyledText flex columnGap fontSize=".9rem">
@@ -35,11 +41,35 @@ const TrackItem = ({
           </StyledText>
         </StyledTitleDiv>
       </StyledDiv>
-      <StyledTrackAlbum>{album.name}</StyledTrackAlbum>
+      {album && (
+        <StyledTrackAlbum>
+          <StyledInternLink to={albumPath}>{album.name}</StyledInternLink>
+        </StyledTrackAlbum>
+      )}
       <StyledTrackDuration>{duration}</StyledTrackDuration>
     </StyledTrackItem>
   );
 };
+
+const StyledTrackItem = styled.div`
+  padding: .5rem .8rem;
+  border-radius: 3px;
+  display: grid;
+  grid-template-columns: 1rem 1fr;
+  grid-gap: 1rem;
+  color: ${(props) => props.theme.colors.gray};
+
+  &:hover {
+    background-color: rgba(178, 178, 178, 0.1);
+  }
+
+  @media (min-width: ${(props) => props.theme.media.md}) {
+    grid-template-columns: ${(props) =>
+      props.type === 'playlist'
+        ? props.theme.template.trackGridColumns
+        : props.theme.template.albumTrackGridColumns};
+  }
+`;
 
 const StyledDiv = styled(Wrapper)`
   column-gap: ${(props) => props.columnGap && '1rem'};
@@ -90,20 +120,12 @@ const StyledTrackDuration = styled(StyledTrackAlbum)`
   }
 `;
 
-const StyledTrackItem = styled.div`
-  padding: .5rem .8rem;
-  border-radius: 3px;
-  display: grid;
-  grid-template-columns: 1rem 1fr;
-  grid-gap: 1rem;
+const StyledInternLink = styled(Link)`
   color: ${(props) => props.theme.colors.gray};
 
   &:hover {
-    background-color: rgba(178, 178, 178, 0.1);
-  }
-
-  @media (min-width: ${(props) => props.theme.media.md}) {
-    grid-template-columns: ${(props) => props.theme.template.trackGridColumns};
+    color: #fff;
+    text-decoration: underline;
   }
 `;
 

@@ -7,7 +7,7 @@ const theme = {
     green: '#15DB5F',
   },
   fontSize: {
-    xxl: '4em', // 64px
+    xxl: '3em', // 48px
     xl: '1.875em', // 30px
     lg: '1.250em', // 20px
     md: '0.875em', // 14px
@@ -22,6 +22,7 @@ const theme = {
   },
   template: {
     trackGridColumns: '1.2rem 2fr 1fr 3rem',
+    albumTrackGridColumns: '1.2rem 2fr 3rem',
   },
 };
 

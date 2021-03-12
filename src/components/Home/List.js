@@ -7,9 +7,13 @@ const List = ({ children }) => {
 
 const StyledList = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
   gap: 1rem;
   padding: 1rem 0;
+
+  @media (min-width: ${(props) => props.theme.media.md}) {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
 
   @media (min-width: ${(props) => props.theme.media.lg}) {
     gap: 2rem;

@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Wrapper from '../shared/Wrapper';
-import Header from './Header';
-import TrackList from './TrackList';
-import TrackItem from './TrackItem';
+import Header from '../shared/Header';
+import TrackList from '../shared/TrackList';
+import TrackItem from '../shared/TrackItem';
 import { fetchPlaylistById } from '../../features/playlists/playlistActions';
 
 const Playlist = () => {
@@ -23,18 +23,15 @@ const Playlist = () => {
 
   return (
     <Wrapper px pb pt>
-      <Header
-        image={playlist.images}
-        name={playlist.name}
-        description={playlist.description}
-        owner={playlist.owner}
-        ownerUrl={playlist.ownerUrl}
-        followers={playlist.followers}
-        type={playlist.type}
-      />
-      <TrackList>
+      <Header {...playlist} />
+      <TrackList type={playlist.type}>
         {tracks.map((item, index) => (
-          <TrackItem key={item.id} number={index + 1} {...item} />
+          <TrackItem
+            key={item.id}
+            type={playlist.type}
+            number={index + 1}
+            {...item}
+          />
         ))}
       </TrackList>
     </Wrapper>

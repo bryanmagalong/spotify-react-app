@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { TitleStyled } from '../shared/Title';
-import ImageWrapper from '../shared/ImageWrapper';
-import Wrapper from '../shared/Wrapper';
-import CustomLink from '../shared/CustomLink';
+import { TitleStyled } from './Title';
+import ImageWrapper from './ImageWrapper';
+import Wrapper from './Wrapper';
+import CustomLink from './CustomLink';
 
 const Header = ({
   name,
@@ -14,9 +14,18 @@ const Header = ({
   ownerUrl,
   followers,
   type,
+  album_type,
+  total_tracks,
+  release_year,
 }) => {
+  const headerType = type === 'album' ? album_type : type;
+  const meta =
+    type === 'album'
+      ? `${release_year} • ${total_tracks} titre${total_tracks > 1 ? 's' : ''}`
+      : `${followers} Abonnés`;
+
   return (
-    <StyledHeaderWrapper flex column itemsCenter>
+    <StyledHeaderWrapper as="section" flex column itemsCenter>
       <ImageWrapper
         marginBottom="0"
         maxWidth="192px"
@@ -27,12 +36,11 @@ const Header = ({
         alt={name}
       />
       <StyledTextWrapper as="section" flex column itemsCenter>
-        <StyledType>{type}</StyledType>
+        <StyledType>{headerType}</StyledType>
         <StyledHeaderTitle>{name}</StyledHeaderTitle>
         <StyledDescription>{description}</StyledDescription>
         <StyledMeta>
-          par <CustomLink href={ownerUrl}>{owner}</CustomLink> • {followers}{' '}
-          Abonnés
+          par <CustomLink href={ownerUrl}>{owner}</CustomLink> • {meta}
         </StyledMeta>
       </StyledTextWrapper>
     </StyledHeaderWrapper>
@@ -73,9 +81,11 @@ const StyledType = styled.span`
 
 const StyledHeaderTitle = styled(TitleStyled)`
   text-transform: capitalize;
+  text-align: center;
 
   @media (min-width: ${(props) => props.theme.media.md}) {
-    font-size: 3em;
+    font-size: 2.3em;
+    text-align: left;
   }
 
   @media (min-width: ${(props) => props.theme.media.xl}) {
