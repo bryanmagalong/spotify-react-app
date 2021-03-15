@@ -1,12 +1,20 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 import { Title } from '../shared/Title';
 
-const Section = ({ title, display, children }) => {
+const Section = ({ title, display, children, path }) => {
+  // const slug = title.split(' ').join('-');
+
   return (
     <StyledSection display={display}>
-      <Title level="2">{title}</Title>
+      <StyledDiv>
+        <Title level="2">{title}</Title>
+        <StyledLink extend={display} to={path}>
+          Voir tout
+        </StyledLink>
+      </StyledDiv>
       <StyledLine />
       {children}
     </StyledSection>
@@ -25,6 +33,26 @@ const StyledLine = styled.div`
   height: 1px;
   background-color: ${(props) => props.theme.colors.gray};
   margin-top: .8rem;
+`;
+
+const StyledDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  column-gap: .5rem;
+`;
+
+const StyledLink = styled(Link)`
+  display: ${(props) => (props.extend > 6 ? 'block' : 'none')};
+  align-self: flex-end;
+  line-height: 1rem;
+  color: ${(props) => props.theme.colors.gray};
+  text-transform: uppercase;
+  font-size: ${(props) => props.theme.fontSize.sm};
+  letter-spacing: .1rem;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 export default Section;
