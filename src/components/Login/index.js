@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { TitleStyled } from '../shared/Title';
+import { StyledTitle } from '../shared/Title';
 import Wrapper from '../shared/Wrapper';
 import Button from '../shared/Button';
 
@@ -29,7 +29,7 @@ const Login = () => {
   );
 };
 
-const LoginTitle = styled(TitleStyled)`
+const LoginTitle = styled(StyledTitle)`
   text-align: center;
   font-size: 2.5em;
 
