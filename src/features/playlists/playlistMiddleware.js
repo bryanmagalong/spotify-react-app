@@ -29,8 +29,11 @@ const playlistMiddleware = (store) => (next) => async (action) => {
           };
         });
 
-        // console.log(data.items);
-        store.dispatch(fetchPlaylistsSuccess(playlists));
+        const extend = data.next
+          ? 'https://api.spotify.com/v1/me/playlists '
+          : null;
+        // console.log(data);
+        store.dispatch(fetchPlaylistsSuccess({ playlists, extend }));
       } catch (error) {
         console.log(error);
       }

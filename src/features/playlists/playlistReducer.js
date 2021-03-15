@@ -4,7 +4,10 @@ import {
 } from './playlistActions';
 
 const initialState = {
-  list: [],
+  list: {
+    items: [],
+    extend: null,
+  },
   playlist: {},
   trackList: [],
 };
@@ -14,7 +17,11 @@ const playlistReducer = (state = initialState, action = {}) => {
     case FETCH_PLAYLISTS_SUCCESS:
       return {
         ...state,
-        list: [ ...action.payload ],
+        list: {
+          ...state.list,
+          items: [ ...action.payload.playlists ],
+          extend: action.payload.extend,
+        },
       };
     case FETCH_PLAYLIST_BY_ID_SUCCESS:
       return {
