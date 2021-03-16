@@ -5,6 +5,7 @@ import { HouseDoor, Folder2Open, Person } from 'react-bootstrap-icons';
 import NavLink from './NavLink';
 import Wrapper from '../shared/Wrapper';
 import Player from './Player';
+import PlaylistsList from './PlaylistsList';
 
 const Navbar = () => {
   return (
@@ -20,6 +21,7 @@ const Navbar = () => {
           <NavLink name="Profil" to="/profile">
             <Person size="26" />
           </NavLink>
+          <PlaylistsList />
         </NavLinkList>
       </StyledNavbar>
       <Player />
