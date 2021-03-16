@@ -2,15 +2,36 @@ import {
   fetchMyTopArtistsSuccess,
   fetchMyTopTracksSuccess,
   fetchMyPlaylistsSuccess,
+  fetchCurrentUserSuccess,
   FETCH_MY_TOP_ARTISTS,
   FETCH_MY_TOP_TRACKS,
   FETCH_MY_PLAYLISTS,
+  FETCH_CURRENT_USER,
 } from './userActions';
 import { get } from '../../utils/api';
 import { setError } from '../errors/errorActions';
 
 const userMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
+    case FETCH_CURRENT_USER:
+      try {
+        const data = await get('https://api.spotify.com/v1/me');
+
+        const userProfile = {
+          name: data.display_name,
+          id: data.id,
+          followers: data.followers.total,
+          type: data.type,
+          image: data.images[0].url,
+        };
+
+        console.log(userProfile);
+
+        store.dispatch(fetchCurrentUserSuccess(userProfile));
+      } catch (error) {
+        console.log(error);
+      }
+      return next(action);
     case FETCH_MY_PLAYLISTS:
       try {
         const params = action.payload ? { params: { ...action.payload } } : {};
