@@ -37,8 +37,10 @@ export const setAuthHeader = () => {
 
 export const tokenExists = () => {
   const token = localStorage.getItem('params');
-  // console.log(token);
-  if (token === '{}') return false;
+  const expiryDate = localStorage.getItem('expiry_time');
+  const dateNow = new Date().getTime() * 1000;
+
+  if (token === '{}' || dateNow >= expiryDate) return false;
   return token;
 };
 
