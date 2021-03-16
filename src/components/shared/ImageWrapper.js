@@ -9,6 +9,7 @@ const ImageWrapper = ({
   maxHeight,
   size,
   boxShadow,
+  type,
 }) => {
   return (
     <StyledImageWrapper
@@ -17,6 +18,7 @@ const ImageWrapper = ({
       maxHeight={maxHeight}
       size={size}
       boxShadow={boxShadow}
+      type={type}
     >
       <StyledImage src={src} alt={alt} />
     </StyledImageWrapper>
@@ -26,6 +28,7 @@ const ImageWrapper = ({
 const StyledImage = styled.img`object-fit: cover;`;
 
 const StyledImageWrapper = styled.div.attrs((props) => ({
+  borderRadius: props.type === 'user' && '100%',
   maxWidth: props.maxWidth || '50%',
   maxHeight: props.maxHeight || 'auto',
   marginBottom: props.marginBottom || '1rem',
@@ -40,6 +43,8 @@ const StyledImageWrapper = styled.div.attrs((props) => ({
     width: ${(props) => props.size};
     height: ${(props) => props.size};
     box-shadow: ${(props) => props.boxShadow};
+    border-radius: ${(props) => props.borderRadius}
+
   }
 `;
 
