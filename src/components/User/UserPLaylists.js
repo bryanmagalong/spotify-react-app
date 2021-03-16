@@ -5,15 +5,15 @@ import Wrapper from '../shared/Wrapper';
 import List from '../shared/List';
 import Card from '../shared/Card';
 import { StyledTitle } from '../shared/Title';
-import { fetchPlaylists } from '../../features/playlists/playlistActions';
+import { fetchMyPlaylists } from '../../features/user/userActions';
 
 const UserPLaylists = () => {
-  const playlists = useSelector((state) => state.playlists.list.items);
+  const playlists = useSelector((state) => state.user.playlists.items);
   const dispatch = useDispatch();
 
   useEffect(
     () => {
-      if (!playlists.length) dispatch(fetchPlaylists());
+      if (!playlists.length) dispatch(fetchMyPlaylists());
     },
     [ dispatch, playlists ],
   );

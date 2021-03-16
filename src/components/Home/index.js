@@ -9,17 +9,17 @@ import Card from '../shared/Card';
 import Section from './Section';
 import List from '../shared/List';
 import { logout } from '../../features/auth/authActions';
-import { fetchPlaylists } from '../../features/playlists/playlistActions';
+import { fetchMyPlaylists } from '../../features/user/userActions';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const playlists = useSelector((state) => state.playlists.list);
+  const playlists = useSelector((state) => state.user.playlists);
   const playlistsDisplay = [ ...playlists.items ];
   playlistsDisplay.splice(6);
 
   useEffect(
     () => {
-      if (!playlists.items.length) dispatch(fetchPlaylists());
+      if (!playlists.items.length) dispatch(fetchMyPlaylists());
     },
     [ dispatch ],
   );
