@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Wrapper from '../shared/Wrapper';
-import { TitleStyled } from '../shared/Title';
+import { StyledTitle } from '../shared/Title';
 
 const Error404 = () => {
   return (
@@ -17,7 +17,7 @@ const Error404 = () => {
   );
 };
 
-const Styled404Title = styled(TitleStyled)`
+const Styled404Title = styled(StyledTitle)`
   color: ${(props) => props.theme.colors.gray};
   letter-spacing: .2rem;
   font-size: 6rem;

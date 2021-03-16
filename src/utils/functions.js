@@ -29,17 +29,6 @@ export const setAuthHeader = () => {
   }
 };
 
-/**
- * Delete Authorization request header
- */
-export const deleteAuthHeader = () => {
-  try {
-    delete axios.defaults.headers.common['Authorization'];
-  } catch (error) {
-    console.log('Error deleting auth', error);
-  }
-};
-
 // export const checkExpiration = () => {
 //   const expiryTime = JSON.parse(localStorage.getItem('expiry_time'));
 //   const currentDate = new Date().getTime() * 1000;
@@ -48,8 +37,10 @@ export const deleteAuthHeader = () => {
 
 export const tokenExists = () => {
   const token = localStorage.getItem('params');
-  // console.log(token);
-  if (token === '{}') return false;
+  const expiryDate = localStorage.getItem('expiry_time');
+  const dateNow = new Date().getTime() * 1000;
+
+  if (token === '{}' || dateNow >= expiryDate) return false;
   return token;
 };
 

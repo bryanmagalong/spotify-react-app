@@ -17,7 +17,8 @@ import Playlist from '../components/Playlist';
 import Album from '../components/Album';
 
 import { hideError } from '../features/errors/errorActions';
-import { deleteAuthHeader } from '../utils/functions';
+import { logout } from '../features/auth/authActions';
+import UserPLaylists from '../components/User/UserPLaylists';
 
 const App = () => {
   const isLogged = useSelector((state) => state.auth.isLogged);
@@ -35,7 +36,7 @@ const App = () => {
     
     if(error.status === 401) {
       dispatch(hideError());
-      deleteAuthHeader();
+      dispatch(logout());
       return history.push('/login');
     };
   }, [error, dispatch, history]);
@@ -54,6 +55,8 @@ const App = () => {
             <Route exact path="/redirect" component={Redirect} />
             <ProtectedRoute path='/playlists/:playlistId' component={Playlist} />
             <ProtectedRoute path='/albums/:albumId' component={Album} />
+            <ProtectedRoute exact path='/user/playlists' component={UserPLaylists} />
+            <ProtectedRoute exact path='/user' component={Error404} />
             <Route path="*" component={Error404} />
           </Switch>
         </Wrapper>

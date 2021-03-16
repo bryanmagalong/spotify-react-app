@@ -1,56 +1,41 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styled from 'styled-components';
 
-import { TitleStyled } from '../shared/Title';
+import { StyledTitle } from '../shared/Title';
 import Button from '../shared/Button';
 import Wrapper from '../shared/Wrapper';
 import Card from '../shared/Card';
 import Section from './Section';
-import List from './List';
+import List from '../shared/List';
 import { logout } from '../../features/auth/authActions';
 import { fetchPlaylists } from '../../features/playlists/playlistActions';
-import {
-  fetchMyTopArtists,
-  fetchMyTopTracks,
-} from '../../features/user/userActions';
 
 const Home = () => {
   const dispatch = useDispatch();
   const playlists = useSelector((state) => state.playlists.list);
-  const topTracks = useSelector((state) => state.user.topTracksList);
-  const topArtists = useSelector((state) => state.user.topArtistsList);
+  const playlistsDisplay = [ ...playlists.items ];
+  playlistsDisplay.splice(6);
 
   useEffect(
     () => {
-      if (!playlists.length) dispatch(fetchPlaylists({ limit: 6 }));
-      if (!topTracks.length)
-        dispatch(fetchMyTopTracks({ limit: 6, time_range: 'long_term' }));
-      if (!topArtists.length)
-        dispatch(fetchMyTopArtists({ limit: 6, time_range: 'long_term' }));
+      if (!playlists.items.length) dispatch(fetchPlaylists());
     },
     [ dispatch ],
   );
 
   return (
     <Wrapper pb pt px>
-      <StyledHomeTitle>Accueil</StyledHomeTitle>
-      <Section title="Mes playlists" display={playlists.length}>
+      <StyledTitle pb>Accueil</StyledTitle>
+      <Section
+        title="mes playlists"
+        display={playlists.items.length}
+        path="/user/playlists"
+      >
         <List>
-          {playlists.map((playlist) => (
+          {playlistsDisplay.map((playlist) => (
             <Card key={playlist.id} {...playlist} />
           ))}
-        </List>
-      </Section>
-      <Section title="titres les plus écoutés" display={topTracks.length}>
-        <List>
-          {topTracks.map((track) => <Card key={track.id} {...track} />)}
-        </List>
-      </Section>
-      <Section title="artistes les plus écoutés" display={topArtists.length}>
-        <List>
-          {topArtists.map((artist) => <Card key={artist.id} {...artist} />)}
         </List>
       </Section>
       <Button type="button" onClick={() => dispatch(logout())}>
@@ -59,9 +44,5 @@ const Home = () => {
     </Wrapper>
   );
 };
-
-const StyledHomeTitle = styled(TitleStyled)`
-  padding-bottom: 1rem;
-`;
 
 export default Home;

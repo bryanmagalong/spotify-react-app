@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { TitleStyled } from './Title';
+import { StyledTitle } from './Title';
 import ImageWrapper from './ImageWrapper';
 import Wrapper from './Wrapper';
 import CustomLink from './CustomLink';
@@ -79,7 +79,7 @@ const StyledType = styled.span`
   }
 `;
 
-const StyledHeaderTitle = styled(TitleStyled)`
+const StyledHeaderTitle = styled(StyledTitle)`
   text-transform: capitalize;
   text-align: center;
 
