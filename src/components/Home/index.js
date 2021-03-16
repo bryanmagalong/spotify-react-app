@@ -30,7 +30,7 @@ const Home = () => {
       <Section
         title="mes playlists"
         display={playlists.items.length}
-        path="/user/playlists"
+        path="/me/playlists"
       >
         <List>
           {playlistsDisplay.map((playlist) => (

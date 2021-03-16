@@ -18,7 +18,7 @@ const Navbar = () => {
           <NavLink name="Parcourir" to="/browse">
             <Folder2Open size="26" />
           </NavLink>
-          <NavLink name="Profil" to="/profile">
+          <NavLink name="Profil" to="/me">
             <Person size="26" />
           </NavLink>
           <PlaylistsList />
