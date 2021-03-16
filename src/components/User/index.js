@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // import styled from 'styled-components';
+import Header from '../shared/Header';
 import { fetchCurrentUser } from '../../features/user/userActions';
 
 import Wrapper from '../shared/Wrapper';
@@ -16,7 +17,7 @@ const User = () => {
   );
   return (
     <Wrapper px pb pt>
-      User
+      <Header {...profile} />
     </Wrapper>
   );
 };
