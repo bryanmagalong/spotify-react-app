@@ -10,6 +10,7 @@ import {
 } from './userActions';
 import { get } from '../../utils/api';
 import { setError } from '../errors/errorActions';
+import { msToMinutesAndSeconds } from '../../utils/functions';
 
 const userMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
@@ -25,7 +26,7 @@ const userMiddleware = (store) => (next) => async (action) => {
           image: data.images[0].url,
         };
 
-        console.log(userProfile);
+        // console.log(userProfile);
 
         store.dispatch(fetchCurrentUserSuccess(userProfile));
       } catch (error) {
@@ -67,6 +68,7 @@ const userMiddleware = (store) => (next) => async (action) => {
           'https://api.spotify.com/v1/me/top/tracks',
           params,
         );
+        // console.log(data);
 
         const myTopTracks = [ ...data.items ].map((item) => {
           return {
@@ -74,8 +76,18 @@ const userMiddleware = (store) => (next) => async (action) => {
             href: item.href,
             type: item.type,
             name: item.name,
-            album: item.album.name,
-            images: item.album.images[0].url,
+            explicit: item.explicit,
+            duration: msToMinutesAndSeconds(item.duration_ms),
+            album: {
+              name: item.album.name,
+              id: item.album.id,
+            },
+            images: item.album.images[2],
+            artist: {
+              name: item.artists[0].name,
+              id: item.artists[0].id,
+              url: item.artists[0].external_urls.spotify,
+            },
             owner: item.owner,
           };
         });
