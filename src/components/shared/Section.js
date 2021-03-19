@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
-import { Title } from '../shared/Title';
+import { Title } from './Title';
 
 const Section = ({ title, display, children, path }) => {
   // const slug = title.split(' ').join('-');

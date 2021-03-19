@@ -6,7 +6,7 @@ import { StyledTitle } from '../shared/Title';
 import Button from '../shared/Button';
 import Wrapper from '../shared/Wrapper';
 import Card from '../shared/Card';
-import Section from './Section';
+import Section from '../shared/Section';
 import List from '../shared/List';
 import { logout } from '../../features/auth/authActions';
 import { fetchMyPlaylists } from '../../features/user/userActions';
