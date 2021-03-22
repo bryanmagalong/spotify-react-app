@@ -21,6 +21,7 @@ const Navbar = () => {
           <NavLink name="Profil" to="/me">
             <Person size="26" />
           </NavLink>
+          <PlaylistsTitle>playlists</PlaylistsTitle>
           <PlaylistsList />
         </NavLinkList>
       </StyledNavbar>
@@ -48,7 +49,7 @@ const NavLinkList = styled.ul`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  height: inherit;
+  height: 100%;
   width: 100%;
 
   @media (min-width: ${(props) => props.theme.media.lg}) {
@@ -74,6 +75,20 @@ const NavWrapper = styled(Wrapper)`
     height: 100vh;
     background-color: ${(props) => props.theme.colors.subDark};
   };
+`;
+
+const PlaylistsTitle = styled.span`
+  display: none;
+
+  @media (min-width: ${(props) => props.theme.media.lg}) {
+    display: block;
+    color: ${(props) => props.theme.colors.gray};
+    font-size: ${(props) => props.theme.fontSize.sm};
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+    padding: 0 1rem;
+    padding-top: 1.5rem;
+  }
 `;
 
 export default Navbar;

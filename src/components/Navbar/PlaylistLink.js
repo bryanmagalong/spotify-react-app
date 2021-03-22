@@ -16,6 +16,11 @@ const StyledPlaylistLink = styled(Link)`
   color: ${(props) => props.theme.colors.gray};
   font-size: ${(props) => props.theme.fontSize.md};
   padding: .4rem 1rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+  max-width: 200px;
 
   &:hover {
     color: #FFF;

@@ -17,7 +17,6 @@ const PlaylistsList = () => {
   );
   return (
     <StyledPlaylistsList>
-      <PlaylistsTitle>playlists</PlaylistsTitle>
       {playlists.map((item) => (
         <PlaylistLink key={item.id} id={item.id} name={item.name} />
       ))}
@@ -25,27 +24,32 @@ const PlaylistsList = () => {
   );
 };
 
-const PlaylistsTitle = styled.span`
-  color: ${(props) => props.theme.colors.gray};
-  font-size: ${(props) => props.theme.fontSize.sm};
-  text-transform: uppercase;
-  letter-spacing: .1rem;
-  padding: 0 1rem;
-`;
-
 const StyledPlaylistsList = styled.ul`
   display: none;
 
+  &::-webkit-scrollbar {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(178, 178, 178, .4);
+    border-radius: .5rem;
+    border: 4px solid transparent;
+    background-clip: content-box;
+  }
+
   @media (min-width: ${(props) => props.theme.media.lg}) {
+    position: relative;
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     gap: 1rem;
+    height: 100%;
     width: 100%;
-    padding-top: 1.5rem;
-    border-top: 1px solid ${(props) => props.theme.colors.gray};
+    overflow-y: scroll;
+    overscroll-behavior-y: contain;
   }
 `;
 export default PlaylistsList;
