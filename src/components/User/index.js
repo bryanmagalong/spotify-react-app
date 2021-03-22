@@ -3,18 +3,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import Header from '../shared/Header';
-import {
-  fetchCurrentUser,
-  fetchMyTopArtists,
-  fetchMyTopTracks,
-} from '../../features/user/userActions';
-
 import Wrapper from '../shared/Wrapper';
 import { Title } from '../shared/Title';
 import TrackItem from '../shared/TrackItem';
 import Section from '../shared/Section';
 import List from '../shared/List';
 import Card from '../shared/Card';
+import Button from '../shared/Button';
+import { logout } from '../../features/auth/authActions';
+import {
+  fetchCurrentUser,
+  fetchMyTopArtists,
+  fetchMyTopTracks,
+} from '../../features/user/userActions';
 
 const User = () => {
   const profile = useSelector((state) => state.user.profile);
@@ -22,6 +23,8 @@ const User = () => {
   const playlists = useSelector((state) => state.user.playlists);
   const playlistsDisplay = [ ...playlists.items ];
   playlistsDisplay.splice(6);
+  const TopTracksDisplay = [ ...topTracksList ];
+  TopTracksDisplay.splice(5);
 
   const dispatch = useDispatch();
 
@@ -42,7 +45,7 @@ const User = () => {
       <StyledSection as="section" flex column>
         <Title level="2">Top titres du mois</Title>
         <ul>
-          {topTracksList.map((item, index) => (
+          {TopTracksDisplay.map((item, index) => (
             <TrackItem key={item.id} number={index + 1} {...item} />
           ))}
         </ul>
@@ -58,6 +61,11 @@ const User = () => {
           ))}
         </List>
       </Section>
+      <StyledSection>
+        <StyledButton type="button" onClick={() => dispatch(logout())}>
+          Déconnexion
+        </StyledButton>
+      </StyledSection>
     </Wrapper>
   );
 };
@@ -65,6 +73,11 @@ const User = () => {
 const StyledSection = styled(Wrapper)`
   padding: 3rem 0;
   row-gap: 1rem;
+`;
+
+const StyledButton = styled(Button)`
+  display: block;
+  margin: 2rem auto;
 `;
 
 export default User;

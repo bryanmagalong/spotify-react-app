@@ -3,12 +3,10 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { StyledTitle } from '../shared/Title';
-import Button from '../shared/Button';
 import Wrapper from '../shared/Wrapper';
 import Card from '../shared/Card';
 import Section from '../shared/Section';
 import List from '../shared/List';
-import { logout } from '../../features/auth/authActions';
 import { fetchMyPlaylists } from '../../features/user/userActions';
 
 const Home = () => {
@@ -38,9 +36,6 @@ const Home = () => {
           ))}
         </List>
       </Section>
-      <Button type="button" onClick={() => dispatch(logout())}>
-        Déconnexion
-      </Button>
     </Wrapper>
   );
 };
