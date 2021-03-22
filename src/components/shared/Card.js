@@ -6,29 +6,23 @@ import ImageWrapper from './ImageWrapper';
 
 const Card = ({ name, images, type, album, id, owner }) => {
   const path = `/${type}s/${id}`;
+  const meta =
+    type === 'track'
+      ? album
+      : type === 'artist' ? 'Artiste' : `par ${owner.display_name}`;
 
   return (
     <article>
       <StyledCard to={path}>
-        <ImageCard type={type} src={images} alt={name} maxWidth="100%" />
+        <ImageWrapper type={type} src={images} alt={name} maxWidth="100%" />
         <DescriptionCard type={type}>
           <h3>{name}</h3>
-          <span>{type === 'track' ? album : `par ${owner.display_name}`}</span>
+          <span>{meta}</span>
         </DescriptionCard>
       </StyledCard>
     </article>
   );
 };
-
-const ImageCard = styled(ImageWrapper)`
-  ${(props) =>
-    props.type === 'artist' &&
-    css`
-      & img {
-        border-radius: 100%;
-      }
-    `};
-`;
 
 const DescriptionCard = styled.div`
   color: white;
