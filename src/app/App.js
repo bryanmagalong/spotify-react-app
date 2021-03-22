@@ -70,7 +70,7 @@ const App = () => {
 const AppStyled = styled.div`
   background: linear-gradient(
     to bottom,
-    ${(props) => props.theme.colors.subLight},
+    ${(props) => props.theme.colors.subDark},
     ${(props) => props.theme.colors.main} 50%
   );
   min-height: 100vh;
