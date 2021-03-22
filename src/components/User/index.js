@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 import Header from '../shared/Header';
 import Wrapper from '../shared/Wrapper';
-import { Title } from '../shared/Title';
 import TrackItem from '../shared/TrackItem';
 import Section from '../shared/Section';
 import List from '../shared/List';
@@ -21,6 +20,7 @@ const User = () => {
   const profile = useSelector((state) => state.user.profile);
   const topTracksList = useSelector((state) => state.user.topTracksList);
   const playlists = useSelector((state) => state.user.playlists);
+  const topArtistsList = useSelector((state) => state.user.topArtistsList);
   const playlistsDisplay = [ ...playlists.items ];
   playlistsDisplay.splice(6);
   const TopTracksDisplay = [ ...topTracksList ];
@@ -41,15 +41,29 @@ const User = () => {
   );
   return (
     <Wrapper px pb pt>
-      <Header {...profile} />
-      <StyledSection as="section" flex column>
-        <Title level="2">Top titres du mois</Title>
-        <ul>
+      <UserHeader pb {...profile} />
+      <Section
+        title="Top titres du mois"
+        display={topTracksList.length}
+        path="/me/top-tracks"
+      >
+        <StyledTrackList>
           {TopTracksDisplay.map((item, index) => (
             <TrackItem key={item.id} number={index + 1} {...item} />
           ))}
-        </ul>
-      </StyledSection>
+        </StyledTrackList>
+      </Section>
+      <Section
+        title="Top artistes du mois"
+        display={topArtistsList.items.length}
+        path="/me/playlists"
+      >
+        <List>
+          {topArtistsList.items.map((artists) => (
+            <Card key={artists.id} {...artists} />
+          ))}
+        </List>
+      </Section>
       <Section
         title="mes playlists"
         display={playlists.items.length}
@@ -70,6 +84,8 @@ const User = () => {
   );
 };
 
+const UserHeader = styled(Header)`padding-bottom: 2rem;`;
+
 const StyledSection = styled(Wrapper)`
   padding: 3rem 0;
   row-gap: 1rem;
@@ -79,5 +95,7 @@ const StyledButton = styled(Button)`
   display: block;
   margin: 2rem auto;
 `;
+
+const StyledTrackList = styled.ul`padding-top: 1rem;`;
 
 export default User;
