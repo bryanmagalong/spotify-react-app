@@ -28,12 +28,12 @@ const ImageWrapper = ({
 const StyledImage = styled.img`object-fit: cover;`;
 
 const StyledImageWrapper = styled.div.attrs((props) => ({
-  borderRadius: props.type === 'user' && '100%',
+  borderRadius: (props.type === 'user' || props.type === 'artist') && '100%',
   maxWidth: props.maxWidth || '50%',
   maxHeight: props.maxHeight || 'auto',
   marginBottom: props.marginBottom || '1rem',
   size: props.size ? `${props.size}px` : '100%',
-  boxShadow: props.boxShadow && '0px 0px 30px 0px rgba(0,0,0,0.50)',
+  boxShadow: props.boxShadow && '0px 0px 30px 0px rgba(178,178,178,0.40)',
 }))`
   max-width: ${(props) => props.maxWidth};
   height: ${(props) => props.maxHeight};

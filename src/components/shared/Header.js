@@ -17,6 +17,7 @@ const Header = ({
   album_type,
   total_tracks,
   release_year,
+  pb,
 }) => {
   const headerType = album_type
     ? album_type
@@ -28,7 +29,7 @@ const Header = ({
       : `${followers} Abonnés`;
 
   return (
-    <StyledHeaderWrapper as="section" flex column itemsCenter>
+    <StyledHeaderWrapper pb={pb} as="section" flex column itemsCenter>
       <ImageWrapper
         type={type}
         marginBottom="0"
@@ -59,6 +60,7 @@ const StyledOwner = styled.span`
 
 const StyledHeaderWrapper = styled(Wrapper)`
   row-gap: 1rem;
+  padding-bottom: ${(props) => props.pb && '2rem'};
   
   @media (min-width: ${(props) => props.theme.media.md}) {
     height: 15rem;
