@@ -21,6 +21,7 @@ import UserTopTracks from '../components/User/UserTopTracks';
 
 import { hideError } from '../features/errors/errorActions';
 import { logout } from '../features/auth/authActions';
+import Browse from '../components/Browse';
 
 
 
@@ -62,6 +63,7 @@ const App = () => {
             <ProtectedRoute exact path='/me/playlists' component={UserPLaylists} />
             <ProtectedRoute exact path='/me/top-tracks' component={UserTopTracks} />
             <ProtectedRoute exact path='/me' component={User} />
+            <ProtectedRoute exact path='/browse' component={Browse} />
             <Route path="*" component={Error404} />
           </Switch>
         </Wrapper>
