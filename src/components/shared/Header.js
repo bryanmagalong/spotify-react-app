@@ -17,6 +17,7 @@ const Header = ({
   album_type,
   total_tracks,
   release_year,
+  nPlaylists,
   pb,
 }) => {
   const headerType = album_type
@@ -25,7 +26,7 @@ const Header = ({
   const meta = album_type
     ? `${release_year} • ${total_tracks} titre${total_tracks > 1 ? 's' : ''}`
     : type === 'user'
-      ? `# playlists publiques • ${followers} Abonnés`
+      ? `${nPlaylists} playlists publiques • ${followers} Abonnés`
       : `${followers} Abonnés`;
 
   return (

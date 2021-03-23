@@ -41,7 +41,7 @@ const User = () => {
   );
   return (
     <Wrapper px pb pt>
-      <UserHeader pb {...profile} />
+      <UserHeader pb {...profile} nPlaylists={playlists.items.length} />
       <Section
         title="Top titres du mois"
         display={topTracksList.length}
