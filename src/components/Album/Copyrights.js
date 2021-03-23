@@ -6,7 +6,7 @@ import Wrapper from '../shared/Wrapper';
 const Copyrights = ({ copyrights }) => {
   return (
     <StyledCopyrights as="section" flex column>
-      {copyrights.map((item) => <p key={item}>{item}</p>)}
+      {copyrights.map((item, index) => <p key={`${item}_${index}`}>{item}</p>)}
     </StyledCopyrights>
   );
 };

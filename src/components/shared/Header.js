@@ -17,16 +17,22 @@ const Header = ({
   album_type,
   total_tracks,
   release_year,
+  nPlaylists,
+  pb,
 }) => {
-  const headerType = type === 'album' ? album_type : type;
-  const meta =
-    type === 'album'
-      ? `${release_year} • ${total_tracks} titre${total_tracks > 1 ? 's' : ''}`
+  const headerType = album_type
+    ? album_type
+    : type === 'user' ? 'profil' : type;
+  const meta = album_type
+    ? `${release_year} • ${total_tracks} titre${total_tracks > 1 ? 's' : ''}`
+    : type === 'user'
+      ? `${nPlaylists} playlists publiques • ${followers} Abonnés`
       : `${followers} Abonnés`;
 
   return (
-    <StyledHeaderWrapper as="section" flex column itemsCenter>
+    <StyledHeaderWrapper pb={pb} as="section" flex column itemsCenter>
       <ImageWrapper
+        type={type}
         marginBottom="0"
         maxWidth="192px"
         maxHeight="192px"
@@ -40,15 +46,22 @@ const Header = ({
         <StyledHeaderTitle>{name}</StyledHeaderTitle>
         <StyledDescription>{description}</StyledDescription>
         <StyledMeta>
-          par <CustomLink href={ownerUrl}>{owner}</CustomLink> • {meta}
+          <StyledOwner type={type}>
+            par <CustomLink href={ownerUrl}>{owner}</CustomLink> •{' '}
+          </StyledOwner>
+          {meta}
         </StyledMeta>
       </StyledTextWrapper>
     </StyledHeaderWrapper>
   );
 };
+const StyledOwner = styled.span`
+  display: ${(props) => props.type === 'user' && 'none'};
+`;
 
 const StyledHeaderWrapper = styled(Wrapper)`
   row-gap: 1rem;
+  padding-bottom: ${(props) => props.pb && '2rem'};
   
   @media (min-width: ${(props) => props.theme.media.md}) {
     height: 15rem;

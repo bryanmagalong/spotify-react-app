@@ -15,10 +15,14 @@ import Wrapper from '../components/shared/Wrapper';
 import Error404 from '../components/Error404';
 import Playlist from '../components/Playlist';
 import Album from '../components/Album';
+import User from '../components/User';
+import UserPLaylists from '../components/User/UserPLaylists';
+import UserTopTracks from '../components/User/UserTopTracks';
 
 import { hideError } from '../features/errors/errorActions';
 import { logout } from '../features/auth/authActions';
-import UserPLaylists from '../components/User/UserPLaylists';
+
+
 
 const App = () => {
   const isLogged = useSelector((state) => state.auth.isLogged);
@@ -35,7 +39,7 @@ const App = () => {
     } 
     
     if(error.status === 401) {
-      dispatch(hideError());
+      // dispatch(hideError());
       dispatch(logout());
       return history.push('/login');
     };
@@ -55,8 +59,9 @@ const App = () => {
             <Route exact path="/redirect" component={Redirect} />
             <ProtectedRoute path='/playlists/:playlistId' component={Playlist} />
             <ProtectedRoute path='/albums/:albumId' component={Album} />
-            <ProtectedRoute exact path='/user/playlists' component={UserPLaylists} />
-            <ProtectedRoute exact path='/user' component={Error404} />
+            <ProtectedRoute exact path='/me/playlists' component={UserPLaylists} />
+            <ProtectedRoute exact path='/me/top-tracks' component={UserTopTracks} />
+            <ProtectedRoute exact path='/me' component={User} />
             <Route path="*" component={Error404} />
           </Switch>
         </Wrapper>
@@ -68,7 +73,7 @@ const App = () => {
 const AppStyled = styled.div`
   background: linear-gradient(
     to bottom,
-    ${(props) => props.theme.colors.subLight},
+    ${(props) => props.theme.colors.subDark},
     ${(props) => props.theme.colors.main} 50%
   );
   min-height: 100vh;

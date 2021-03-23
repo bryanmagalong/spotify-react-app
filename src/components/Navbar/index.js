@@ -5,6 +5,7 @@ import { HouseDoor, Folder2Open, Person } from 'react-bootstrap-icons';
 import NavLink from './NavLink';
 import Wrapper from '../shared/Wrapper';
 import Player from './Player';
+import PlaylistsList from './PlaylistsList';
 
 const Navbar = () => {
   return (
@@ -17,9 +18,11 @@ const Navbar = () => {
           <NavLink name="Parcourir" to="/browse">
             <Folder2Open size="26" />
           </NavLink>
-          <NavLink name="Profil" to="/profile">
+          <NavLink name="Profil" to="/me">
             <Person size="26" />
           </NavLink>
+          <PlaylistsTitle>playlists</PlaylistsTitle>
+          <PlaylistsList />
         </NavLinkList>
       </StyledNavbar>
       <Player />
@@ -46,7 +49,7 @@ const NavLinkList = styled.ul`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  height: inherit;
+  height: 100%;
   width: 100%;
 
   @media (min-width: ${(props) => props.theme.media.lg}) {
@@ -72,6 +75,20 @@ const NavWrapper = styled(Wrapper)`
     height: 100vh;
     background-color: ${(props) => props.theme.colors.subDark};
   };
+`;
+
+const PlaylistsTitle = styled.span`
+  display: none;
+
+  @media (min-width: ${(props) => props.theme.media.lg}) {
+    display: block;
+    color: ${(props) => props.theme.colors.gray};
+    font-size: ${(props) => props.theme.fontSize.sm};
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+    padding: 0 1rem;
+    padding-top: 1.5rem;
+  }
 `;
 
 export default Navbar;

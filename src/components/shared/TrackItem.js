@@ -65,7 +65,7 @@ const StyledTrackItem = styled.div`
 
   @media (min-width: ${(props) => props.theme.media.md}) {
     grid-template-columns: ${(props) =>
-      props.type === 'playlist'
+      props.type === 'playlist' || props.type === 'track'
         ? props.theme.template.trackGridColumns
         : props.theme.template.albumTrackGridColumns};
   }

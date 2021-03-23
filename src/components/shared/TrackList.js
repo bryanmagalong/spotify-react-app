@@ -32,7 +32,7 @@ const StyledTrackListHeader = styled.div`
         : props.theme.template.albumTrackGridColumns};
     grid-gap: 1rem;
     height: 2rem;
-    border-bottom: 1px solid ${(props) => props.theme.colors.gray};
+    border-bottom: 1px solid rgba(178, 178, 178, 0.4);
 
     & div {
       display: flex;

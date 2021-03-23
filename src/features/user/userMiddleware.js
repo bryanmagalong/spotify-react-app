@@ -1,14 +1,66 @@
 import {
   fetchMyTopArtistsSuccess,
   fetchMyTopTracksSuccess,
+  fetchMyPlaylistsSuccess,
+  fetchCurrentUserSuccess,
   FETCH_MY_TOP_ARTISTS,
   FETCH_MY_TOP_TRACKS,
+  FETCH_MY_PLAYLISTS,
+  FETCH_CURRENT_USER,
 } from './userActions';
 import { get } from '../../utils/api';
 import { setError } from '../errors/errorActions';
+import { msToMinutesAndSeconds } from '../../utils/functions';
 
 const userMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
+    case FETCH_CURRENT_USER:
+      try {
+        const data = await get('https://api.spotify.com/v1/me');
+
+        const userProfile = {
+          name: data.display_name,
+          id: data.id,
+          followers: data.followers.total,
+          type: data.type,
+          image: data.images[0].url,
+        };
+
+        // console.log(userProfile);
+
+        store.dispatch(fetchCurrentUserSuccess(userProfile));
+      } catch (error) {
+        console.log(error);
+      }
+      return next(action);
+    case FETCH_MY_PLAYLISTS:
+      try {
+        const params = action.payload ? { params: { ...action.payload } } : {};
+        const data = await get(
+          'https://api.spotify.com/v1/me/playlists',
+          params,
+        );
+
+        const playlists = [ ...data.items ].map((item) => {
+          return {
+            id: item.id,
+            href: item.href,
+            type: item.type,
+            name: item.name,
+            images: item.images[0].url,
+            owner: item.owner,
+          };
+        });
+
+        const extend = data.next
+          ? 'https://api.spotify.com/v1/me/playlists '
+          : null;
+        // console.log(data);
+        store.dispatch(fetchMyPlaylistsSuccess({ playlists, extend }));
+      } catch (error) {
+        console.log(error);
+      }
+      return next(action);
     case FETCH_MY_TOP_TRACKS:
       try {
         const params = action.payload ? { params: { ...action.payload } } : {};
@@ -16,6 +68,7 @@ const userMiddleware = (store) => (next) => async (action) => {
           'https://api.spotify.com/v1/me/top/tracks',
           params,
         );
+        // console.log(data);
 
         const myTopTracks = [ ...data.items ].map((item) => {
           return {
@@ -23,8 +76,18 @@ const userMiddleware = (store) => (next) => async (action) => {
             href: item.href,
             type: item.type,
             name: item.name,
-            album: item.album.name,
-            images: item.album.images[0].url,
+            explicit: item.explicit,
+            duration: msToMinutesAndSeconds(item.duration_ms),
+            album: {
+              name: item.album.name,
+              id: item.album.id,
+            },
+            images: item.album.images[2],
+            artist: {
+              name: item.artists[0].name,
+              id: item.artists[0].id,
+              url: item.artists[0].external_urls.spotify,
+            },
             owner: item.owner,
           };
         });

@@ -1,6 +1,4 @@
 import {
-  FETCH_PLAYLISTS,
-  fetchPlaylistsSuccess,
   FETCH_PLAYLIST_BY_ID,
   fetchPlaylistByIdSuccess,
 } from './playlistActions';
@@ -10,34 +8,6 @@ import { msToMinutesAndSeconds } from '../../utils/functions';
 
 const playlistMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
-    case FETCH_PLAYLISTS:
-      try {
-        const params = action.payload ? { params: { ...action.payload } } : {};
-        const data = await get(
-          'https://api.spotify.com/v1/me/playlists',
-          params,
-        );
-
-        const playlists = [ ...data.items ].map((item) => {
-          return {
-            id: item.id,
-            href: item.href,
-            type: item.type,
-            name: item.name,
-            images: item.images[0].url,
-            owner: item.owner,
-          };
-        });
-
-        const extend = data.next
-          ? 'https://api.spotify.com/v1/me/playlists '
-          : null;
-        // console.log(data);
-        store.dispatch(fetchPlaylistsSuccess({ playlists, extend }));
-      } catch (error) {
-        console.log(error);
-      }
-      return next(action);
     case FETCH_PLAYLIST_BY_ID:
       try {
         const playlistId = action.payload;

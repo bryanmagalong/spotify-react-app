@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
-import { Title } from '../shared/Title';
+import { Title } from './Title';
 
 const Section = ({ title, display, children, path }) => {
   // const slug = title.split(' ').join('-');
@@ -31,7 +31,7 @@ const StyledSection = styled.section.attrs((props) => ({
 const StyledLine = styled.div`
   width: 100%;
   height: 1px;
-  background-color: ${(props) => props.theme.colors.gray};
+  background-color: rgba(178, 178, 178, 0.4);
   margin-top: .8rem;
 `;
 
