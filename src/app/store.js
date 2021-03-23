@@ -3,6 +3,7 @@ import authMiddleware from '../features/auth/authMiddleware';
 import playlistMiddleware from '../features/playlists/playlistMiddleware';
 import albumMiddleware from '../features/albums/albumMiddleware';
 import userMiddleware from '../features/user/userMiddleware';
+import browseReducer from '../features/browse/browseMiddleware';
 import rootReducer from './rootReducer';
 
 // == Enhancers
@@ -14,6 +15,7 @@ const enhancers = composeEnhancers(
     playlistMiddleware,
     albumMiddleware,
     userMiddleware,
+    browseReducer,
   ),
 );
 
