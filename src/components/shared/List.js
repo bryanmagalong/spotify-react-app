@@ -1,11 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
 
-const List = ({ children }) => {
-  return <StyledList>{children}</StyledList>;
-};
-
-const StyledList = styled.div`
+const List = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
   gap: 1rem;
