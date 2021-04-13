@@ -1,11 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import { StyledTitle as Title } from '../shared/Title';
 
-const CategoryCard = ({ name, id, icons, color }) => {
+const CategoryCard = ({ name, id, icons }) => {
+  const categoryLink = `/browse/categories/${id}/playlists`;
+
   return (
-    <StyledCard icon={icons[0].url}>
+    <StyledCard as={Link} to={categoryLink} icon={icons[0].url}>
       <StyledTitle as="h3">{name}</StyledTitle>
     </StyledCard>
   );
@@ -23,6 +26,11 @@ const StyledCard = styled.div`
     ${(props) => props.theme.colors.green};
   border-radius: .5rem;
 
+  &:hover {
+    ${StyledTitle} {
+      text-decoration: underline;
+    }
+  }
   @media (min-width: ${(props) => props.theme.media.lg}) {
     position: relative;
     z-index: 0;
