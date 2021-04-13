@@ -7,6 +7,7 @@ const initialState = {
   categories: [],
   playlists: [],
   categoryName: null,
+  imageUrl: '',
 };
 
 const browseReducer = (state = initialState, action = {}) => {
@@ -21,6 +22,7 @@ const browseReducer = (state = initialState, action = {}) => {
         ...state,
         playlists: [ ...action.payload.playlists ],
         categoryName: action.payload.name,
+        imageUrl: action.payload.imageUrl,
       };
     default:
       return state;
