@@ -61,7 +61,7 @@ const Title = styled(StyledTitle)`
 
 const CategoryHeader = styled(Wrapper)`
   background: linear-gradient(0deg, rgba(21, 21, 21, 1), transparent)
-    ${(props) => (props.color ? props.color : props.theme.colors.green)};
+    ${(props) => (props.color ? props.color : props.theme.colors.main)};
   height: 8rem;
   align-items: flex-end;
 
