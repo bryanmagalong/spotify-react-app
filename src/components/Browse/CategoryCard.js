@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { StyledTitle as Title } from '../shared/Title';
 
-const CategoryCard = ({ name, id, icons }) => {
+const CategoryCard = ({ name, id, icons, color }) => {
   return (
     <StyledCard icon={icons[0].url}>
       <StyledTitle as="h3">{name}</StyledTitle>
@@ -19,7 +19,8 @@ const StyledTitle = styled(Title)`
 
 const StyledCard = styled.div`
   height: 5rem;
-  background-color: ${(props) => props.theme.colors.gray};
+  background: linear-gradient(160deg, rgba(0, 0, 0, 0.5), transparent)
+    ${(props) => props.theme.colors.green};
   border-radius: .5rem;
 
   @media (min-width: ${(props) => props.theme.media.lg}) {
@@ -29,6 +30,7 @@ const StyledCard = styled.div`
     height: 12.5rem;
     background: url(${(props) => props.icon}) center;
     background-size: contain;
+    border-radius: 0;
 
     ${StyledTitle} {
       position: absolute;
