@@ -33,7 +33,7 @@ const StyledImageWrapper = styled.div.attrs((props) => ({
   maxHeight: props.maxHeight || 'auto',
   marginBottom: props.marginBottom || '1rem',
   size: props.size ? `${props.size}px` : '100%',
-  boxShadow: props.boxShadow && '0px 0px 30px 0px rgba(178,178,178,0.40)',
+  boxShadow: props.boxShadow && '0px 0px 30px 0px rgba(21,21,21,0.50)',
 }))`
   max-width: ${(props) => props.maxWidth};
   height: ${(props) => props.maxHeight};
