@@ -31,7 +31,7 @@ const browseMiddleware = (store) => (next) => async (action) => {
         );
 
         const data2 = await get(
-          `https://api.spotify.com/v1/browse/categories/${action.payload}/`,
+          `https://api.spotify.com/v1/browse/categories/${action.payload}?country=FR&locale=fr_FR`,
         );
 
         const playlists = [ ...data.playlists.items ].map((item) => {
