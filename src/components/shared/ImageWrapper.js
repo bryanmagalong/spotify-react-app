@@ -20,7 +20,7 @@ const ImageWrapper = ({
       boxShadow={boxShadow}
       type={type}
     >
-      <StyledImage src={src} alt={alt} />
+      <StyledImage src={src} alt={alt} loading="lazy" />
     </StyledImageWrapper>
   );
 };
