@@ -35,6 +35,7 @@ const Browse = () => {
 const StyledList = styled(List)`
   @media (min-width: ${(props) => props.theme.media.lg}) {
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    padding-bottom: 2rem;
   }
 `;
 
