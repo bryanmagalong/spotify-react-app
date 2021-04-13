@@ -1,7 +1,12 @@
-import { FETCH_ALL_CATEGORIES_SUCCESS } from './browseActions';
+import {
+  FETCH_ALL_CATEGORIES_SUCCESS,
+  FETCH_CATEGORY_PLAYLISTS_BY_ID_SUCCESS,
+} from './browseActions';
 
 const initialState = {
   categories: [],
+  playlists: [],
+  categoryName: null,
 };
 
 const browseReducer = (state = initialState, action = {}) => {
@@ -10,6 +15,12 @@ const browseReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         categories: [ ...action.payload ],
+      };
+    case FETCH_CATEGORY_PLAYLISTS_BY_ID_SUCCESS:
+      return {
+        ...state,
+        playlists: [ ...action.payload.playlists ],
+        categoryName: action.payload.name,
       };
     default:
       return state;
