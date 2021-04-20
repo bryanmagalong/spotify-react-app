@@ -3,6 +3,8 @@ import {
   FETCH_ALL_CATEGORIES,
   fetchCategoryPlaylistsByIdSuccess,
   FETCH_CATEGORY_PLAYLISTS_BY_ID,
+  FETCH_CATEGORY_COLOR,
+  fetchCategoryColorSuccess,
 } from './browseActions';
 import { get } from '../../utils/api';
 
@@ -56,6 +58,18 @@ const browseMiddleware = (store) => (next) => async (action) => {
       }
 
       return next(action);
+    case FETCH_CATEGORY_COLOR:
+      try {
+        const data = await get(
+          `https://api.spotify.com/v1/browse/categories/${action.payload}/playlists`,
+        );
+
+        const { url } = data.playlists.items[0].images[0];
+        store.dispatch(fetchCategoryColorSuccess({ id: action.payload, url }));
+      } catch (error) {
+        console.log(error);
+      }
+      return action;
     default:
       return next(action);
   }
