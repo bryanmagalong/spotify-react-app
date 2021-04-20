@@ -1,5 +1,6 @@
 import {
   FETCH_ALL_CATEGORIES_SUCCESS,
+  FETCH_CATEGORY_COLOR_SUCCESS,
   FETCH_CATEGORY_PLAYLISTS_BY_ID_SUCCESS,
 } from './browseActions';
 
@@ -23,6 +24,17 @@ const browseReducer = (state = initialState, action = {}) => {
         playlists: [ ...action.payload.playlists ],
         categoryName: action.payload.name,
         imageUrl: action.payload.imageUrl,
+      };
+    case FETCH_CATEGORY_COLOR_SUCCESS:
+      return {
+        ...state,
+        categories: [ ...state.categories ].map((category) => ({
+          ...category,
+          imageUrl:
+            action.payload.id === category.id
+              ? action.payload.url
+              : category.imageUrl,
+        })),
       };
     default:
       return state;
