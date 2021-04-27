@@ -25,14 +25,16 @@ const Album = () => {
   );
 
   return (
-    <Wrapper px pb pt>
+    <Wrapper pb>
       <Header {...album} />
-      <TrackList type={album.type}>
-        {tracks.map((item, index) => (
-          <TrackItem key={item.id} number={index + 1} {...item} />
-        ))}
-      </TrackList>
-      <Copyrights copyrights={copyrights} />
+      <Wrapper px>
+        <TrackList type={album.type}>
+          {tracks.map((item, index) => (
+            <TrackItem key={item.id} number={index + 1} {...item} />
+          ))}
+        </TrackList>
+        <Copyrights copyrights={copyrights} />
+      </Wrapper>
     </Wrapper>
   );
 };

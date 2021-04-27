@@ -22,18 +22,20 @@ const Playlist = () => {
   );
 
   return (
-    <Wrapper px pb pt>
+    <Wrapper pb>
       <Header {...playlist} />
-      <TrackList type={playlist.type}>
-        {tracks.map((item, index) => (
-          <TrackItem
-            key={item.id}
-            type={playlist.type}
-            number={index + 1}
-            {...item}
-          />
-        ))}
-      </TrackList>
+      <Wrapper px>
+        <TrackList type={playlist.type}>
+          {tracks.map((item, index) => (
+            <TrackItem
+              key={item.id}
+              type={playlist.type}
+              number={index + 1}
+              {...item}
+            />
+          ))}
+        </TrackList>
+      </Wrapper>
     </Wrapper>
   );
 };

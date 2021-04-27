@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Switch, Route, useHistory } from 'react-router-dom';
+import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import GlobalStyles from '../theme/globalStyles';
@@ -18,7 +18,9 @@ import Album from '../components/Album';
 import User from '../components/User';
 import UserPLaylists from '../components/User/UserPLaylists';
 import UserTopTracks from '../components/User/UserTopTracks';
-
+import Browse from '../components/Browse';
+import CategoryPlaylists from '../components/Browse/CategoryPlaylists';
+import { usePrevious } from '../utils/hooks';
 import { hideError } from '../features/errors/errorActions';
 import { logout } from '../features/auth/authActions';
 
@@ -29,6 +31,13 @@ const App = () => {
   const { error, isOpen } = useSelector((state) => state.errors);
   const dispatch = useDispatch();
   const history = useHistory();
+  const { pathname } = useLocation();
+  const prevPath = usePrevious(pathname);
+
+  // useEffect for scroll restoration
+  useEffect(() => {
+    if(pathname !== prevPath) window.scrollTo(0,0);
+  }, [pathname, prevPath]);
 
   useEffect(() => {
     if(!error.status) return;
@@ -62,6 +71,8 @@ const App = () => {
             <ProtectedRoute exact path='/me/playlists' component={UserPLaylists} />
             <ProtectedRoute exact path='/me/top-tracks' component={UserTopTracks} />
             <ProtectedRoute exact path='/me' component={User} />
+            <ProtectedRoute exact path='/browse' component={Browse} />
+            <ProtectedRoute exact path='/browse/categories/:categoryId/playlists' component={CategoryPlaylists} />
             <Route path="*" component={Error404} />
           </Switch>
         </Wrapper>

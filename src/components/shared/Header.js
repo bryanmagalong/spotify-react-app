@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { usePalette } from 'react-palette';
 
 import { StyledTitle } from './Title';
 import ImageWrapper from './ImageWrapper';
@@ -29,8 +30,19 @@ const Header = ({
       ? `${nPlaylists} playlists publiques • ${followers} Abonnés`
       : `${followers} Abonnés`;
 
+  const { data } = usePalette(image);
+
   return (
-    <StyledHeaderWrapper pb={pb} as="section" flex column itemsCenter>
+    <StyledHeaderWrapper
+      pb
+      as="section"
+      flex
+      column
+      itemsCenter
+      color={data.vibrant}
+      px
+      pt
+    >
       <ImageWrapper
         type={type}
         marginBottom="0"
@@ -55,6 +67,7 @@ const Header = ({
     </StyledHeaderWrapper>
   );
 };
+
 const StyledOwner = styled.span`
   display: ${(props) => props.type === 'user' && 'none'};
 `;
@@ -62,9 +75,12 @@ const StyledOwner = styled.span`
 const StyledHeaderWrapper = styled(Wrapper)`
   row-gap: 1rem;
   padding-bottom: ${(props) => props.pb && '2rem'};
-  
+
+  background: linear-gradient(0deg, rgba(21, 21, 21, 1), transparent)
+    ${(props) => (props.color ? props.color : props.theme.colors.main)};
+    
   @media (min-width: ${(props) => props.theme.media.md}) {
-    height: 15rem;
+    height: 18rem;
     flex-direction: row;
     align-items: flex-end;
     column-gap: 2rem;

@@ -20,6 +20,7 @@ const StyledSearch = styled.div`
 
   @media (min-width: ${(props) => props.theme.media.lg}) {
     padding-left: 2rem;
+    z-index: 2;
   }
 `;
 
