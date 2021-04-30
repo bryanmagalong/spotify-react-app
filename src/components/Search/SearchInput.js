@@ -1,17 +1,20 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { Search } from 'react-bootstrap-icons';
 import { searchOnChange } from '../../features/search/searchActions';
 
 const SearchInput = () => {
-  // TODO: form/input verification
   const inputValue = useSelector((state) => state.search.value);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleSubmit = (e) => {
-    // console.log('Submit event');
     e.preventDefault();
+    // Remove whitespaces at the beginning and at the end of the string
+    const input = e.target[1].value.trim();
+    if (input !== '') history.push(`/search/${input}`);
   };
 
   return (
@@ -26,7 +29,6 @@ const SearchInput = () => {
         placeholder="Artistes, titres ou albums"
         onChange={(e) => {
           dispatch(searchOnChange(e.target.value));
-          // console.log(e.target.value);
         }}
       />
     </StyledForm>
