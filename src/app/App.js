@@ -23,6 +23,7 @@ import CategoryPlaylists from '../components/Browse/CategoryPlaylists';
 import { usePrevious } from '../utils/hooks';
 import { hideError } from '../features/errors/errorActions';
 import { logout } from '../features/auth/authActions';
+import SearchResults from '../components/Search/SearchResults';
 
 
 
@@ -73,6 +74,7 @@ const App = () => {
             <ProtectedRoute exact path='/me' component={User} />
             <ProtectedRoute exact path='/browse' component={Browse} />
             <ProtectedRoute exact path='/browse/categories/:categoryId/playlists' component={CategoryPlaylists} />
+            <ProtectedRoute exact path='/search/:queryInput' component={SearchResults} />
             <Route path="*" component={Error404} />
           </Switch>
         </Wrapper>
