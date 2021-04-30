@@ -26,23 +26,25 @@ const playlistMiddleware = (store) => (next) => async (action) => {
           followers: data.followers.total.toLocaleString(),
         };
 
-        const trackList = [ ...data.tracks.items ].map((item) => ({
-          added_at: item.added_at,
-          duration: msToMinutesAndSeconds(item.track.duration_ms),
-          id: item.track.id,
-          name: item.track.name,
-          explicit: item.track.explicit,
-          artist: {
-            name: item.track.artists[0].name,
-            id: item.track.artists[0].id,
-            url: item.track.artists[0].external_urls.spotify,
-          },
-          album: {
-            name: item.track.album.name,
-            id: item.track.album.id,
-          },
-          images: item.track.album.images[2],
-        }));
+        const trackList = [ ...data.tracks.items ]
+          .filter((item) => item.track !== null)
+          .map((item) => ({
+            added_at: item.added_at,
+            duration: msToMinutesAndSeconds(item.track.duration_ms),
+            id: item.track.id,
+            name: item.track.name,
+            explicit: item.track.explicit,
+            artist: {
+              name: item.track.artists[0].name,
+              id: item.track.artists[0].id,
+              url: item.track.artists[0].external_urls.spotify,
+            },
+            album: {
+              name: item.track.album.name,
+              id: item.track.album.id,
+            },
+            images: item.track.album.images[2],
+          }));
 
         store.dispatch(fetchPlaylistByIdSuccess({ playlist, trackList }));
         // console.log(playlist);
