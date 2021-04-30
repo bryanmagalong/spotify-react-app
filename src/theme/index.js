@@ -16,6 +16,7 @@ const theme = {
   media: {
     xs: '320px',
     sm: '375px',
+    sml: '425px',
     md: '768px',
     lg: '1024px',
     xl: '1224px',
