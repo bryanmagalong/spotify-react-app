@@ -29,7 +29,7 @@ const browseMiddleware = (store) => (next) => async (action) => {
     case FETCH_CATEGORY_PLAYLISTS_BY_ID:
       try {
         const data = await get(
-          `https://api.spotify.com/v1/browse/categories/${action.payload}/playlists`,
+          `https://api.spotify.com/v1/browse/categories/${action.payload}/playlists?country=FR&locale=fr_FR`,
         );
 
         const data2 = await get(
@@ -61,7 +61,7 @@ const browseMiddleware = (store) => (next) => async (action) => {
     case FETCH_CATEGORY_COLOR:
       try {
         const data = await get(
-          `https://api.spotify.com/v1/browse/categories/${action.payload}/playlists`,
+          `https://api.spotify.com/v1/browse/categories/${action.payload}/playlists?country=FR&locale=fr_FR`,
         );
 
         const { url } = data.playlists.items[0].images[0];
