@@ -16,6 +16,11 @@ const SearchResults = () => {
   const { artists, tracks, playlists, albums } = useSelector(
     (state) => state.search,
   );
+  const hasResults =
+    artists.total || tracks.total || playlists.total || albums.total;
+  const resultsText = hasResults
+    ? `Résultats pour la recherche: "${queryInput}"`
+    : `Aucun résultat trouvé pour la recherche: "${queryInput}"`;
 
   useEffect(
     () => {
@@ -25,7 +30,8 @@ const SearchResults = () => {
   );
 
   return (
-    <StyledWrapper pt px pb>
+    <Wrapper pt px pb>
+      <ResultsSpan>{resultsText}</ResultsSpan>
       <Section title="Titres" display={tracks.total} path="/">
         <StyledTrackList>
           {tracks.items.map((item, index) => (
@@ -38,7 +44,7 @@ const SearchResults = () => {
           {artists.items.map((artist) => <Card key={artist.id} {...artist} />)}
         </List>
       </Section>
-      <Section title="Albums" display="1" path="/">
+      <Section title="Albums" display={albums.total} path="/">
         <List>
           {albums.items.map((album) => <Card key={album.id} {...album} />)}
         </List>
@@ -50,14 +56,16 @@ const SearchResults = () => {
           ))}
         </List>
       </Section>
-    </StyledWrapper>
+    </Wrapper>
   );
 };
 
 const StyledTrackList = styled.ul`padding-top: 1rem;`;
 
-const StyledWrapper = styled(Wrapper)`
-
+const ResultsSpan = styled.span`
+  color: #fff;
+  font-weight: bold;
+  font-size: ${(props) => props.theme.fontSize.lg};
 `;
 
 export default SearchResults;
