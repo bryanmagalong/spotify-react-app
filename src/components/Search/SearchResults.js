@@ -32,7 +32,11 @@ const SearchResults = () => {
   return (
     <Wrapper pt px pb>
       <ResultsSpan>{resultsText}</ResultsSpan>
-      <Section title="Titres" display={tracks.total} path="/">
+      <Section
+        title="Titres"
+        display={tracks.total}
+        path={`/search/${queryInput}/tracks`}
+      >
         <StyledTrackList>
           {tracks.items.map((item, index) => (
             <TrackItem key={item.id} number={index + 1} {...item} />
