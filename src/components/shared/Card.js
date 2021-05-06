@@ -44,6 +44,7 @@ const DescriptionCard = styled.div`
   & span {
     font-size: ${(props) => props.theme.fontSize.md};
     color: ${(props) => props.theme.colors.gray};
+    overflow-wrap: break-word;
   }
 `;
 
