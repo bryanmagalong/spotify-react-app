@@ -1,11 +1,11 @@
 import {
   FETCH_SEARCH_RESULTS_SUCCESS,
+  FETCH_SEARCH_TRACKS_SUCCESS,
   SEARCH_ON_CHANGE,
 } from './searchActions';
 
 const initialState = {
   value: '',
-  limit: 6,
   albums: {
     items: [],
     total: 0,
@@ -35,20 +35,28 @@ const searchReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         albums: {
-          items: [ ...action.payload.albums.items ].slice(0, state.limit),
+          items: [ ...action.payload.albums.items ],
           total: action.payload.albums.total,
         },
         artists: {
-          items: [ ...action.payload.artists.items ].slice(0, state.limit),
+          items: [ ...action.payload.artists.items ],
           total: action.payload.artists.total,
         },
         tracks: {
-          items: [ ...action.payload.tracks.items ].slice(0, state.limit),
+          items: [ ...action.payload.tracks.items ],
           total: action.payload.tracks.total,
         },
         playlists: {
-          items: [ ...action.payload.playlists.items ].slice(0, state.limit),
+          items: [ ...action.payload.playlists.items ],
           total: action.payload.playlists.total,
+        },
+      };
+    case FETCH_SEARCH_TRACKS_SUCCESS:
+      return {
+        ...state,
+        tracks: {
+          items: [ ...action.payload.items ],
+          total: action.payload.total,
         },
       };
     default:

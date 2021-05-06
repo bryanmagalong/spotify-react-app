@@ -2,7 +2,9 @@ import { get } from '../../utils/api';
 import { msToMinutesAndSeconds } from '../../utils/functions';
 import {
   fetchSearchResultsSuccess,
+  fetchSearchTracksSuccess,
   FETCH_SEARCH_RESULTS,
+  FETCH_SEARCH_TRACKS,
 } from './searchActions';
 
 const searchMiddleware = (store) => (next) => async (action) => {
@@ -10,13 +12,10 @@ const searchMiddleware = (store) => (next) => async (action) => {
     case FETCH_SEARCH_RESULTS:
       // Encoding spaces with "%20"
       const queryInput = action.payload.split(' ').join('%20');
-      console.log(queryInput);
       try {
         const data = await get(
-          `https://api.spotify.com/v1/search?q=${queryInput}&type=track,playlist,artist,album`,
+          `https://api.spotify.com/v1/search?q=${queryInput}&type=track,playlist,artist,album&limit=6`,
         );
-
-        console.log(data);
 
         const tracks = {
           items: [ ...data.tracks.items ].map((item) => {
@@ -91,6 +90,45 @@ const searchMiddleware = (store) => (next) => async (action) => {
         store.dispatch(
           fetchSearchResultsSuccess({ albums, artists, playlists, tracks }),
         );
+      } catch (error) {
+        console.log(error);
+      }
+      return next(action);
+    case FETCH_SEARCH_TRACKS:
+      // console.log('FETCH SEARCH TRACKS');
+      try {
+        const queryInput = action.payload.split(' ').join('%20');
+        const data = await get(
+          `https://api.spotify.com/v1/search?q=${queryInput}&type=track&limit=50`,
+        );
+
+        const tracks = {
+          items: [ ...data.tracks.items ].map((item) => {
+            return {
+              id: item.id,
+              href: item.href,
+              type: item.type,
+              name: item.name,
+              explicit: item.explicit,
+              duration: msToMinutesAndSeconds(item.duration_ms),
+              album: {
+                name: item.album.name,
+                id: item.album.id,
+              },
+              images: item.album.images[2],
+              artist: {
+                name: item.artists[0].name,
+                id: item.artists[0].id,
+                url: item.artists[0].external_urls.spotify,
+              },
+              owner: item.owner,
+            };
+          }),
+          total: data.tracks.total,
+        };
+
+        // console.log(tracks);
+        store.dispatch(fetchSearchTracksSuccess(tracks));
       } catch (error) {
         console.log(error);
       }
