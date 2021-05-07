@@ -1,4 +1,5 @@
 import {
+  FETCH_SEARCH_ARTISTS_SUCCESS,
   FETCH_SEARCH_RESULTS_SUCCESS,
   FETCH_SEARCH_TRACKS_SUCCESS,
   SEARCH_ON_CHANGE,
@@ -55,6 +56,15 @@ const searchReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         tracks: {
+          items: [ ...action.payload.items ],
+          total: action.payload.total,
+        },
+      };
+
+    case FETCH_SEARCH_ARTISTS_SUCCESS:
+      return {
+        ...state,
+        artists: {
           items: [ ...action.payload.items ],
           total: action.payload.total,
         },
