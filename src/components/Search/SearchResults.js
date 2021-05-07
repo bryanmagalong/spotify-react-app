@@ -9,6 +9,7 @@ import { fetchSearchResults } from '../../features/search/searchActions';
 import TrackItem from '../shared/TrackItem';
 import Card from '../shared/Card';
 import List from '../shared/List';
+import TextSpan from '../shared/TextSpan';
 
 const SearchResults = () => {
   const { queryInput } = useParams();
@@ -21,6 +22,7 @@ const SearchResults = () => {
   const resultsText = hasResults
     ? `Résultats pour la recherche: "${queryInput}"`
     : `Aucun résultat trouvé pour la recherche: "${queryInput}"`;
+  const path = `/search/${queryInput}`;
 
   useEffect(
     () => {
@@ -31,29 +33,33 @@ const SearchResults = () => {
 
   return (
     <Wrapper pt px pb>
-      <ResultsSpan>{resultsText}</ResultsSpan>
-      <Section
-        title="Titres"
-        display={tracks.total}
-        path={`/search/${queryInput}/tracks`}
-      >
+      <TextSpan>{resultsText}</TextSpan>
+      <Section title="Titres" display={tracks.total} path={`${path}/tracks`}>
         <StyledTrackList>
           {tracks.items.map((item, index) => (
             <TrackItem key={item.id} number={index + 1} {...item} />
           ))}
         </StyledTrackList>
       </Section>
-      <Section title="Artistes" display={artists.total} path="/">
+      <Section
+        title="Artistes"
+        display={artists.total}
+        path={`${path}/artists`}
+      >
         <List>
           {artists.items.map((artist) => <Card key={artist.id} {...artist} />)}
         </List>
       </Section>
-      <Section title="Albums" display={albums.total} path="/">
+      <Section title="Albums" display={albums.total} path={`${path}/albums`}>
         <List>
           {albums.items.map((album) => <Card key={album.id} {...album} />)}
         </List>
       </Section>
-      <Section title="Playlists" display={playlists.total} path="/">
+      <Section
+        title="Playlists"
+        display={playlists.total}
+        path={`${path}/playlists`}
+      >
         <List>
           {playlists.items.map((playlist) => (
             <Card key={playlist.id} {...playlist} />
@@ -65,11 +71,5 @@ const SearchResults = () => {
 };
 
 const StyledTrackList = styled.ul`padding-top: 1rem;`;
-
-const ResultsSpan = styled.span`
-  color: #fff;
-  font-weight: bold;
-  font-size: ${(props) => props.theme.fontSize.lg};
-`;
 
 export default SearchResults;
