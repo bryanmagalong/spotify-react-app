@@ -4,9 +4,9 @@ import { useParams } from 'react-router-dom';
 // import styled from 'styled-components';
 
 import Wrapper from '../shared/Wrapper';
-import { StyledTitle } from '../shared/Title';
 import TrackList from '../shared/TrackList';
 import TrackItem from '../shared/TrackItem';
+import TextSpan from '../shared/TextSpan';
 import { fetchSearchTracks } from '../../features/search/searchActions';
 
 const TracksResultsExtended = () => {
@@ -22,7 +22,7 @@ const TracksResultsExtended = () => {
   );
   return (
     <Wrapper px pt pb>
-      <StyledTitle pb>Tous les titres pour "{queryInput}"</StyledTitle>
+      <TextSpan as="h1">Tous les titres pour "{queryInput}"</TextSpan>
       <TrackList type="playlist">
         {tracks.map((track, index) => (
           <TrackItem
