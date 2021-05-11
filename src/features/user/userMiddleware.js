@@ -26,8 +26,6 @@ const userMiddleware = (store) => (next) => async (action) => {
           image: data.images[0].url,
         };
 
-        // console.log(userProfile);
-
         store.dispatch(fetchCurrentUserSuccess(userProfile));
       } catch (error) {
         console.log(error);
@@ -68,7 +66,6 @@ const userMiddleware = (store) => (next) => async (action) => {
           'https://api.spotify.com/v1/me/top/tracks',
           params,
         );
-        // console.log(data);
 
         const myTopTracks = [ ...data.items ].map((item) => {
           return {

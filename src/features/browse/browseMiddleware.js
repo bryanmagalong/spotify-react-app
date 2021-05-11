@@ -20,7 +20,6 @@ const browseMiddleware = (store) => (next) => async (action) => {
         );
         const categories = [ ...data.categories.items ];
 
-        // console.log(data);
         store.dispatch(fetchAllCategoriesSuccess(categories));
       } catch (error) {
         console.log(error);
@@ -48,8 +47,7 @@ const browseMiddleware = (store) => (next) => async (action) => {
         });
         const name = data2.name;
         const imageUrl = playlists[0].images;
-        console.log(name);
-        // console.log(playlists);
+
         store.dispatch(
           fetchCategoryPlaylistsByIdSuccess({ playlists, name, imageUrl }),
         );

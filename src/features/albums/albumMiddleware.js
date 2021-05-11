@@ -8,7 +8,6 @@ const albumMiddleware = (store) => (next) => async (action) => {
       try {
         const albumId = action.payload;
         const data = await get(`https://api.spotify.com/v1/albums/${albumId}`);
-        // console.log(data);
 
         const album = {
           name: data.name,
@@ -23,8 +22,6 @@ const albumMiddleware = (store) => (next) => async (action) => {
 
         const trackList = [ ...data.tracks.items ];
         const copyrights = data.copyrights.map((item) => item.text);
-        // console.log(album);
-        // console.log(trackList);
 
         store.dispatch(fetchAlbumByIdSuccess({ album, trackList, copyrights }));
       } catch (error) {
