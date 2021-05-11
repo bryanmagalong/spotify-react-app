@@ -1,8 +1,11 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { usePrevious } from '../utils/hooks';
+import { hideError } from '../features/errors/errorActions';
+import { logout } from '../features/auth/authActions';
 import GlobalStyles from '../theme/globalStyles';
 import Home from '../components/Home';
 import Login from '../components/Login';
@@ -20,11 +23,11 @@ import UserPLaylists from '../components/User/UserPLaylists';
 import UserTopTracks from '../components/User/UserTopTracks';
 import Browse from '../components/Browse';
 import CategoryPlaylists from '../components/Browse/CategoryPlaylists';
-import { usePrevious } from '../utils/hooks';
-import { hideError } from '../features/errors/errorActions';
-import { logout } from '../features/auth/authActions';
-
-
+import SearchResults from '../components/Search/SearchResults';
+import TracksResultsExtended from '../components/Search/TracksResultsExtended';
+import ArtistsResultsExtended from '../components/Search/ArtistsResultsExtended';
+import AlbumsResultsExtended from '../components/Search/AlbumsResultsExtended';
+import PlaylistsResultsExtended from '../components/Search/PlaylistsResultsExtended';
 
 const App = () => {
   const isLogged = useSelector((state) => state.auth.isLogged);
@@ -35,27 +38,33 @@ const App = () => {
   const prevPath = usePrevious(pathname);
 
   // useEffect for scroll restoration
-  useEffect(() => {
-    if(pathname !== prevPath) window.scrollTo(0,0);
-  }, [pathname, prevPath]);
+  useEffect(
+    () => {
+      if (pathname !== prevPath) window.scrollTo(0, 0);
+    },
+    [ pathname, prevPath ],
+  );
 
-  useEffect(() => {
-    if(!error.status) return;
-    
-    if(error.status === 404) {
-      dispatch(hideError());
-      return history.push('/404');
-    } 
-    
-    if(error.status === 401) {
-      // dispatch(hideError());
-      dispatch(logout());
-      return history.push('/login');
-    };
-  }, [error, dispatch, history]);
+  useEffect(
+    () => {
+      if (!error.status) return;
+
+      if (error.status === 404) {
+        dispatch(hideError());
+        return history.push('/404');
+      }
+
+      if (error.status === 401) {
+        // dispatch(hideError());
+        dispatch(logout());
+        return history.push('/login');
+      }
+    },
+    [ error, dispatch, history ],
+  );
 
   return (
-    <>
+    <React.Fragment>
       <GlobalStyles />
       <AppStyled>
         {isLogged && <Navbar />}
@@ -66,18 +75,63 @@ const App = () => {
             <ProtectedRoute exact path="/" component={Home} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/redirect" component={Redirect} />
-            <ProtectedRoute path='/playlists/:playlistId' component={Playlist} />
-            <ProtectedRoute path='/albums/:albumId' component={Album} />
-            <ProtectedRoute exact path='/me/playlists' component={UserPLaylists} />
-            <ProtectedRoute exact path='/me/top-tracks' component={UserTopTracks} />
-            <ProtectedRoute exact path='/me' component={User} />
-            <ProtectedRoute exact path='/browse' component={Browse} />
-            <ProtectedRoute exact path='/browse/categories/:categoryId/playlists' component={CategoryPlaylists} />
+            <ProtectedRoute
+              path="/playlists/:playlistId"
+              component={Playlist}
+            />
+            <ProtectedRoute path="/albums/:albumId" component={Album} />
+            <ProtectedRoute
+              exact
+              path="/me/playlists"
+              component={UserPLaylists}
+            />
+            <ProtectedRoute
+              exact
+              path="/me/top-tracks"
+              component={UserTopTracks}
+            />
+            <ProtectedRoute exact path="/me" component={User} />
+            <ProtectedRoute exact path="/browse" component={Browse} />
+            <ProtectedRoute
+              exact
+              path="/browse/categories/:categoryId/playlists"
+              component={CategoryPlaylists}
+            />
+            <ProtectedRoute
+              exact
+              path="/search/:queryInput"
+              component={SearchResults}
+            />
+            <ProtectedRoute
+              exact
+              path="/search/:queryInput/tracks"
+              component={TracksResultsExtended}
+            />
+            <ProtectedRoute
+              exact
+              path="/search/:queryInput/artists"
+              component={ArtistsResultsExtended}
+            />
+            <ProtectedRoute
+              exact
+              path="/search/:queryInput/albums"
+              component={AlbumsResultsExtended}
+            />
+            <ProtectedRoute
+              exact
+              path="/search/:queryInput/playlists"
+              component={PlaylistsResultsExtended}
+            />
+            <ProtectedRoute
+              exact
+              path="/search/:queryInput"
+              component={SearchResults}
+            />
             <Route path="*" component={Error404} />
           </Switch>
         </Wrapper>
       </AppStyled>
-    </>
+    </React.Fragment>
   );
 };
 

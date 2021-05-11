@@ -38,6 +38,10 @@ const StyledPlaylistsList = styled.ul`
     background-clip: content-box;
   }
 
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(178, 178, 178, .6);
+  }
+
   @media (min-width: ${(props) => props.theme.media.lg}) {
     position: relative;
     display: flex;

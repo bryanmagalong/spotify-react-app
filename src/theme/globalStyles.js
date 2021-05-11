@@ -33,6 +33,26 @@ const GlobalStyles = createGlobalStyle`
   }
   body {
     line-height: 1;
+
+    &::-webkit-scrollbar {
+      background-color: #121212;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(178, 178, 178, .4);
+      border-radius: .5rem;
+      border: 4px solid transparent;
+      background-clip: content-box;
+    }
+
+    &::-webkit-scrollbar-thumb:hover{
+      background-color: rgba(178, 178, 178, .6);
+    }
+
+    @media (min-width: 1024px) {
+      overflow-y: scroll;
+      overscroll-behavior-y: contain;
+    }
   }
   ol, ul {
     list-style: none;

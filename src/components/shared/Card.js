@@ -9,12 +9,14 @@ const Card = ({ name, images, type, album, id, owner }) => {
   const meta =
     type === 'track'
       ? album
-      : type === 'artist' ? 'Artiste' : `par ${owner.display_name}`;
+      : type === 'artist'
+        ? 'Artiste'
+        : `par ${owner.display_name ?? owner}`;
 
   return (
     <article>
       <StyledCard to={path}>
-        <ImageWrapper type={type} src={images} alt={name} maxWidth="100%" />
+        <ImageWrapper type={type} src={images} alt={name} maxWidth="100%" maxHeight="70%"/>
         <DescriptionCard type={type}>
           <h3>{name}</h3>
           <span>{meta}</span>
@@ -42,6 +44,7 @@ const DescriptionCard = styled.div`
   & span {
     font-size: ${(props) => props.theme.fontSize.md};
     color: ${(props) => props.theme.colors.gray};
+    overflow-wrap: break-word;
   }
 `;
 
