@@ -7,6 +7,8 @@ export const FETCH_SEARCH_ARTISTS = 'FETCH_SEARCH_ARTISTS';
 export const FETCH_SEARCH_ARTISTS_SUCCESS = 'FETCH_SEARCH_ARTISTS_SUCCESS';
 export const FETCH_SEARCH_ALBUMS = 'FETCH_SEARCH_ALBUMS';
 export const FETCH_SEARCH_ALBUMS_SUCCESS = 'FETCH_SEARCH_ALBUMS_SUCCESS';
+export const FETCH_SEARCH_PLAYLISTS = 'FETCH_SEARCH_PLAYLISTS';
+export const FETCH_SEARCH_PLAYLISTS_SUCCESS = 'FETCH_SEARCH_PLAYLISTS_SUCCESS';
 
 export const searchOnChange = (payload) => ({
   type: SEARCH_ON_CHANGE,
@@ -50,5 +52,15 @@ export const fetchSearchAlbums = (payload) => ({
 
 export const fetchSearchAlbumsSuccess = (payload) => ({
   type: FETCH_SEARCH_ALBUMS_SUCCESS,
+  payload,
+});
+
+export const fetchSearchPlaylists = (payload) => ({
+  type: FETCH_SEARCH_PLAYLISTS,
+  payload,
+});
+
+export const fetchSearchPlaylistsSuccess = (payload) => ({
+  type: FETCH_SEARCH_PLAYLISTS_SUCCESS,
   payload,
 });

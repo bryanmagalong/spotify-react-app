@@ -3,10 +3,12 @@ import { msToMinutesAndSeconds } from '../../utils/functions';
 import {
   fetchSearchAlbumsSuccess,
   fetchSearchArtistsSuccess,
+  fetchSearchPlaylistsSuccess,
   fetchSearchResultsSuccess,
   fetchSearchTracksSuccess,
   FETCH_SEARCH_ALBUMS,
   FETCH_SEARCH_ARTISTS,
+  FETCH_SEARCH_PLAYLISTS,
   FETCH_SEARCH_RESULTS,
   FETCH_SEARCH_TRACKS,
 } from './searchActions';
@@ -131,7 +133,6 @@ const searchMiddleware = (store) => (next) => async (action) => {
           total: data.tracks.total,
         };
 
-        // console.log(tracks);
         store.dispatch(fetchSearchTracksSuccess(tracks));
       } catch (error) {
         console.log(error);
@@ -158,7 +159,7 @@ const searchMiddleware = (store) => (next) => async (action) => {
           }),
           total: data.artists.total,
         };
-        // console.log(artists);
+
         store.dispatch(fetchSearchArtistsSuccess(artists));
       } catch (error) {
         console.log(error);
@@ -187,8 +188,33 @@ const searchMiddleware = (store) => (next) => async (action) => {
           total: data.albums.total,
         };
 
-        console.log(albums);
         store.dispatch(fetchSearchAlbumsSuccess(albums));
+      } catch (error) {
+        console.log(error);
+      }
+      return next(action);
+    case FETCH_SEARCH_PLAYLISTS:
+      try {
+        const queryInput = action.payload.split(' ').join('%20');
+        const data = await get(
+          `https://api.spotify.com/v1/search?q=${queryInput}&type=playlist&limit=50`,
+        );
+
+        const playlists = {
+          items: [ ...data.playlists.items ].map((item) => {
+            return {
+              id: item.id,
+              href: item.href,
+              type: item.type,
+              name: item.name,
+              images: item.images[0].url,
+              owner: item.owner,
+            };
+          }),
+          total: data.playlists.total,
+        };
+
+        store.dispatch(fetchSearchPlaylistsSuccess(playlists));
       } catch (error) {
         console.log(error);
       }

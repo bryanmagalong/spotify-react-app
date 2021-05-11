@@ -27,6 +27,7 @@ import SearchResults from '../components/Search/SearchResults';
 import TracksResultsExtended from '../components/Search/TracksResultsExtended';
 import ArtistsResultsExtended from '../components/Search/ArtistsResultsExtended';
 import AlbumsResultsExtended from '../components/Search/AlbumsResultsExtended';
+import PlaylistsResultsExtended from '../components/Search/PlaylistsResultsExtended';
 
 const App = () => {
   const isLogged = useSelector((state) => state.auth.isLogged);
@@ -115,6 +116,11 @@ const App = () => {
               exact
               path="/search/:queryInput/albums"
               component={AlbumsResultsExtended}
+            />
+            <ProtectedRoute
+              exact
+              path="/search/:queryInput/playlists"
+              component={PlaylistsResultsExtended}
             />
             <ProtectedRoute
               exact
