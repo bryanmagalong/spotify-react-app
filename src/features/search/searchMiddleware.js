@@ -1,9 +1,11 @@
 import { get } from '../../utils/api';
 import { msToMinutesAndSeconds } from '../../utils/functions';
 import {
+  fetchSearchAlbumsSuccess,
   fetchSearchArtistsSuccess,
   fetchSearchResultsSuccess,
   fetchSearchTracksSuccess,
+  FETCH_SEARCH_ALBUMS,
   FETCH_SEARCH_ARTISTS,
   FETCH_SEARCH_RESULTS,
   FETCH_SEARCH_TRACKS,
@@ -158,6 +160,35 @@ const searchMiddleware = (store) => (next) => async (action) => {
         };
         // console.log(artists);
         store.dispatch(fetchSearchArtistsSuccess(artists));
+      } catch (error) {
+        console.log(error);
+      }
+      return next(action);
+    case FETCH_SEARCH_ALBUMS:
+      try {
+        const queryInput = action.payload.split(' ').join('%20');
+        const data = await get(
+          `https://api.spotify.com/v1/search?q=${queryInput}&type=album&limit=50`,
+        );
+
+        const albums = {
+          items: [ ...data.albums.items ].map((item) => {
+            return {
+              id: item.id,
+              href: item.href,
+              type: item.type,
+              name: item.name,
+              owner: item.artists[0].name,
+              images: item.images.length
+                ? item.images[0].url
+                : 'https://developer.spotify.com/assets/branding-guidelines/icon3@2x.png',
+            };
+          }),
+          total: data.albums.total,
+        };
+
+        console.log(albums);
+        store.dispatch(fetchSearchAlbumsSuccess(albums));
       } catch (error) {
         console.log(error);
       }
