@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Player = () => {
-  return <StyledPlayer>PLAYER</StyledPlayer>;
+  return <StyledPlayer>Player</StyledPlayer>;
 };
 
 const StyledPlayer = styled.div`

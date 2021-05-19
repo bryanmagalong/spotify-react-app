@@ -4,8 +4,8 @@ import { HouseDoor, Folder2Open, Person } from 'react-bootstrap-icons';
 
 import NavLink from './NavLink';
 import Wrapper from '../shared/Wrapper';
-import Player from './Player';
 import PlaylistsList from './PlaylistsList';
+import Player from '../Player';
 
 const Navbar = () => {
   return (
