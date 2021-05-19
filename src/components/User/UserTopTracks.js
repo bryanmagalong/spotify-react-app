@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import Wrapper from '../shared/Wrapper';
 import { StyledTitle } from '../shared/Title';
-import { fetchMyTopArtists } from '../../features/user/userActions';
+import { fetchMyTopTracks } from '../../features/user/userActions';
 import TrackList from '../shared/TrackList';
 import TrackItem from '../shared/TrackItem';
 
@@ -13,7 +13,7 @@ const UserTopTracks = () => {
 
   useEffect(
     () => {
-      if (!topTracksList.lenght) dispatch(fetchMyTopArtists());
+      if (!topTracksList.length) dispatch(fetchMyTopTracks());
     },
     [ dispatch, topTracksList ],
   );
