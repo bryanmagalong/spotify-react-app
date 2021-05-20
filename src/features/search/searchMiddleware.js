@@ -86,7 +86,9 @@ const searchMiddleware = (store) => (next) => async (action) => {
               href: item.href,
               type: item.type,
               name: item.name,
-              images: item.images[0].url,
+              images: item.images.length
+                ? item.images[0].url
+                : 'https://developer.spotify.com/assets/branding-guidelines/icon3@2x.png',
               owner: item.owner,
             };
           }),
