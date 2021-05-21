@@ -46,7 +46,6 @@ const Player = () => {
         src={track.image}
         maxWidth="64px"
         maxHeight="64px"
-        size="64"
         marginBottom="0"
       />
       <Description>
@@ -78,36 +77,43 @@ const Player = () => {
 const StyledPlayer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
+  gap: 1rem;
   padding: 0 0.5rem;
   background-color: ${(props) => props.theme.colors.subLight};
   color: #fff;
   font-weight: bold;
-  height: 50%;
 
   @media (min-width: ${(props) => props.theme.media.lg}) {
-    height: 25%;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
     /* gap: 1rem; */
     padding: 1rem;
+    height: 14.5rem;
   }
 `;
 
 const PLayPauseButton = styled.button`
   background-color: transparent;
-  font-size: 2.3em;
+  font-size: 2em;
   color: ${(props) => props.theme.colors.gray};
-  text-align: center;
-  width: 50%;
+  text-align: right;
   cursor: pointer;
+
   & svg {
     vertical-align: middle;
   }
+
   &:hover {
     transition: all .2s ease-in-out;
     color: #fff;
+  }
+
+  @media (min-width: ${(props) => props.theme.media.md}) {
+    text-align: start;
+  }
+
+  @media (min-width: ${(props) => props.theme.media.lg}) {
+    text-align: center;
   }
 `;
 
@@ -123,6 +129,7 @@ const ArtistName = styled.div`
   font-size: ${(props) => props.theme.fontSize.md};
   font-weight: normal;
   color: ${(props) => props.theme.colors.gray};
+
   @media (min-width: ${(props) => props.theme.media.lg}) {
     text-align: center;
   }

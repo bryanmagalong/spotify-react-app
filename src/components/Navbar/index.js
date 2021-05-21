@@ -39,7 +39,7 @@ const StyledNavbar = styled.nav`
 
   @media (min-width: ${(props) => props.theme.media.lg}) {
     order: 0;
-    height: 75%;
+    height: 70%;
     align-items: flex-start;
     padding-top: 2rem;
   }
@@ -66,7 +66,7 @@ const NavWrapper = styled(Wrapper)`
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 10rem;
+  height: 8rem;
 
   @media (min-width: ${(props) => props.theme.media.lg}) {
     position: sticky;
@@ -74,6 +74,7 @@ const NavWrapper = styled(Wrapper)`
     max-width: 14.5rem;
     height: 100vh;
     background-color: ${(props) => props.theme.colors.subDark};
+    justify-content: space-between;
   };
 `;
 

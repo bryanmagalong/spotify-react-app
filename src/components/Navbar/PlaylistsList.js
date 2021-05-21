@@ -45,11 +45,10 @@ const StyledPlaylistsList = styled.ul`
   @media (min-width: ${(props) => props.theme.media.lg}) {
     position: relative;
     display: flex;
-    justify-content: space-evenly;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: flex-start;
     gap: 1rem;
+    padding-bottom: 1rem;
     height: 100%;
     width: 100%;
     overflow-y: scroll;
