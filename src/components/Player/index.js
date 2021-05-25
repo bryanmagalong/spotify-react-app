@@ -12,7 +12,7 @@ import ImageWrapper from '../shared/ImageWrapper';
 
 const Player = () => {
   const dispatch = useDispatch();
-  const track = useSelector((state) => state.player.playback.track);
+  const track = useSelector((state) => state.player.track);
   const { isPlaying, audio } = useSelector((state) => state.player);
   const myRef = useCallback((node) => {
     if (node !== null) setMarquee(node.scrollWidth > node.offsetWidth);
@@ -43,33 +43,42 @@ const Player = () => {
   return (
     <StyledPlayer>
       <ImageWrapper
-        src={track.image}
+        src={
+          track.image ? (
+            track.image
+          ) : (
+            'https://developer.spotify.com/assets/branding-guidelines/icon3@2x.png'
+          )
+        }
         maxWidth="64px"
         maxHeight="64px"
+        size="64"
         marginBottom="0"
       />
       <Description>
         <TrackTitle ref={myRef} marquee={marquee}>
-          {track.name}
+          {track.name ? track.name : 'Aucune musique sélectionnée'}
         </TrackTitle>
         <ArtistName>{track.artist}</ArtistName>
       </Description>
-      <PLayPauseButton
-        type="button"
-        onClick={(e) => {
-          e.preventDefault();
-          if (isPlaying) {
-            audio.pause();
-            dispatch(pauseSong());
-          }
-          else {
-            audio.play();
-            dispatch(playSong());
-          }
-        }}
-      >
-        {isPlaying ? <PauseCircleFill /> : <PlayCircleFill />}
-      </PLayPauseButton>
+      {track.preview_url !== null ? (
+        <PLayPauseButton
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            if (isPlaying) {
+              dispatch(pauseSong());
+            }
+            else {
+              dispatch(playSong());
+            }
+          }}
+        >
+          {isPlaying ? <PauseCircleFill /> : <PlayCircleFill />}
+        </PLayPauseButton>
+      ) : (
+        'Preview indisponible'
+      )}
     </StyledPlayer>
   );
 };

@@ -1,36 +1,46 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import ImageWrapper from './ImageWrapper';
 import Wrapper from './Wrapper';
 import StyledCustomLink from './CustomLink';
+import { startNewPlayback } from '../../features/player/playerActions';
 
 const TrackItem = ({
   number,
-  images,
+  image,
   name,
   artist,
   album,
   explicit,
   duration,
   type,
+  id,
 }) => {
   const albumPath = album ? `/albums/${album.id}` : '';
+  const dispatch = useDispatch();
 
+  const handleOnClick = (e) => {
+    e.preventDefault();
+    dispatch(
+      startNewPlayback(id),
+    );
+  };
   return (
     <StyledTrackItem type={type}>
-      <StyledDiv flex itemsCenter>
+      <StyledDiv flex itemsCenter onClick={handleOnClick}>
         {number}
       </StyledDiv>
       <StyledDiv flex itemsCenter columnGap>
-        {images && (
+        {image && (
           <ImageWrapper
-            src={images.url}
-            alt={name}
+            src={image.url}
+            alt={name ?? 'spotify logo image'}
             maxWidth="30%"
             marginBottom="0"
-            size={images.width}
+            size={image.width}
           />
         )}
         <StyledTitleDiv flex column fullWidth>

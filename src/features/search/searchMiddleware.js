@@ -36,7 +36,7 @@ const searchMiddleware = (store) => (next) => async (action) => {
                 name: item.album.name,
                 id: item.album.id,
               },
-              images: item.album.images[2],
+              image: item.album.images[2],
               artist: {
                 name: item.artists[0].name,
                 id: item.artists[0].id,

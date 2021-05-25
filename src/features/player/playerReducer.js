@@ -5,9 +5,8 @@ import {
 } from './playerActions';
 
 const initialState = {
-  playback: {
-    context: {},
-    track: {},
+  track: {
+    preview_url: null,
   },
   isPlaying: false,
   audio: null,
@@ -16,20 +15,29 @@ const initialState = {
 const playerReducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case FETCH_USER_CURRENT_PLAYBACK_INFO_SUCCESS:
+      if (state.audio && state.isPlaying) {
+        state.audio.pause();
+        return {
+          ...state,
+          track: { ...action.payload },
+          isPlaying: false,
+          audio: new Audio(action.payload.preview_url),
+        };
+      }
+
       return {
         ...state,
-        playback: {
-          context: { ...action.payload.context },
-          track: { ...action.payload.track },
-        },
-        audio: new Audio(action.payload.track.preview_url),
+        track: { ...action.payload },
+        audio: new Audio(action.payload.preview_url),
       };
     case PLAY_SONG:
+      state.audio.play();
       return {
         ...state,
         isPlaying: true,
       };
     case PAUSE_SONG:
+      state.audio.pause();
       return {
         ...state,
         isPlaying: false,

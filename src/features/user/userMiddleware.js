@@ -73,13 +73,14 @@ const userMiddleware = (store) => (next) => async (action) => {
             href: item.href,
             type: item.type,
             name: item.name,
+            preview_url: item.preview_url,
             explicit: item.explicit,
             duration: msToMinutesAndSeconds(item.duration_ms),
             album: {
               name: item.album.name,
               id: item.album.id,
             },
-            images: item.album.images[2],
+            image: item.album.images[2],
             artist: {
               name: item.artists[0].name,
               id: item.artists[0].id,
