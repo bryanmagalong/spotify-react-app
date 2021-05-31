@@ -24,7 +24,7 @@ const playerMiddleware = (store) => (next) => async (action) => {
 
         store.dispatch(fetchUserCurrentPlaybackInfoSuccess(track));
       } catch (error) {
-        console.log(error);
+        if (process.env.NODE_ENV === 'development') console.log(error);
       }
       return next(action);
     case START_NEW_PLAYBACK:
@@ -46,7 +46,7 @@ const playerMiddleware = (store) => (next) => async (action) => {
         store.dispatch(fetchUserCurrentPlaybackInfoSuccess(track));
         if (track.preview_url !== null) store.dispatch(playSong());
       } catch (error) {
-        console.log(error);
+        if (process.env.NODE_ENV === 'development') console.log(error);
       }
 
       return next(action);
