@@ -46,13 +46,15 @@ const browseMiddleware = (store) => (next) => async (action) => {
           };
         });
         const name = data2.name;
-        const imageUrl = playlists[0].images;
+        const imageUrl = playlists[0]
+          ? playlists[0].images
+          : 'https://developer.spotify.com/assets/branding-guidelines/icon3@2x.png';
 
         store.dispatch(
           fetchCategoryPlaylistsByIdSuccess({ playlists, name, imageUrl }),
         );
       } catch (error) {
-        console.og(error);
+        console.log(error);
       }
 
       return next(action);

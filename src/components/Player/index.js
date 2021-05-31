@@ -19,7 +19,6 @@ const Player = () => {
   });
   const [ marquee, setMarquee ] = useState();
   const handleEnded = () => {
-    // console.log('ended');
     dispatch(pauseSong());
   };
 
