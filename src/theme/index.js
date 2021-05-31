@@ -22,8 +22,8 @@ const theme = {
     xl: '1224px',
   },
   template: {
-    trackGridColumns: '1.2rem 2fr 1fr 3rem',
-    albumTrackGridColumns: '1.2rem 2fr 3rem',
+    trackGridColumns: '2rem 2fr 1fr 3rem',
+    albumTrackGridColumns: '2rem 2fr 3rem',
   },
 };
 
