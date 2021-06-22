@@ -99,7 +99,7 @@ const searchMiddleware = (store) => (next) => async (action) => {
           fetchSearchResultsSuccess({ albums, artists, playlists, tracks }),
         );
       } catch (error) {
-        console.log(error);
+        if (process.env.NODE_ENV === 'development') console.log(error);
       }
       return next(action);
     case FETCH_SEARCH_TRACKS:
@@ -137,7 +137,7 @@ const searchMiddleware = (store) => (next) => async (action) => {
 
         store.dispatch(fetchSearchTracksSuccess(tracks));
       } catch (error) {
-        console.log(error);
+        if (process.env.NODE_ENV === 'development') console.log(error);
       }
       return next(action);
     case FETCH_SEARCH_ARTISTS:
@@ -164,7 +164,7 @@ const searchMiddleware = (store) => (next) => async (action) => {
 
         store.dispatch(fetchSearchArtistsSuccess(artists));
       } catch (error) {
-        console.log(error);
+        if (process.env.NODE_ENV === 'development') console.log(error);
       }
       return next(action);
     case FETCH_SEARCH_ALBUMS:
@@ -192,7 +192,7 @@ const searchMiddleware = (store) => (next) => async (action) => {
 
         store.dispatch(fetchSearchAlbumsSuccess(albums));
       } catch (error) {
-        console.log(error);
+        if (process.env.NODE_ENV === 'development') console.log(error);
       }
       return next(action);
     case FETCH_SEARCH_PLAYLISTS:
@@ -218,7 +218,7 @@ const searchMiddleware = (store) => (next) => async (action) => {
 
         store.dispatch(fetchSearchPlaylistsSuccess(playlists));
       } catch (error) {
-        console.log(error);
+        if (process.env.NODE_ENV === 'development') console.log(error);
       }
       return next(action);
     default:

@@ -28,7 +28,7 @@ const userMiddleware = (store) => (next) => async (action) => {
 
         store.dispatch(fetchCurrentUserSuccess(userProfile));
       } catch (error) {
-        console.log(error);
+        if (process.env.NODE_ENV === 'development') console.log(error);
       }
       return next(action);
     case FETCH_MY_PLAYLISTS:
@@ -56,7 +56,7 @@ const userMiddleware = (store) => (next) => async (action) => {
         // console.log(data);
         store.dispatch(fetchMyPlaylistsSuccess({ playlists, extend }));
       } catch (error) {
-        console.log(error);
+        if (process.env.NODE_ENV === 'development') console.log(error);
       }
       return next(action);
     case FETCH_MY_TOP_TRACKS:
@@ -92,7 +92,8 @@ const userMiddleware = (store) => (next) => async (action) => {
 
         store.dispatch(fetchMyTopTracksSuccess(myTopTracks));
       } catch (error) {
-        console.log(error);
+        if (process.env.NODE_ENV === 'development') console.log(error);
+
         store.dispatch(
           setError({
             message: error.message,
@@ -123,7 +124,8 @@ const userMiddleware = (store) => (next) => async (action) => {
 
         store.dispatch(fetchMyTopArtistsSuccess(myTopArtists));
       } catch (error) {
-        console.log(error);
+        if (process.env.NODE_ENV === 'development') console.log(error);
+
         store.dispatch(
           setError({
             message: error.message,

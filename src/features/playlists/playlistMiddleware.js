@@ -49,7 +49,8 @@ const playlistMiddleware = (store) => (next) => async (action) => {
 
         store.dispatch(fetchPlaylistByIdSuccess({ playlist, trackList }));
       } catch (error) {
-        console.log(error);
+        if (process.env.NODE_ENV === 'development') console.log(error);
+
         if (error.response.status === 404);
         store.dispatch(
           setError({ message: 'Playlist introuvable!', status: 404 }),

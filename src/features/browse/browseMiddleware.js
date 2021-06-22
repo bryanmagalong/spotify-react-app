@@ -22,7 +22,7 @@ const browseMiddleware = (store) => (next) => async (action) => {
 
         store.dispatch(fetchAllCategoriesSuccess(categories));
       } catch (error) {
-        console.log(error);
+        if (process.env.NODE_ENV === 'development') console.log(error);
       }
       return next(action);
     case FETCH_CATEGORY_PLAYLISTS_BY_ID:
@@ -54,7 +54,7 @@ const browseMiddleware = (store) => (next) => async (action) => {
           fetchCategoryPlaylistsByIdSuccess({ playlists, name, imageUrl }),
         );
       } catch (error) {
-        console.log(error);
+        if (process.env.NODE_ENV === 'development') console.log(error);
       }
 
       return next(action);
@@ -67,7 +67,7 @@ const browseMiddleware = (store) => (next) => async (action) => {
         const { url } = data.playlists.items[0].images[0];
         store.dispatch(fetchCategoryColorSuccess({ id: action.payload, url }));
       } catch (error) {
-        console.log(error);
+        if (process.env.NODE_ENV === 'development') console.log(error);
       }
       return action;
     default:
