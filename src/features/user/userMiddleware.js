@@ -38,7 +38,6 @@ const userMiddleware = (store) => (next) => async (action) => {
           'https://api.spotify.com/v1/me/playlists',
           params,
         );
-        console.log(data);
 
         const playlists = {
           items: [ ...data.items ].map((item) => {
