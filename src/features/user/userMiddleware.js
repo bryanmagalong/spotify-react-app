@@ -38,23 +38,25 @@ const userMiddleware = (store) => (next) => async (action) => {
           'https://api.spotify.com/v1/me/playlists',
           params,
         );
+        console.log(data);
 
-        const playlists = [ ...data.items ].map((item) => {
-          return {
-            id: item.id,
-            href: item.href,
-            type: item.type,
-            name: item.name,
-            images: item.images[0].url,
-            owner: item.owner,
-          };
-        });
+        const playlists = {
+          items: [ ...data.items ].map((item) => {
+            return {
+              id: item.id,
+              href: item.href,
+              type: item.type,
+              name: item.name,
+              images: item.images.length
+                ? item.images[0].url
+                : 'https://developer.spotify.com/assets/branding-guidelines/icon3@2x.png',
+              owner: item.owner,
+            };
+          }),
+          total: data.total,
+        };
 
-        const extend = data.next
-          ? 'https://api.spotify.com/v1/me/playlists '
-          : null;
-        // console.log(data);
-        store.dispatch(fetchMyPlaylistsSuccess({ playlists, extend }));
+        store.dispatch(fetchMyPlaylistsSuccess(playlists));
       } catch (error) {
         if (process.env.NODE_ENV === 'development') console.log(error);
       }

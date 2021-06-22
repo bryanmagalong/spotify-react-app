@@ -2,11 +2,16 @@ import {
   FETCH_ALL_CATEGORIES_SUCCESS,
   FETCH_CATEGORY_COLOR_SUCCESS,
   FETCH_CATEGORY_PLAYLISTS_BY_ID_SUCCESS,
+  FETCH_NEW_RELEASES_SUCCESS,
 } from './browseActions';
 
 const initialState = {
   categories: [],
   playlists: [],
+  newReleases: {
+    items: [],
+    total: 0,
+  },
   categoryName: null,
   imageUrl: '',
 };
@@ -35,6 +40,14 @@ const browseReducer = (state = initialState, action = {}) => {
               ? action.payload.url
               : category.imageUrl,
         })),
+      };
+    case FETCH_NEW_RELEASES_SUCCESS:
+      return {
+        ...state,
+        newReleases: {
+          items: [ ...action.payload.items ],
+          total: action.payload.total,
+        },
       };
     default:
       return state;

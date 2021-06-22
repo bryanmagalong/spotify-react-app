@@ -9,7 +9,8 @@ const initialState = {
   profile: null,
   playlists: {
     items: [],
-    extend: null,
+    itemsHome: [],
+    total: 0,
   },
   topArtistsList: { items: [] },
   topTracksList: [],
@@ -27,8 +28,9 @@ const userReducer = (state = initialState, action = {}) => {
         ...state,
         playlists: {
           ...state.playlists,
-          items: [ ...action.payload.playlists ],
-          extend: action.payload.extend,
+          items: [ ...action.payload.items ],
+          itemsHome: [ ...action.payload.items ].splice(6),
+          total: action.payload.total,
         },
       };
     case FETCH_MY_TOP_ARTISTS_SUCCESS:

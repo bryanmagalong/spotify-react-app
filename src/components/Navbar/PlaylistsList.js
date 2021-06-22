@@ -6,18 +6,18 @@ import PlaylistLink from './PlaylistLink';
 import { fetchMyPlaylists } from '../../features/user/userActions';
 
 const PlaylistsList = () => {
-  const playlists = useSelector((state) => state.user.playlists.items);
+  const playlists = useSelector((state) => state.user.playlists);
   const dispatch = useDispatch();
 
   useEffect(
     () => {
-      if (!playlists.length) dispatch(fetchMyPlaylists());
+      if (!playlists.items.length) dispatch(fetchMyPlaylists());
     },
     [ playlists, dispatch ],
   );
   return (
     <StyledPlaylistsList>
-      {playlists.map((item) => (
+      {playlists.items.map((item) => (
         <PlaylistLink key={item.id} id={item.id} name={item.name} />
       ))}
     </StyledPlaylistsList>

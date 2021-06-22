@@ -5,6 +5,8 @@ import {
   FETCH_CATEGORY_PLAYLISTS_BY_ID,
   FETCH_CATEGORY_COLOR,
   fetchCategoryColorSuccess,
+  FETCH_NEW_RELEASES,
+  fetchNewReleasesSuccess,
 } from './browseActions';
 import { get } from '../../utils/api';
 
@@ -69,7 +71,34 @@ const browseMiddleware = (store) => (next) => async (action) => {
       } catch (error) {
         if (process.env.NODE_ENV === 'development') console.log(error);
       }
-      return action;
+      return next(action);
+    case FETCH_NEW_RELEASES:
+      try {
+        const data = await get(
+          'https://api.spotify.com/v1/browse/new-releases?limit=6',
+        );
+
+        const newReleases = {
+          items: [ ...data.albums.items ].map((item) => {
+            return {
+              id: item.id,
+              href: item.href,
+              type: item.type,
+              name: item.name,
+              owner: item.artists[0].name,
+              images: item.images.length
+                ? item.images[0].url
+                : 'https://developer.spotify.com/assets/branding-guidelines/icon3@2x.png',
+            };
+          }),
+          total: data.albums.total,
+        };
+
+        store.dispatch(fetchNewReleasesSuccess(newReleases));
+      } catch (error) {
+        if (process.env.NODE_ENV === 'development') console.log(error);
+      }
+      return next(action);
     default:
       return next(action);
   }
