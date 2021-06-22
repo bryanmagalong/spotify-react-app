@@ -29,7 +29,7 @@ const userReducer = (state = initialState, action = {}) => {
         playlists: {
           ...state.playlists,
           items: [ ...action.payload.items ],
-          itemsHome: [ ...action.payload.items ].splice(6),
+          itemsHome: [ ...action.payload.items ].splice(0, 6),
           total: action.payload.total,
         },
       };
