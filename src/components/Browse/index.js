@@ -12,9 +12,12 @@ const Browse = () => {
   const categories = useSelector((state) => state.browse.categories);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (!categories.length) dispatch(fetchAllCategories());
-  });
+  useEffect(
+    () => {
+      if (!categories.length) dispatch(fetchAllCategories());
+    },
+    [ dispatch, categories ],
+  );
 
   return (
     <Wrapper pb pt px>
@@ -22,7 +25,7 @@ const Browse = () => {
         <Title as="h2">Catégories</Title>
         <StyledList>
           {categories.map((category) => (
-            <CategoryCard key={category.id} {...category}>
+            <CategoryCard key={category.id} id={category.id}>
               {category.name}
             </CategoryCard>
           ))}

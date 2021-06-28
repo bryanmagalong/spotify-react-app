@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {
   fetchAllCategoriesSuccess,
   FETCH_ALL_CATEGORIES,
@@ -14,13 +15,17 @@ const browseMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
     case FETCH_ALL_CATEGORIES:
       try {
+        const params = {
+          limit: 40,
+        };
         const data = await get(
           'https://api.spotify.com/v1/browse/categories?country=FR&locale=fr_FR',
-          {
-            params: { limit: 40 },
-          },
+          params,
         );
-        const categories = [ ...data.categories.items ];
+        const categories = [ ...data.categories.items ].map((category) => ({
+          ...category,
+          imageUrl: '',
+        }));
 
         store.dispatch(fetchAllCategoriesSuccess(categories));
       } catch (error) {
@@ -62,15 +67,26 @@ const browseMiddleware = (store) => (next) => async (action) => {
       return next(action);
     case FETCH_CATEGORY_COLOR:
       try {
+        const params = { ...action.payload.params };
         const data = await get(
-          `https://api.spotify.com/v1/browse/categories/${action.payload}/playlists?country=FR&locale=fr_FR`,
+          `https://api.spotify.com/v1/browse/categories/${action.payload
+            .id}/playlists?country=FR&locale=fr_FR`,
+          params,
         );
 
         const { url } = data.playlists.items[0].images[0];
-        store.dispatch(fetchCategoryColorSuccess({ id: action.payload, url }));
+        store.dispatch(
+          fetchCategoryColorSuccess({ id: action.payload.id, url }),
+        );
       } catch (error) {
-        if (process.env.NODE_ENV === 'development') console.log(error);
+        if (axios.isCancel(error)) {
+          console.log(error.message);
+        }
+        else {
+          if (process.env.NODE_ENV === 'development') console.log(error);
+        }
       }
+
       return next(action);
     case FETCH_NEW_RELEASES:
       try {
