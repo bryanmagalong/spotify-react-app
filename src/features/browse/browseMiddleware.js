@@ -90,8 +90,9 @@ const browseMiddleware = (store) => (next) => async (action) => {
       return next(action);
     case FETCH_NEW_RELEASES:
       try {
+        const limit = action.payload ? `?limit=${action.payload}` : `?limit=6`;
         const data = await get(
-          'https://api.spotify.com/v1/browse/new-releases?limit=6',
+          `https://api.spotify.com/v1/browse/new-releases${limit}`,
         );
 
         const newReleases = {

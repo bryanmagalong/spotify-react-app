@@ -23,7 +23,8 @@ const Home = () => {
 
   useEffect(
     () => {
-      if (!newReleases.items.length) dispatch(fetchNewReleases());
+      if (!newReleases.items.length || newReleases.items.length > 6)
+        dispatch(fetchNewReleases());
     },
     [ dispatch, newReleases ],
   );
@@ -31,7 +32,11 @@ const Home = () => {
   return (
     <Wrapper pb pt px>
       <StyledTitle pb>Accueil</StyledTitle>
-      <Section title="nouvelles sorties" display={newReleases.total} path="#">
+      <Section
+        title="nouvelles sorties"
+        display={newReleases.total}
+        path="/browse/new-releases"
+      >
         <List>
           {newReleases.items.map((album) => <Card key={album.id} {...album} />)}
         </List>

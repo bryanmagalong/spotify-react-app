@@ -37,8 +37,9 @@ export const fetchCategoryColorSuccess = (payload) => ({
   payload,
 });
 
-export const fetchNewReleases = () => ({
+export const fetchNewReleases = (payload) => ({
   type: FETCH_NEW_RELEASES,
+  payload,
 });
 
 export const fetchNewReleasesSuccess = (payload) => ({
