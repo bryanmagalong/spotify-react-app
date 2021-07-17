@@ -10,6 +10,7 @@ const Search = () => {
   );
 };
 
+//===== Styles
 const StyledSearch = styled.div`
   background-color: ${(props) => props.theme.colors.subDark};
   height: 3.75rem;

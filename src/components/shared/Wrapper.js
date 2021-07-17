@@ -5,7 +5,7 @@ const Wrapper = styled.div`
   display: ${(props) => props.flex && 'flex'};
   flex-direction: ${(props) => props.column && 'column'};
   align-items: ${(props) => props.itemsCenter && 'center'};
-  padding-bottom: ${(props) => props.pb && '10rem'};
+  padding-bottom: ${(props) => props.pb && '8rem'};
   padding-top: ${(props) => props.pt && '1.5rem'};
 
   @media (min-width: ${(props) => props.theme.media.lg}) {

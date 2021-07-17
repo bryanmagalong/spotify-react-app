@@ -17,6 +17,7 @@ const Error404 = () => {
   );
 };
 
+//===== Styles
 const Styled404Title = styled(StyledTitle)`
   color: ${(props) => props.theme.colors.gray};
   letter-spacing: .2rem;

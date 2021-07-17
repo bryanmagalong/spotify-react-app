@@ -1,25 +1,42 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { usePalette } from 'react-palette';
+import axios from 'axios';
 
 import { StyledTitle as Title } from '../shared/Title';
 import { fetchCategoryColor } from '../../features/browse/browseActions';
 
-const CategoryCard = ({ name, id, icons }) => {
+const CategoryCard = ({ id }) => {
   const categoryLink = `/browse/categories/${id}/playlists`;
   const dispatch = useDispatch();
-  const categoryImageUrl = useSelector(
-    (state) =>
-      state.browse.categories.find((category) => id === category.id).imageUrl,
+  const { imageUrl, name, icons } = useSelector((state) =>
+    state.browse.categories.find((category) => id === category.id),
   );
-  const { data } = usePalette(categoryImageUrl);
+
+  let { data } = usePalette(imageUrl); // generates color from the category's image url
+
   useEffect(
     () => {
-      if (!categoryImageUrl) dispatch(fetchCategoryColor(id));
+      if (!imageUrl) {
+        const source = axios.CancelToken.source(); // creates a cancel token factory
+
+        dispatch(
+          fetchCategoryColor({
+            id: id,
+            params: { cancelToken: source.token }, // generates a cancel token from source
+          }),
+        );
+
+        return () => {
+          // clean-up function
+          source.cancel('CategoryCard Unmounted, request cancelled'); // cancel the request on unmount
+        };
+      }
     },
-    [ dispatch, id, categoryImageUrl ],
+    [ dispatch, imageUrl, id ],
   );
 
   return (
@@ -34,6 +51,12 @@ const CategoryCard = ({ name, id, icons }) => {
   );
 };
 
+//===== PropTypes
+CategoryCard.propTypes = {
+  id: PropTypes.string.isRequired,
+};
+
+//===== Styles
 const StyledTitle = styled(Title)`
   font-size: ${(props) => props.theme.fontSize.md};
   text-transform: none;

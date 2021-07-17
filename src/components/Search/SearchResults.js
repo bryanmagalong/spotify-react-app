@@ -70,6 +70,7 @@ const SearchResults = () => {
   );
 };
 
+//===== Styles
 const StyledTrackList = styled.ul`padding-top: 1rem;`;
 
 export default SearchResults;

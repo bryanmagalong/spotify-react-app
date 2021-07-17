@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -8,30 +7,47 @@ import Card from '../shared/Card';
 import Section from '../shared/Section';
 import List from '../shared/List';
 import { fetchMyPlaylists } from '../../features/user/userActions';
+import { fetchNewReleases } from '../../features/browse/browseActions';
 
 const Home = () => {
   const dispatch = useDispatch();
   const playlists = useSelector((state) => state.user.playlists);
-  const playlistsDisplay = [ ...playlists.items ];
-  playlistsDisplay.splice(6);
+  const newReleases = useSelector((state) => state.browse.newReleases);
 
   useEffect(
     () => {
       if (!playlists.items.length) dispatch(fetchMyPlaylists());
     },
-    [ dispatch ],
+    [ dispatch, playlists ],
+  );
+
+  useEffect(
+    () => {
+      if (!newReleases.items.length || newReleases.items.length > 6)
+        dispatch(fetchNewReleases());
+    },
+    [ dispatch, newReleases ],
   );
 
   return (
     <Wrapper pb pt px>
       <StyledTitle pb>Accueil</StyledTitle>
       <Section
+        title="nouvelles sorties"
+        display={newReleases.total}
+        path="/browse/new-releases"
+      >
+        <List>
+          {newReleases.items.map((album) => <Card key={album.id} {...album} />)}
+        </List>
+      </Section>
+      <Section
         title="mes playlists"
-        display={playlists.items.length}
+        display={playlists.total}
         path="/me/playlists"
       >
         <List>
-          {playlistsDisplay.map((playlist) => (
+          {playlists.itemsHome.map((playlist) => (
             <Card key={playlist.id} {...playlist} />
           ))}
         </List>

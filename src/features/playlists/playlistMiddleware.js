@@ -34,6 +34,7 @@ const playlistMiddleware = (store) => (next) => async (action) => {
             id: item.track.id,
             name: item.track.name,
             explicit: item.track.explicit,
+            preview_url: item.track.preview_url,
             artist: {
               name: item.track.artists[0].name,
               id: item.track.artists[0].id,
@@ -43,12 +44,13 @@ const playlistMiddleware = (store) => (next) => async (action) => {
               name: item.track.album.name,
               id: item.track.album.id,
             },
-            images: item.track.album.images[2],
+            image: item.track.album.images[2],
           }));
 
         store.dispatch(fetchPlaylistByIdSuccess({ playlist, trackList }));
       } catch (error) {
-        console.log(error);
+        if (process.env.NODE_ENV === 'development') console.log(error);
+
         if (error.response.status === 404);
         store.dispatch(
           setError({ message: 'Playlist introuvable!', status: 404 }),

@@ -6,24 +6,25 @@ import PlaylistLink from './PlaylistLink';
 import { fetchMyPlaylists } from '../../features/user/userActions';
 
 const PlaylistsList = () => {
-  const playlists = useSelector((state) => state.user.playlists.items);
+  const playlists = useSelector((state) => state.user.playlists);
   const dispatch = useDispatch();
 
   useEffect(
     () => {
-      if (!playlists.length) dispatch(fetchMyPlaylists());
+      if (!playlists.items.length) dispatch(fetchMyPlaylists());
     },
     [ playlists, dispatch ],
   );
   return (
     <StyledPlaylistsList>
-      {playlists.map((item) => (
+      {playlists.items.map((item) => (
         <PlaylistLink key={item.id} id={item.id} name={item.name} />
       ))}
     </StyledPlaylistsList>
   );
 };
 
+//===== Styles
 const StyledPlaylistsList = styled.ul`
   display: none;
 
@@ -45,15 +46,15 @@ const StyledPlaylistsList = styled.ul`
   @media (min-width: ${(props) => props.theme.media.lg}) {
     position: relative;
     display: flex;
-    justify-content: space-evenly;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: flex-start;
     gap: 1rem;
+    padding-bottom: 1rem;
     height: 100%;
     width: 100%;
     overflow-y: scroll;
     overscroll-behavior-y: contain;
   }
 `;
+
 export default PlaylistsList;

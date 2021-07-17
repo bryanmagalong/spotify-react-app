@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { usePalette } from 'react-palette';
 
@@ -68,6 +69,30 @@ const Header = ({
   );
 };
 
+//===== PropTypes
+Header.defaultProps = {
+  name: 'loading...',
+  image:
+    'https://developer.spotify.com/assets/branding-guidelines/icon3@2x.png',
+  type: 'album',
+};
+
+Header.propTypes = {
+  name: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  type: PropTypes.oneOf([ 'user', 'album', 'playlist' ]).isRequired,
+  description: PropTypes.string,
+  owner: PropTypes.string,
+  ownerUrl: PropTypes.string,
+  followers: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
+  album_type: PropTypes.string,
+  total_tracks: PropTypes.number,
+  release_year: PropTypes.string,
+  nPlaylists: PropTypes.number,
+  pb: PropTypes.string,
+};
+
+//===== Styles
 const StyledOwner = styled.span`
   display: ${(props) => props.type === 'user' && 'none'};
 `;

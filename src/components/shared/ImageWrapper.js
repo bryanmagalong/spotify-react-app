@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const ImageWrapper = ({
@@ -25,13 +26,34 @@ const ImageWrapper = ({
   );
 };
 
+//===== PropTypes
+ImageWrapper.defaultProps = {
+  alt: '',
+  type: 'track',
+  marginBottom: '1rem',
+  maxWidth: '50%',
+  maxHeight: 'auto',
+};
+
+ImageWrapper.propTypes = {
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+  type: PropTypes.oneOf([ 'user', 'album', 'playlist', 'track', 'artist' ])
+    .isRequired,
+  marginBottom: PropTypes.string,
+  maxWidth: PropTypes.string,
+  maxHeight: PropTypes.string,
+  size: PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]),
+  boxShadow: PropTypes.bool,
+};
+//===== Styles
 const StyledImage = styled.img`object-fit: cover;`;
 
 const StyledImageWrapper = styled.div.attrs((props) => ({
   borderRadius: (props.type === 'user' || props.type === 'artist') && '100%',
-  maxWidth: props.maxWidth || '50%',
-  maxHeight: props.maxHeight || 'auto',
-  marginBottom: props.marginBottom || '1rem',
+  maxWidth: props.maxWidth,
+  maxHeight: props.maxHeight,
+  marginBottom: props.marginBottom,
   size: props.size ? `${props.size}px` : '100%',
   boxShadow: props.boxShadow && '0px 0px 30px 0px rgba(21,21,21,0.50)',
 }))`

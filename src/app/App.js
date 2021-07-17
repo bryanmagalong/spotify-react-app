@@ -24,10 +24,11 @@ import UserTopTracks from '../components/User/UserTopTracks';
 import Browse from '../components/Browse';
 import CategoryPlaylists from '../components/Browse/CategoryPlaylists';
 import SearchResults from '../components/Search/SearchResults';
-import TracksResultsExtended from '../components/Search/TracksResultsExtended';
-import ArtistsResultsExtended from '../components/Search/ArtistsResultsExtended';
-import AlbumsResultsExtended from '../components/Search/AlbumsResultsExtended';
-import PlaylistsResultsExtended from '../components/Search/PlaylistsResultsExtended';
+import TracksResultsExtended from '../components/Extended/TracksResultsExtended';
+import ArtistsResultsExtended from '../components/Extended/ArtistsResultsExtended';
+import AlbumsResultsExtended from '../components/Extended/AlbumsResultsExtended';
+import PlaylistsResultsExtended from '../components/Extended/PlaylistsResultsExtended';
+import NewReleasesExtended from '../components/Extended/NewReleasesExtended';
 
 const App = () => {
   const isLogged = useSelector((state) => state.auth.isLogged);
@@ -92,6 +93,11 @@ const App = () => {
             />
             <ProtectedRoute exact path="/me" component={User} />
             <ProtectedRoute exact path="/browse" component={Browse} />
+            <ProtectedRoute
+              exact
+              path="/browse/new-releases"
+              component={NewReleasesExtended}
+            />
             <ProtectedRoute
               exact
               path="/browse/categories/:categoryId/playlists"

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Clock } from 'react-bootstrap-icons';
 
@@ -18,6 +19,16 @@ const TrackList = ({ children, type }) => {
   );
 };
 
+//===== PropTypes
+TrackList.defaultProps = {
+  type: 'playlist',
+};
+
+TrackList.propTypes = {
+  type: PropTypes.oneOf([ 'album', 'playlist' ]).isRequired,
+};
+
+//===== Styles
 const StyledTrackList = styled.div`padding: 2rem 0;`;
 
 const StyledTrackListHeader = styled.div`

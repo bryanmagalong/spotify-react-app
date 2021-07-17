@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -12,7 +13,14 @@ const MyNavLink = ({ to, name, children }) => {
     </LinkItem>
   );
 };
+//===== PropTypes
+MyNavLink.propTypes = {
+  to: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  children: PropTypes.element,
+};
 
+//===== Styles
 const StyledNavLink = styled(NavLink)`
   display: flex;
   flex-direction: column;

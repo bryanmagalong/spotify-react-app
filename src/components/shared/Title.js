@@ -1,3 +1,5 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 export const Title = ({ level, children }) => {
@@ -6,6 +8,12 @@ export const Title = ({ level, children }) => {
   return <StyledTitle as={tag}>{children}</StyledTitle>;
 };
 
+//===== PropTypes
+Title.propTypes = {
+  level: PropTypes.string,
+};
+
+//===== Styles
 export const StyledTitle = styled.h1`
   text-transform: uppercase;
   font-weight: bold;

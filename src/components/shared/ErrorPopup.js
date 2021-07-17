@@ -16,6 +16,7 @@ const ErrorPopup = ({ children }) => {
   );
 };
 
+//===== Styles
 const StyledErrorPopup = styled.div`
   position: sticky;
   top: 0px;
