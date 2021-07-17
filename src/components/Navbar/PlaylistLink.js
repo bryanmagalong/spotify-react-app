@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const PlaylistLink = ({ name, id }) => {
   const path = `/playlists/${id}`;
 
   return (
     <li>
-      <StyledPlaylistLink to={path}>{name}</StyledPlaylistLink>
+      <StyledPlaylistLink to={path} activeClassName="selected">
+        {name}
+      </StyledPlaylistLink>
     </li>
   );
 };
@@ -19,7 +21,7 @@ PlaylistLink.propTypes = {
 };
 
 //===== Styles
-const StyledPlaylistLink = styled(Link)`
+const StyledPlaylistLink = styled(NavLink)`
   color: ${(props) => props.theme.colors.gray};
   font-size: ${(props) => props.theme.fontSize.md};
   padding: .4rem 1rem;
@@ -29,9 +31,10 @@ const StyledPlaylistLink = styled(Link)`
   display: block;
   max-width: 200px;
 
-  &:hover {
+  &:hover, &.selected{
     color: #FFF;
   }
+
 `;
 
 export default PlaylistLink;
