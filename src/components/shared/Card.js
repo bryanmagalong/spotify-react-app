@@ -1,15 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 import ImageWrapper from './ImageWrapper';
 
-const Card = ({ name, images, type, album, id, owner }) => {
+const Card = ({ name, images, type, id, owner }) => {
   const path = `/${type}s/${id}`;
   const meta =
-    type === 'track'
-      ? album
-      : type === 'artist'
+    type === 'artist'
         ? 'Artiste'
         : `par ${owner.display_name ?? owner}`;
 
@@ -26,6 +25,18 @@ const Card = ({ name, images, type, album, id, owner }) => {
   );
 };
 
+//===== PropTypes
+Card.propTypes = {
+  name: PropTypes.string.isRequired,
+  images: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(['track', 'artist', 'album', 'playlist']).isRequired,
+  id: PropTypes.string.isRequired,
+  owner: PropTypes.oneOfType([
+    PropTypes.string, 
+    PropTypes.object,
+  ]),
+} 
+//===== Styles
 const DescriptionCard = styled.div`
   color: white;
   letter-spacing: .1rem;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
@@ -71,6 +72,24 @@ const TrackItem = ({
   );
 };
 
+//===== PropTypes
+TrackItem.defaultProps = {
+  type: 'album',
+};
+
+TrackItem.propTypes = {
+  number: PropTypes.number.isRequired,
+  image: PropTypes.object,
+  name: PropTypes.string.isRequired,
+  artist: PropTypes.object.isRequired,
+  album: PropTypes.object,
+  explicit: PropTypes.bool,
+  duration: PropTypes.string.isRequired,
+  type: PropTypes.oneOf([ 'album', 'playlist', 'track' ]).isRequired,
+  id: PropTypes.string.isRequired,
+};
+
+//===== Styles
 const StyledDiv = styled(Wrapper)`
   column-gap: ${(props) => props.columnGap && '1rem'};
 `;

@@ -29,6 +29,7 @@ const Login = () => {
   );
 };
 
+//===== Styles
 const LoginTitle = styled(StyledTitle)`
   text-align: center;
   font-size: 2.5em;

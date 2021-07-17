@@ -22,9 +22,9 @@ const User = () => {
   const playlists = useSelector((state) => state.user.playlists);
   const topArtistsList = useSelector((state) => state.user.topArtistsList);
   const playlistsDisplay = [ ...playlists.items ];
-  playlistsDisplay.splice(6);
+  playlistsDisplay.splice(6); //TODO use query parameters instead
   const TopTracksDisplay = [ ...topTracksList ];
-  TopTracksDisplay.splice(5);
+  TopTracksDisplay.splice(5); //TODO use query parameters instead
 
   const dispatch = useDispatch();
 
@@ -86,6 +86,7 @@ const User = () => {
   );
 };
 
+//===== Styles
 const UserHeader = styled(Header)`padding-bottom: 2rem;`;
 
 const StyledSection = styled(Wrapper)`

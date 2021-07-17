@@ -30,6 +30,7 @@ const Navbar = () => {
   );
 };
 
+//===== Styles
 const StyledNavbar = styled.nav`
   width: 100%;
   height: 50%;

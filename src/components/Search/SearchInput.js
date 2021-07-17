@@ -35,6 +35,7 @@ const SearchInput = () => {
   );
 };
 
+//===== Styles
 const StyledSearchInput = styled.input`
   background-color: white;
   width: 100%;

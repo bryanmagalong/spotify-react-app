@@ -13,11 +13,13 @@ import ImageWrapper from '../shared/ImageWrapper';
 const Player = () => {
   const dispatch = useDispatch();
   const track = useSelector((state) => state.player.track);
-  const { isPlaying, audio } = useSelector((state) => state.player);
+  const { isPlaying, audio: audioObject } = useSelector(
+    (state) => state.player,
+  );
   const myRef = useCallback((node) => {
     if (node !== null) setMarquee(node.scrollWidth > node.offsetWidth);
   });
-  const [ marquee, setMarquee ] = useState();
+  const [ marquee, setMarquee ] = useState(); // marquee is used to apply or not a auto-scroll effect on the track title
   const handleEnded = () => {
     dispatch(pauseSong());
   };
@@ -31,12 +33,16 @@ const Player = () => {
 
   useEffect(
     () => {
-      if (audio) {
-        audio.removeEventListener('ended', handleEnded);
-        audio.addEventListener('ended', handleEnded);
+      if (audioObject) {
+        audioObject.addEventListener('ended', handleEnded);
       }
+
+      return () => {
+        //clean-up function
+        if (audioObject) audioObject.removeEventListener('ended', handleEnded); // remove eventListener on unmount
+      };
     },
-    [ audio ],
+    [ audioObject ],
   );
 
   return (
@@ -82,6 +88,7 @@ const Player = () => {
   );
 };
 
+//===== Styles
 const StyledPlayer = styled.div`
   display: flex;
   align-items: center;

@@ -16,7 +16,7 @@ const CategoryPlaylists = () => {
   const imageUrl = useSelector((state) => state.browse.imageUrl);
   const playlists = useSelector((state) => state.browse.playlists);
   const dispatch = useDispatch();
-  const { data } = usePalette(imageUrl);
+  const { data } = usePalette(imageUrl); // generates color from the category's image url
 
   useEffect(
     () => {
@@ -40,6 +40,8 @@ const CategoryPlaylists = () => {
     </Wrapper>
   );
 };
+
+//===== Styles
 const Title = styled(StyledTitle)`
   padding-bottom: 1rem;
   padding-left: 1rem;

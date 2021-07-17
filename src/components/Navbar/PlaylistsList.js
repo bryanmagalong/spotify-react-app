@@ -24,6 +24,7 @@ const PlaylistsList = () => {
   );
 };
 
+//===== Styles
 const StyledPlaylistsList = styled.ul`
   display: none;
 
@@ -55,4 +56,5 @@ const StyledPlaylistsList = styled.ul`
     overscroll-behavior-y: contain;
   }
 `;
+
 export default PlaylistsList;

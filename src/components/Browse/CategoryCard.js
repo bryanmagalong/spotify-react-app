@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,7 +15,8 @@ const CategoryCard = ({ id }) => {
   const { imageUrl, name, icons } = useSelector((state) =>
     state.browse.categories.find((category) => id === category.id),
   );
-  let { data } = usePalette(imageUrl);
+
+  let { data } = usePalette(imageUrl); // generates color from the category's image url
 
   useEffect(
     () => {
@@ -24,13 +26,13 @@ const CategoryCard = ({ id }) => {
         dispatch(
           fetchCategoryColor({
             id: id,
-            params: { cancelToken: source.token },
+            params: { cancelToken: source.token }, // generates a cancel token from source
           }),
         );
 
         return () => {
           // clean-up function
-          source.cancel('CategoryCard Unmounted, request cancelled'); // cancel all subscriptions & asynchronous tasks on unmount
+          source.cancel('CategoryCard Unmounted, request cancelled'); // cancel the request on unmount
         };
       }
     },
@@ -49,6 +51,12 @@ const CategoryCard = ({ id }) => {
   );
 };
 
+//===== PropTypes
+CategoryCard.propTypes = {
+  id: PropTypes.string.isRequired,
+};
+
+//===== Styles
 const StyledTitle = styled(Title)`
   font-size: ${(props) => props.theme.fontSize.md};
   text-transform: none;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
@@ -21,6 +22,14 @@ const Section = ({ title, display, children, path }) => {
   );
 };
 
+//===== PropTypes
+Section.propTypes = {
+  title: PropTypes.string.isRequired,
+  display: PropTypes.number.isRequired,
+  path: PropTypes.string,
+};
+
+//===== Styles
 const StyledSection = styled.section.attrs((props) => ({
   display: props.display, // true if list length > 0 else false
 }))`
