@@ -13,7 +13,7 @@ const UserTopTracks = () => {
 
   useEffect(
     () => {
-      if (!topTracksList.total) dispatch(fetchMyTopTracks());
+      if (!topTracksList.items.length) dispatch(fetchMyTopTracks());
     },
     [ dispatch, topTracksList ],
   );
