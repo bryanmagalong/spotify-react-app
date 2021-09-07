@@ -13,7 +13,7 @@ const UserTopTracks = () => {
 
   useEffect(
     () => {
-      if (!topTracksList.length) dispatch(fetchMyTopTracks());
+      if (!topTracksList.total) dispatch(fetchMyTopTracks());
     },
     [ dispatch, topTracksList ],
   );
@@ -21,7 +21,7 @@ const UserTopTracks = () => {
     <Wrapper pb pt px>
       <StyledTitle pb>Top titres du mois</StyledTitle>
       <TrackList type="playlist">
-        {topTracksList.map((track, index) => (
+        {topTracksList.items.map((track, index) => (
           <TrackItem
             key={track.id}
             typ="playlist"
