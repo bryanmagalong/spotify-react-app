@@ -20,8 +20,6 @@ const User = () => {
   const topTracksList = useSelector((state) => state.user.topTracksList);
   const playlists = useSelector((state) => state.user.playlists);
   const topArtistsList = useSelector((state) => state.user.topArtistsList);
-  const playlistsDisplay = [ ...playlists.items ];
-  playlistsDisplay.splice(6); //TODO use query parameters instead
 
   const dispatch = useDispatch();
 
@@ -31,7 +29,7 @@ const User = () => {
       if (!profile) {
         dispatch(fetchCurrentUser());
         dispatch(fetchMyTopTracks(5));
-        dispatch(fetchMyTopArtists());
+        dispatch(fetchMyTopArtists(6));
       }
     },
     [ profile, dispatch ],
@@ -68,7 +66,7 @@ const User = () => {
           path="/me/playlists"
         >
           <List>
-            {playlistsDisplay.map((playlist) => (
+            {playlists.itemsHome.map((playlist) => (
               <Card key={playlist.id} {...playlist} />
             ))}
           </List>

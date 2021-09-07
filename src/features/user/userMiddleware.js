@@ -33,10 +33,9 @@ const userMiddleware = (store) => (next) => async (action) => {
       return next(action);
     case FETCH_MY_PLAYLISTS:
       try {
-        const params = action.payload ? { params: { ...action.payload } } : {};
+        const limit = action.payload ? `?limit=${action.payload}` : '';
         const data = await get(
-          'https://api.spotify.com/v1/me/playlists',
-          params,
+          `https://api.spotify.com/v1/me/playlists${limit}`,
         );
 
         const playlists = {
@@ -63,7 +62,6 @@ const userMiddleware = (store) => (next) => async (action) => {
     case FETCH_MY_TOP_TRACKS:
       try {
         const limit = action.payload ? `?limit=${action.payload}` : '';
-
         const data = await get(
           `https://api.spotify.com/v1/me/top/tracks${limit}`,
         );
@@ -108,23 +106,25 @@ const userMiddleware = (store) => (next) => async (action) => {
       break;
     case FETCH_MY_TOP_ARTISTS:
       try {
-        const params = action.payload ? { params: { ...action.payload } } : {};
+        const limit = action.payload ? `?limit=${action.payload}` : '';
         const data = await get(
-          'https://api.spotify.com/v1/me/top/artists',
-          params,
+          `https://api.spotify.com/v1/me/top/artists${limit}`,
         );
 
-        const myTopArtists = [ ...data.items ].map((item) => {
-          return {
-            id: item.id,
-            href: item.href,
-            type: item.type,
-            name: item.name,
-            images: item.images.length
-              ? item.images[0].url
-              : 'https://developer.spotify.com/assets/branding-guidelines/icon3@2x.png',
-          };
-        });
+        const myTopArtists = {
+          items: [ ...data.items ].map((item) => {
+            return {
+              id: item.id,
+              href: item.href,
+              type: item.type,
+              name: item.name,
+              images: item.images.length
+                ? item.images[0].url
+                : 'https://developer.spotify.com/assets/branding-guidelines/icon3@2x.png',
+            };
+          }),
+          total: data.total,
+        };
 
         store.dispatch(fetchMyTopArtistsSuccess(myTopArtists));
       } catch (error) {
