@@ -24,7 +24,7 @@ const Home = () => {
   useEffect(
     () => {
       if (!newReleases.items.length || newReleases.items.length > 6)
-        dispatch(fetchNewReleases());
+        dispatch(fetchNewReleases(6));
     },
     [ dispatch, newReleases ],
   );
