@@ -13,7 +13,10 @@ const initialState = {
     total: 0,
   },
   topArtistsList: { items: [] },
-  topTracksList: [],
+  topTracksList: {
+    items: [],
+    total: 0,
+  },
 };
 
 const userReducer = (state = initialState, action = {}) => {
@@ -41,7 +44,11 @@ const userReducer = (state = initialState, action = {}) => {
     case FETCH_MY_TOP_TRACKS_SUCCESS:
       return {
         ...state,
-        topTracksList: [ ...action.payload ],
+        topTracksList: {
+          ...state.topTracksList,
+          items: [ ...action.payload.items ],
+          total: action.payload.total,
+        },
       };
     default:
       return state;

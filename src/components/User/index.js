@@ -8,8 +8,7 @@ import TrackItem from '../shared/TrackItem';
 import Section from '../shared/Section';
 import List from '../shared/List';
 import Card from '../shared/Card';
-import Button from '../shared/Button';
-import { logout } from '../../features/auth/authActions';
+import LogoutButton from './LougoutButton';
 import {
   fetchCurrentUser,
   fetchMyTopArtists,
@@ -23,8 +22,6 @@ const User = () => {
   const topArtistsList = useSelector((state) => state.user.topArtistsList);
   const playlistsDisplay = [ ...playlists.items ];
   playlistsDisplay.splice(6); //TODO use query parameters instead
-  const TopTracksDisplay = [ ...topTracksList ];
-  TopTracksDisplay.splice(5); //TODO use query parameters instead
 
   const dispatch = useDispatch();
 
@@ -33,7 +30,7 @@ const User = () => {
       // if profile is null, so is topTracksList and topArtistsList
       if (!profile) {
         dispatch(fetchCurrentUser());
-        dispatch(fetchMyTopTracks());
+        dispatch(fetchMyTopTracks(5));
         dispatch(fetchMyTopArtists());
       }
     },
@@ -45,11 +42,11 @@ const User = () => {
       <Wrapper px>
         <Section
           title="Top titres du mois"
-          display={topTracksList.length}
+          display={topTracksList.total}
           path="/me/top-tracks"
         >
           <StyledTrackList>
-            {TopTracksDisplay.map((item, index) => (
+            {topTracksList.items.map((item, index) => (
               <TrackItem key={item.id} number={index + 1} {...item} />
             ))}
           </StyledTrackList>
@@ -77,9 +74,7 @@ const User = () => {
           </List>
         </Section>
         <StyledSection>
-          <StyledButton type="button" onClick={() => dispatch(logout())}>
-            Déconnexion
-          </StyledButton>
+          <LogoutButton />
         </StyledSection>
       </Wrapper>
     </Wrapper>
@@ -92,11 +87,6 @@ const UserHeader = styled(Header)`padding-bottom: 2rem;`;
 const StyledSection = styled(Wrapper)`
   padding: 3rem 0;
   row-gap: 1rem;
-`;
-
-const StyledButton = styled(Button)`
-  display: block;
-  margin: 2rem auto;
 `;
 
 const StyledTrackList = styled.ul`padding-top: 1rem;`;

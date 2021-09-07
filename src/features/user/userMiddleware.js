@@ -62,34 +62,37 @@ const userMiddleware = (store) => (next) => async (action) => {
       return next(action);
     case FETCH_MY_TOP_TRACKS:
       try {
-        const params = action.payload ? { params: { ...action.payload } } : {};
+        const limit = action.payload ? `?limit=${action.payload}` : '';
+
         const data = await get(
-          'https://api.spotify.com/v1/me/top/tracks',
-          params,
+          `https://api.spotify.com/v1/me/top/tracks${limit}`,
         );
 
-        const myTopTracks = [ ...data.items ].map((item) => {
-          return {
-            id: item.id,
-            href: item.href,
-            type: item.type,
-            name: item.name,
-            preview_url: item.preview_url,
-            explicit: item.explicit,
-            duration: msToMinutesAndSeconds(item.duration_ms),
-            album: {
-              name: item.album.name,
-              id: item.album.id,
-            },
-            image: item.album.images[2],
-            artist: {
-              name: item.artists[0].name,
-              id: item.artists[0].id,
-              url: item.artists[0].external_urls.spotify,
-            },
-            owner: item.owner,
-          };
-        });
+        const myTopTracks = {
+          items: [ ...data.items ].map((item) => {
+            return {
+              id: item.id,
+              href: item.href,
+              type: item.type,
+              name: item.name,
+              preview_url: item.preview_url,
+              explicit: item.explicit,
+              duration: msToMinutesAndSeconds(item.duration_ms),
+              album: {
+                name: item.album.name,
+                id: item.album.id,
+              },
+              image: item.album.images[2],
+              artist: {
+                name: item.artists[0].name,
+                id: item.artists[0].id,
+                url: item.artists[0].external_urls.spotify,
+              },
+              owner: item.owner,
+            };
+          }),
+          total: data.total,
+        };
 
         store.dispatch(fetchMyTopTracksSuccess(myTopTracks));
       } catch (error) {
