@@ -22,6 +22,22 @@ const Login = () => {
   return (
     <LoginWrapper flex column>
       <LoginTitle>Spotify React App</LoginTitle>
+      <DescriptionWrapper flex column>
+        <p>
+          Spotify React App est une application web utilisant l'API du service
+          de streaming Spotify.
+        </p>
+        <p>
+          L'application ne propose que des fonctionnalités en lecture seule. De
+          plus, compte tenu des restrictions liées à l'utilisation de l'API
+          Spotify, une session de connexion est limitée à une durée de 1 heure
+          et seules les previews des morceaux peuvent être écoutées.
+        </p>
+        <p>
+          N'hésitez donc pas à visiter le site ou l'application officielle de
+          Spotify pour profiter pleinement des fonctionnalités sans contraintes.
+        </p>
+      </DescriptionWrapper>
       <Button type="button" onClick={handleLogin}>
         Se connecter à Spotify
       </Button>
@@ -45,6 +61,16 @@ const LoginWrapper = styled(Wrapper)`
   align-items: center;
   row-gap: 2.5rem;
   padding: 0 10px;
+`;
+
+const DescriptionWrapper = styled(Wrapper)`
+  color: #FFF;
+  font-size: 0.9rem;
+  letter-spacing: 0.2rem;
+  line-height: 1rem;
+  text-align: center;
+  gap: 0.5rem;
+  max-width: 85%;
 `;
 
 export default Login;
