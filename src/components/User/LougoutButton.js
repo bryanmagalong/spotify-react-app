@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
@@ -7,16 +7,22 @@ import { logout } from '../../features/auth/authActions';
 
 function LougoutButton() {
   const dispatch = useDispatch();
-  const handleOnClick = () => {
-    dispatch(logout());
-  };
+  const handleOnClick = useCallback(
+    () => {
+      dispatch(logout());
+    },
+    [ dispatch ],
+  );
 
-  useEffect(() => {
-    return () => {
-      //clean-up function
-      window.removeEventListener('click', handleOnClick);
-    };
-  }, []);
+  useEffect(
+    () => {
+      return () => {
+        //clean-up function
+        window.removeEventListener('click', handleOnClick);
+      };
+    },
+    [ handleOnClick ],
+  );
 
   return (
     <StyledButton type="button" onClick={handleOnClick}>
