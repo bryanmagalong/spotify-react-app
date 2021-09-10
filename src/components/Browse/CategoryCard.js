@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { usePalette } from 'react-palette';
+import { Palette } from 'react-palette';
 import axios from 'axios';
 
 import { StyledTitle as Title } from '../shared/Title';
@@ -15,8 +15,6 @@ const CategoryCard = ({ id }) => {
   const { imageUrl, name, icons } = useSelector((state) =>
     state.browse.categories.find((category) => id === category.id),
   );
-
-  let { data } = usePalette(imageUrl); // generates color from the category's image url
 
   useEffect(
     () => {
@@ -40,14 +38,18 @@ const CategoryCard = ({ id }) => {
   );
 
   return (
-    <StyledCard
-      as={Link}
-      to={categoryLink}
-      icon={icons[0].url}
-      color={data.vibrant}
-    >
-      <StyledTitle as="h3">{name}</StyledTitle>
-    </StyledCard>
+    <Palette src={imageUrl}>
+      {({ data, loading }) => (
+        <StyledCard
+          as={Link}
+          to={categoryLink}
+          icon={icons[0].url}
+          color={loading ? '#282828' : data.vibrant}
+        >
+          <StyledTitle as="h3">{name}</StyledTitle>
+        </StyledCard>
+      )}
+    </Palette>
   );
 };
 

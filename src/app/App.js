@@ -32,11 +32,15 @@ import NewReleasesExtended from '../components/Extended/NewReleasesExtended';
 
 const App = () => {
   const isLogged = useSelector((state) => state.auth.isLogged);
-  const { error, isOpen } = useSelector((state) => state.errors);
   const dispatch = useDispatch();
   const history = useHistory();
   const { pathname } = useLocation();
   const prevPath = usePrevious(pathname);
+  const { error, isOpen } = useSelector((state) => state.errors);
+  const errorMessage =
+    error.status === 401
+      ? 'Session expirée. Veuillez vous reconnecter.'
+      : error.message;
 
   // useEffect for scroll restoration
   useEffect(
@@ -56,7 +60,6 @@ const App = () => {
       }
 
       if (error.status === 401) {
-        // dispatch(hideError());
         dispatch(logout());
         return history.push('/login');
       }
@@ -71,7 +74,7 @@ const App = () => {
         {isLogged && <Navbar />}
         <Wrapper as="main" fullWidth>
           {isLogged && <Search />}
-          {isOpen && <ErrorPopup>{error.message}</ErrorPopup>}
+          {isOpen && <ErrorPopup>{errorMessage}</ErrorPopup>}
           <Switch>
             <ProtectedRoute exact path="/" component={Home} />
             <Route exact path="/login" component={Login} />

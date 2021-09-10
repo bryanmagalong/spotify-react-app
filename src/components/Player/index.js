@@ -16,10 +16,15 @@ const Player = () => {
   const { isPlaying, audio: audioObject } = useSelector(
     (state) => state.player,
   );
+  
+  // i want to apply an auto-scroll effect (marquee) wether the track title is too long or not
+  // to do so, i need to get the scrollWidth and offsetWidth of <TrackTitle /> every time it is mounted
+  // i pass a function wrapped with useCallback to ref attribute to get the latest DOM node reference
   const myRef = useCallback((node) => {
-    if (node !== null) setMarquee(node.scrollWidth > node.offsetWidth);
+    if (node !== null) setMarquee(node.scrollWidth > node.offsetWidth); // if true (title too long), i apply the marquee effect
   });
-  const [ marquee, setMarquee ] = useState(); // marquee is used to apply or not a auto-scroll effect on the track title
+  const [ marquee, setMarquee ] = useState();
+
   const handleEnded = () => {
     dispatch(pauseSong());
   };

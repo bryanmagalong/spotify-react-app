@@ -11,11 +11,13 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) => {
+        // checks if the user is logged in or if a token exists before rendering a protected page
         if (isLogged) return <Component {...props} />;
         if (tokenExists()) {
           dispatch(loginSuccess());
           return <Component {...props} />;
         }
+        // if not logged in / token doesn't exist, redirect to login page
         return <Redirect to="/login" />;
       }}
     />

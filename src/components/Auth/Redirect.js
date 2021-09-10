@@ -21,7 +21,7 @@ const Redirect = () => {
           status: 401,
         }),
       );
-      // console.log(error.message);
+
       // redirect to login page if not logged in
       history.push('/login');
     }

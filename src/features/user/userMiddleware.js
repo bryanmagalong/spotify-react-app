@@ -33,10 +33,9 @@ const userMiddleware = (store) => (next) => async (action) => {
       return next(action);
     case FETCH_MY_PLAYLISTS:
       try {
-        const params = action.payload ? { params: { ...action.payload } } : {};
+        const limit = action.payload ? `?limit=${action.payload}` : '';
         const data = await get(
-          'https://api.spotify.com/v1/me/playlists',
-          params,
+          `https://api.spotify.com/v1/me/playlists${limit}`,
         );
 
         const playlists = {
@@ -62,34 +61,36 @@ const userMiddleware = (store) => (next) => async (action) => {
       return next(action);
     case FETCH_MY_TOP_TRACKS:
       try {
-        const params = action.payload ? { params: { ...action.payload } } : {};
+        const limit = action.payload ? `?limit=${action.payload}` : '';
         const data = await get(
-          'https://api.spotify.com/v1/me/top/tracks',
-          params,
+          `https://api.spotify.com/v1/me/top/tracks${limit}`,
         );
 
-        const myTopTracks = [ ...data.items ].map((item) => {
-          return {
-            id: item.id,
-            href: item.href,
-            type: item.type,
-            name: item.name,
-            preview_url: item.preview_url,
-            explicit: item.explicit,
-            duration: msToMinutesAndSeconds(item.duration_ms),
-            album: {
-              name: item.album.name,
-              id: item.album.id,
-            },
-            image: item.album.images[2],
-            artist: {
-              name: item.artists[0].name,
-              id: item.artists[0].id,
-              url: item.artists[0].external_urls.spotify,
-            },
-            owner: item.owner,
-          };
-        });
+        const myTopTracks = {
+          items: [ ...data.items ].map((item) => {
+            return {
+              id: item.id,
+              href: item.href,
+              type: item.type,
+              name: item.name,
+              preview_url: item.preview_url,
+              explicit: item.explicit,
+              duration: msToMinutesAndSeconds(item.duration_ms),
+              album: {
+                name: item.album.name,
+                id: item.album.id,
+              },
+              image: item.album.images[2],
+              artist: {
+                name: item.artists[0].name,
+                id: item.artists[0].id,
+                url: item.artists[0].external_urls.spotify,
+              },
+              owner: item.owner,
+            };
+          }),
+          total: data.total,
+        };
 
         store.dispatch(fetchMyTopTracksSuccess(myTopTracks));
       } catch (error) {
@@ -105,23 +106,25 @@ const userMiddleware = (store) => (next) => async (action) => {
       break;
     case FETCH_MY_TOP_ARTISTS:
       try {
-        const params = action.payload ? { params: { ...action.payload } } : {};
+        const limit = action.payload ? `?limit=${action.payload}` : '';
         const data = await get(
-          'https://api.spotify.com/v1/me/top/artists',
-          params,
+          `https://api.spotify.com/v1/me/top/artists${limit}`,
         );
 
-        const myTopArtists = [ ...data.items ].map((item) => {
-          return {
-            id: item.id,
-            href: item.href,
-            type: item.type,
-            name: item.name,
-            images: item.images.length
-              ? item.images[0].url
-              : 'https://developer.spotify.com/assets/branding-guidelines/icon3@2x.png',
-          };
-        });
+        const myTopArtists = {
+          items: [ ...data.items ].map((item) => {
+            return {
+              id: item.id,
+              href: item.href,
+              type: item.type,
+              name: item.name,
+              images: item.images.length
+                ? item.images[0].url
+                : 'https://developer.spotify.com/assets/branding-guidelines/icon3@2x.png',
+            };
+          }),
+          total: data.total,
+        };
 
         store.dispatch(fetchMyTopArtistsSuccess(myTopArtists));
       } catch (error) {
