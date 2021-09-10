@@ -6,8 +6,6 @@ import styled, { css } from 'styled-components';
 import { Title } from './Title';
 
 const Section = ({ title, display, children, path }) => {
-  // const slug = title.split(' ').join('-');
-
   return (
     <StyledSection display={display}>
       <StyledDiv>

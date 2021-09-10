@@ -60,7 +60,6 @@ const App = () => {
       }
 
       if (error.status === 401) {
-        // dispatch(hideError());
         dispatch(logout());
         return history.push('/login');
       }
