@@ -7,3 +7,5 @@ L'application ne propose que des fonctionnalités en lecture seule. De plus, com
 N'hésitez donc pas à visiter le site ou l'application officielle de Spotify pour profiter pleinement des fonctionnalités sans contraintes.
 
 Technologies utilisées: React, Redux, React-router, Create React App, styled-components
+
+[Lien vers Spotify React App](https://sra-bmagalong.netlify.app)
