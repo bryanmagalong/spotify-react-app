@@ -21,6 +21,7 @@ import Album from '../components/Album';
 import User from '../components/User';
 import UserPLaylists from '../components/User/UserPLaylists';
 import UserTopTracks from '../components/User/UserTopTracks';
+import UserTopArtists from '../components/User/UserTopArtists';
 import Browse from '../components/Browse';
 import CategoryPlaylists from '../components/Browse/CategoryPlaylists';
 import SearchResults from '../components/Search/SearchResults';
@@ -93,6 +94,11 @@ const App = () => {
               exact
               path="/me/top-tracks"
               component={UserTopTracks}
+            />
+            <ProtectedRoute
+              exact
+              path="/me/top-artists"
+              component={UserTopArtists}
             />
             <ProtectedRoute exact path="/me" component={User} />
             <ProtectedRoute exact path="/browse" component={Browse} />

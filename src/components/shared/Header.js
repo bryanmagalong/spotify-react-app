@@ -71,7 +71,7 @@ const Header = ({
 
 //===== PropTypes
 Header.defaultProps = {
-  name: 'loading...',
+  name: 'chargement...',
   image:
     'https://developer.spotify.com/assets/branding-guidelines/icon3@2x.png',
   type: 'album',

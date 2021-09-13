@@ -20,7 +20,9 @@ const playlistMiddleware = (store) => (next) => async (action) => {
           name: data.name,
           description: data.description,
           type: data.type,
-          image: data.images[0].url,
+          image: data.images.length
+            ? data.images[0].url
+            : 'https://developer.spotify.com/assets/branding-guidelines/icon3@2x.png',
           owner: data.owner.display_name,
           ownerUrl: data.owner.external_urls.spotify,
           followers: data.followers.total.toLocaleString(),

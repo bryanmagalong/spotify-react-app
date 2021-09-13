@@ -34,7 +34,8 @@ const Home = () => {
       <StyledTitle pb>Accueil</StyledTitle>
       <Section
         title="nouvelles sorties"
-        display={newReleases.total}
+        total={newReleases.total}
+        length={newReleases.items.length}
         path="/browse/new-releases"
       >
         <List>
@@ -43,7 +44,8 @@ const Home = () => {
       </Section>
       <Section
         title="mes playlists"
-        display={playlists.total}
+        total={playlists.total}
+        length={playlists.itemsHome.length}
         path="/me/playlists"
       >
         <List>

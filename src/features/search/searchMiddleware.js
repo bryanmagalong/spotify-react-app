@@ -103,7 +103,6 @@ const searchMiddleware = (store) => (next) => async (action) => {
       }
       return next(action);
     case FETCH_SEARCH_TRACKS:
-      // console.log('FETCH SEARCH TRACKS');
       try {
         const queryInput = action.payload.split(' ').join('%20');
         const data = await get(
@@ -123,7 +122,7 @@ const searchMiddleware = (store) => (next) => async (action) => {
                 name: item.album.name,
                 id: item.album.id,
               },
-              images: item.album.images[2],
+              image: item.album.images[2],
               artist: {
                 name: item.artists[0].name,
                 id: item.artists[0].id,
@@ -209,7 +208,9 @@ const searchMiddleware = (store) => (next) => async (action) => {
               href: item.href,
               type: item.type,
               name: item.name,
-              images: item.images[0].url,
+              images: item.images.length
+                ? item.images[0].url
+                : 'https://developer.spotify.com/assets/branding-guidelines/icon3@2x.png',
               owner: item.owner,
             };
           }),
