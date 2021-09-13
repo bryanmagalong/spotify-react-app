@@ -14,7 +14,7 @@ const NewReleasesExtended = () => {
   useEffect(
     () => {
       if (!newReleases.length || newReleases.length < 7)
-        dispatch(fetchNewReleases(20));
+        dispatch(fetchNewReleases(50));
     },
     [ dispatch, newReleases ],
   );
