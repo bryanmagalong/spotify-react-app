@@ -29,12 +29,18 @@ const User = () => {
       if (!profile) {
         dispatch(fetchCurrentUser());
         dispatch(fetchMyTopTracks(5));
-        dispatch(fetchMyTopArtists(3));
+        dispatch(fetchMyTopArtists(5));
       }
 
       if (topTracksList.items.length > 5) dispatch(fetchMyTopTracks(5));
+      if (topArtistsList.items.length > 5) dispatch(fetchMyTopArtists(5));
     },
-    [ profile, dispatch, topTracksList.items.length ],
+    [
+      profile,
+      dispatch,
+      topTracksList.items.length,
+      topArtistsList.items.length,
+    ],
   );
   return (
     <Wrapper pb>
@@ -56,7 +62,7 @@ const User = () => {
           title="Top artistes du mois"
           total={topArtistsList.total}
           length={topArtistsList.items.length}
-          path="/me/playlists"
+          path="/me/top-artists"
         >
           <List>
             {topArtistsList.items.map((artists) => (
