@@ -29,10 +29,12 @@ const User = () => {
       if (!profile) {
         dispatch(fetchCurrentUser());
         dispatch(fetchMyTopTracks(5));
-        dispatch(fetchMyTopArtists(6));
+        dispatch(fetchMyTopArtists(3));
       }
+
+      if (topTracksList.items.length > 5) dispatch(fetchMyTopTracks(5));
     },
-    [ profile, dispatch ],
+    [ profile, dispatch, topTracksList.items.length ],
   );
   return (
     <Wrapper pb>
@@ -40,7 +42,8 @@ const User = () => {
       <Wrapper px>
         <Section
           title="Top titres du mois"
-          display={topTracksList.total}
+          total={topTracksList.total}
+          length={topTracksList.items.length}
           path="/me/top-tracks"
         >
           <StyledTrackList>
@@ -51,7 +54,8 @@ const User = () => {
         </Section>
         <Section
           title="Top artistes du mois"
-          display={topArtistsList.items.length}
+          total={topArtistsList.total}
+          length={topArtistsList.items.length}
           path="/me/playlists"
         >
           <List>
@@ -62,7 +66,8 @@ const User = () => {
         </Section>
         <Section
           title="mes playlists"
-          display={playlists.items.length}
+          total={playlists.total}
+          length={playlists.itemsHome.length}
           path="/me/playlists"
         >
           <List>

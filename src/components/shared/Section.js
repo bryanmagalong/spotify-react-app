@@ -5,12 +5,12 @@ import styled, { css } from 'styled-components';
 
 import { Title } from './Title';
 
-const Section = ({ title, display, children, path }) => {
+const Section = ({ title, total, length, children, path }) => {
   return (
-    <StyledSection display={display}>
+    <StyledSection total={total}>
       <StyledDiv>
         <Title level="2">{title}</Title>
-        <StyledLink extend={display} to={path}>
+        <StyledLink total={total} length={length} to={path}>
           Voir tout
         </StyledLink>
       </StyledDiv>
@@ -23,13 +23,14 @@ const Section = ({ title, display, children, path }) => {
 //===== PropTypes
 Section.propTypes = {
   title: PropTypes.string.isRequired,
-  display: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  length: PropTypes.number.isRequired,
   path: PropTypes.string,
 };
 
 //===== Styles
 const StyledSection = styled.section.attrs((props) => ({
-  display: props.display, // true if list length > 0 else false
+  display: props.total, // true if list length > 0 else false
 }))`
   padding: 1rem 0;
   ${(props) => !props.display && css`display: none;`};
@@ -49,7 +50,7 @@ const StyledDiv = styled.div`
 `;
 
 const StyledLink = styled(Link)`
-  display: ${(props) => (props.extend > 6 ? 'block' : 'none')};
+  display: ${(props) => (props.total > props.length ? 'block' : 'none')};
   align-self: flex-end;
   line-height: 1rem;
   color: ${(props) => props.theme.colors.gray};

@@ -34,7 +34,12 @@ const SearchResults = () => {
   return (
     <Wrapper pt px pb>
       <TextSpan>{resultsText}</TextSpan>
-      <Section title="Titres" display={tracks.total} path={`${path}/tracks`}>
+      <Section
+        title="Titres"
+        total={tracks.total}
+        length={tracks.items.length}
+        path={`${path}/tracks`}
+      >
         <StyledTrackList>
           {tracks.items.map((item, index) => (
             <TrackItem key={item.id} number={index + 1} {...item} />
@@ -43,21 +48,28 @@ const SearchResults = () => {
       </Section>
       <Section
         title="Artistes"
-        display={artists.total}
+        total={artists.total}
+        length={artists.items.length}
         path={`${path}/artists`}
       >
         <List>
           {artists.items.map((artist) => <Card key={artist.id} {...artist} />)}
         </List>
       </Section>
-      <Section title="Albums" display={albums.total} path={`${path}/albums`}>
+      <Section
+        title="Albums"
+        total={albums.total}
+        length={albums.items.length}
+        path={`${path}/albums`}
+      >
         <List>
           {albums.items.map((album) => <Card key={album.id} {...album} />)}
         </List>
       </Section>
       <Section
         title="Playlists"
-        display={playlists.total}
+        total={playlists.total}
+        length={playlists.items.length}
         path={`${path}/playlists`}
       >
         <List>
