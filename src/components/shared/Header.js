@@ -1,12 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { usePalette } from 'react-palette';
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import { usePalette } from "react-palette";
 
-import { StyledTitle } from './Title';
-import ImageWrapper from './ImageWrapper';
-import Wrapper from './Wrapper';
-import CustomLink from './CustomLink';
+import { StyledTitle } from "./Title";
+import ImageWrapper from "./ImageWrapper";
+import Wrapper from "./Wrapper";
+import CustomLink from "./CustomLink";
+import LogoutButton from "../User/LougoutButton";
 
 const Header = ({
   name,
@@ -24,12 +25,14 @@ const Header = ({
 }) => {
   const headerType = album_type
     ? album_type
-    : type === 'user' ? 'profil' : type;
+    : type === "user"
+    ? "profil"
+    : type;
   const meta = album_type
-    ? `${release_year} • ${total_tracks} titre${total_tracks > 1 ? 's' : ''}`
-    : type === 'user'
-      ? `${nPlaylists} playlists publiques • ${followers} Abonnés`
-      : `${followers} Abonnés`;
+    ? `${release_year} • ${total_tracks} titre${total_tracks > 1 ? "s" : ""}`
+    : type === "user"
+    ? `${nPlaylists} playlists publiques • ${followers} Abonnés`
+    : `${followers} Abonnés`;
 
   const { data } = usePalette(image);
 
@@ -60,31 +63,36 @@ const Header = ({
         <StyledDescription>{description}</StyledDescription>
         <StyledMeta>
           <StyledOwner type={type}>
-            par <CustomLink href={ownerUrl}>{owner}</CustomLink> •{' '}
+            par <CustomLink href={ownerUrl}>{owner}</CustomLink> •{" "}
           </StyledOwner>
           {meta}
         </StyledMeta>
       </StyledTextWrapper>
+      {type === "user" && (
+        <ButtonWrapper flex>
+          <LogoutButton />
+        </ButtonWrapper>
+      )}
     </StyledHeaderWrapper>
   );
 };
 
 //===== PropTypes
 Header.defaultProps = {
-  name: 'chargement...',
+  name: "chargement...",
   image:
-    'https://developer.spotify.com/assets/branding-guidelines/icon3@2x.png',
-  type: 'album',
+    "https://developer.spotify.com/assets/branding-guidelines/icon3@2x.png",
+  type: "album",
 };
 
 Header.propTypes = {
   name: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
-  type: PropTypes.oneOf([ 'user', 'album', 'playlist' ]).isRequired,
+  type: PropTypes.oneOf(["user", "album", "playlist"]).isRequired,
   description: PropTypes.string,
   owner: PropTypes.string,
   ownerUrl: PropTypes.string,
-  followers: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]),
+  followers: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   album_type: PropTypes.string,
   total_tracks: PropTypes.number,
   release_year: PropTypes.string,
@@ -94,16 +102,16 @@ Header.propTypes = {
 
 //===== Styles
 const StyledOwner = styled.span`
-  display: ${(props) => props.type === 'user' && 'none'};
+  display: ${(props) => props.type === "user" && "none"};
 `;
 
 const StyledHeaderWrapper = styled(Wrapper)`
   row-gap: 1rem;
-  padding-bottom: ${(props) => props.pb && '2rem'};
+  padding-bottom: ${(props) => props.pb && "2rem"};
 
   background: linear-gradient(0deg, rgba(21, 21, 21, 1), transparent)
     ${(props) => (props.color ? props.color : props.theme.colors.main)};
-    
+
   @media (min-width: ${(props) => props.theme.media.md}) {
     height: 18rem;
     flex-direction: row;
@@ -123,6 +131,13 @@ const StyledTextWrapper = styled(Wrapper)`
   }
 `;
 
+const ButtonWrapper = styled(Wrapper)`
+  @media (min-width: ${(props) => props.theme.media.lg}) {
+    flex-grow: 1;
+    justify-content: flex-end;
+  }
+`;
+
 const StyledType = styled.span`
   display: none;
   letter-spacing: 3px;
@@ -138,7 +153,7 @@ const StyledHeaderTitle = styled(StyledTitle)`
   text-align: center;
 
   @media (min-width: ${(props) => props.theme.media.md}) {
-    font-size: 2.3em;
+    font-size: 2.14em;
     text-align: left;
   }
 
@@ -164,6 +179,10 @@ const StyledMeta = styled.p`
   ${CustomLink} {
     color: #fff;
     font-weight: bold;
+  }
+
+  @media (min-width: ${(props) => props.theme.media.md}) {
+    text-align: left;
   }
 `;
 

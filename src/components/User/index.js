@@ -1,19 +1,18 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import styled from 'styled-components';
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import styled from "styled-components";
 
-import Header from '../shared/Header';
-import Wrapper from '../shared/Wrapper';
-import TrackItem from '../shared/TrackItem';
-import Section from '../shared/Section';
-import List from '../shared/List';
-import Card from '../shared/Card';
-import LogoutButton from './LougoutButton';
+import Header from "../shared/Header";
+import Wrapper from "../shared/Wrapper";
+import TrackItem from "../shared/TrackItem";
+import Section from "../shared/Section";
+import List from "../shared/List";
+import Card from "../shared/Card";
 import {
   fetchCurrentUser,
   fetchMyTopArtists,
   fetchMyTopTracks,
-} from '../../features/user/userActions';
+} from "../../features/user/userActions";
 
 const User = () => {
   const profile = useSelector((state) => state.user.profile);
@@ -23,25 +22,22 @@ const User = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(
-    () => {
-      // if profile is null, so is topTracksList and topArtistsList
-      if (!profile) {
-        dispatch(fetchCurrentUser());
-        dispatch(fetchMyTopTracks(5));
-        dispatch(fetchMyTopArtists(5));
-      }
+  useEffect(() => {
+    // if profile is null, so is topTracksList and topArtistsList
+    if (!profile) {
+      dispatch(fetchCurrentUser());
+      dispatch(fetchMyTopTracks(5));
+      dispatch(fetchMyTopArtists(5));
+    }
 
-      if (topTracksList.items.length > 5) dispatch(fetchMyTopTracks(5));
-      if (topArtistsList.items.length > 5) dispatch(fetchMyTopArtists(5));
-    },
-    [
-      profile,
-      dispatch,
-      topTracksList.items.length,
-      topArtistsList.items.length,
-    ],
-  );
+    if (topTracksList.items.length > 5) dispatch(fetchMyTopTracks(5));
+    if (topArtistsList.items.length > 5) dispatch(fetchMyTopArtists(5));
+  }, [
+    profile,
+    dispatch,
+    topTracksList.items.length,
+    topArtistsList.items.length,
+  ]);
   return (
     <Wrapper pb>
       <UserHeader {...profile} nPlaylists={playlists.items.length} />
@@ -82,22 +78,18 @@ const User = () => {
             ))}
           </List>
         </Section>
-        <StyledSection>
-          <LogoutButton />
-        </StyledSection>
       </Wrapper>
     </Wrapper>
   );
 };
 
 //===== Styles
-const UserHeader = styled(Header)`padding-bottom: 2rem;`;
-
-const StyledSection = styled(Wrapper)`
-  padding: 3rem 0;
-  row-gap: 1rem;
+const UserHeader = styled(Header)`
+  padding-bottom: 2rem;
 `;
 
-const StyledTrackList = styled.ul`padding-top: 1rem;`;
+const StyledTrackList = styled.ul`
+  padding-top: 1rem;
+`;
 
 export default User;
